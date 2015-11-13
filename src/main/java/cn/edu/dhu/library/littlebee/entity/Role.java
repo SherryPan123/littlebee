@@ -4,13 +4,17 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
  * Created by sherry on 15-11-12.
  */
-public class Role extends BaseEntity{
+@Entity
+@Table(name = "role")
+public class Role extends BaseEntity {
 
     /*角色名称*/
     @Length(min = 4, max = 20)

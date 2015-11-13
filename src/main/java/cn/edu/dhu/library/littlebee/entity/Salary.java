@@ -1,19 +1,19 @@
 package cn.edu.dhu.library.littlebee.entity;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 /**
  * Created by sherry on 15-11-12.
  */
-public class Salary extends BaseEntity{
+@Entity
+@Table(name = "salary")
+public class Salary extends BaseEntity {
 
     /*工资表月份*/
-    @Column(name = "year_month")
-    private ZonedDateTime yearMonth;
+    @Column(name = "date")
+    private ZonedDateTime date; // PNT: year_month can not be used..  By Jiaye
 
     /*用户学号*/
     @ManyToOne

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sherry on 15-11-10.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User extends BaseEntity {
 
     /*用户姓名*/

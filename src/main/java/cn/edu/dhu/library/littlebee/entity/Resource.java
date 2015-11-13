@@ -1,10 +1,14 @@
 package cn.edu.dhu.library.littlebee.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by sherry on 15-11-12.
  */
+@Entity
+@Table(name = "resource")
 public class Resource extends BaseEntity {
 
     /*特征码*/

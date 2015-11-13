@@ -1,11 +1,15 @@
 package cn.edu.dhu.library.littlebee.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by sherry on 15-11-12.
  */
-public class Permission extends BaseEntity{
+@Entity
+@Table(name = "permission")
+public class Permission extends BaseEntity {
 
     /*权限名称*/
     @Column(name = "name", nullable = false, length = 45)

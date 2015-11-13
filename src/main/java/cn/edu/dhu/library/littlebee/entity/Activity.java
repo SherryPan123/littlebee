@@ -1,14 +1,14 @@
 package cn.edu.dhu.library.littlebee.entity;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by sherry on 15-11-12.
  */
-public class Activity {
+@Entity
+@Table(name = "activity")
+public class Activity extends BaseEntity {
 
     /*活动名称*/
     @Column(name = "name", nullable = false, length = 45)

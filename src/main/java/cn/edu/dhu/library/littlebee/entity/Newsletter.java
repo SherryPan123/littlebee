@@ -3,11 +3,13 @@ package cn.edu.dhu.library.littlebee.entity;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 
 /**
  * Created by sherry on 15-11-12.
  */
+@Entity
+@Table(name = "newsletter")
 public class Newsletter extends BaseEntity {
 
     /*通讯稿标题*/
@@ -21,9 +23,11 @@ public class Newsletter extends BaseEntity {
     private String content;
 
     /*发表人编号*/
+    @ManyToOne
     private User author;
 
     /*活动编号*/
+    @ManyToOne
     private Activity activity;
 
 }
