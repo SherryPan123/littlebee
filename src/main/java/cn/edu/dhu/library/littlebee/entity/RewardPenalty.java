@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
 @Table(name = "reward_penalty")
 public class RewardPenalty extends BaseEntity {
 
-    /*用户学号*/
+    /*用户*/
     @ManyToOne
     private User user;
 

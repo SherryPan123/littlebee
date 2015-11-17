@@ -22,11 +22,11 @@ public class Newsletter extends BaseEntity {
     @Column(name = "content", nullable = true, length = 255)
     private String content;
 
-    /*发表人编号*/
+    /*发表人*/
     @ManyToOne
     private User author;
 
-    /*活动编号*/
+    /*活动*/
     @ManyToOne
     private Activity activity;
 

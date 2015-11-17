@@ -1,5 +1,7 @@
 package cn.edu.dhu.library.littlebee.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,11 +14,12 @@ import javax.persistence.Table;
 public class Permission extends BaseEntity {
 
     /*权限名称*/
+    @NotEmpty
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
     /*权限描述*/
-    @Column(name = "description", nullable = true, length = 100)
+    @Column(name = "description", nullable = true, length = 255)
     private String description;
 
 }

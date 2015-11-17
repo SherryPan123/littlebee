@@ -23,7 +23,7 @@ public class Role extends BaseEntity {
     private String roleName;
 
     /*角色描述*/
-    @Column(name = "description", nullable = true, length = 100)
+    @Column(name = "description", nullable = true, length = 255)
     private String description;
 
     /*权限序列*/

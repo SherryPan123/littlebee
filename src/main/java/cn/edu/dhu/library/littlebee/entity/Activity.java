@@ -1,5 +1,7 @@
 package cn.edu.dhu.library.littlebee.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
 public class Activity extends BaseEntity {
 
     /*活动名称*/
+    @NotEmpty
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
@@ -20,7 +23,7 @@ public class Activity extends BaseEntity {
 
     /*负责人序列*/
     @ManyToMany
-    private List<User> users;/*通讯稿序列*/
+    private List<User> users;
 
     /*通讯稿序列*/
     @OneToMany

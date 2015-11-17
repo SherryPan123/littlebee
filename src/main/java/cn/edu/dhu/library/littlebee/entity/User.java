@@ -21,7 +21,7 @@ public class User extends BaseEntity {
     /*用户姓名*/
     @Length(min = 4, max = 20)
     @NotEmpty
-    @Column(name = "username", unique = true, nullable = false, length = 45)
+    @Column(name = "username", nullable = false, length = 45)
     private String username;
 
     /*用户密码*/
@@ -33,7 +33,7 @@ public class User extends BaseEntity {
     /*用户学号或工号*/
     @Length(min = 6, max = 10)
     @NotEmpty
-    @Column(name = "user_number", nullable = false)
+    @Column(name = "user_number", unique = true, nullable = false)
     private String userNumber;
 
     /*用户邮箱*/

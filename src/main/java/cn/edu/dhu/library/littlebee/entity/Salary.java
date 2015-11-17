@@ -15,7 +15,7 @@ public class Salary extends BaseEntity {
     @Column(name = "date")
     private ZonedDateTime date; // PNT: year_month can not be used..  By Jiaye
 
-    /*用户学号*/
+    /*用户*/
     @ManyToOne
     private User user;
 
