@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by sherry on 15-11-12.
@@ -21,6 +22,10 @@ public class Newsletter extends BaseEntity {
     /*通讯稿内容*/
     @Column(name = "content", nullable = true, length = 255)
     private String content;
+
+    /*图片序列*/
+    @OneToMany
+    private List<Resource> photos;
 
     /*发表人*/
     @ManyToOne

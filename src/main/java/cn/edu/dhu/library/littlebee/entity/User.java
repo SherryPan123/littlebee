@@ -74,6 +74,10 @@ public class User extends BaseEntity {
     @Column(name = "self_introduction")
     private String selfIntroduction;
 
+    /*奖惩情况*/
+    @ManyToMany
+    private List<RewardPenalty> rewardPenalties;
+
     public User(String username, String password, String userNumber){
         this.username = username;
         this.password = password;

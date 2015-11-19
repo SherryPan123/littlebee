@@ -29,8 +29,4 @@ public class Activity extends BaseEntity {
     @OneToMany
     private List<Newsletter> newsletters;
 
-    /*图片序列*/
-    @OneToMany
-    private List<Resource> photos;
-
 }
