@@ -39,4 +39,59 @@ public class Salary extends BaseEntity {
     @Column(name = "description", nullable = true, length = 255)
     private String description;
 
+    public ZonedDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public BigDecimal getUnityPay() {
+        return unityPay;
+    }
+
+    public void setUnityPay(BigDecimal unityPay) {
+        this.unityPay = unityPay;
+    }
+
+    public BigDecimal getManHour() {
+        return manHour;
+    }
+
+    public void setManHour(BigDecimal manHour) {
+        this.manHour = manHour;
+    }
+
+    public BigDecimal getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(BigDecimal bonus) {
+        this.bonus = bonus;
+    }
+
+    public BigDecimal getTotalPay() {
+        return totalPay;
+    }
+
+    public void setTotalPay(BigDecimal totalPay) {
+        this.totalPay = totalPay;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
