@@ -1,5 +1,6 @@
 package cn.edu.dhu.library.littlebee.repository;
 
+import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.entity.RewardPenalty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,11 +18,5 @@ public interface RewardPenaltyRepository extends JpaRepository<RewardPenalty, UU
     RewardPenalty findById(UUID id);
 
     List<RewardPenalty> findByDate(ZonedDateTime date);  //通过月份找
-
-    List<RewardPenalty> findByUserUserNumber(String userNumber); //通过学号找
-
-    List<RewardPenalty> findByUserUsername(String username); //通过姓名找
-
-    RewardPenalty findByUserUserNumberAndDate(String userNumber,ZonedDateTime date);//通过学号和月份查
 
 }

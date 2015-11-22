@@ -78,7 +78,11 @@ public class User extends BaseEntity {
     @ManyToMany
     private List<RewardPenalty> rewardPenalties;
 
-    public User(String username, String password, String userNumber){
+    public User() {
+
+    }
+
+    public User(String username, String password, String userNumber) {
         this.username = username;
         this.password = password;
         this.userNumber = userNumber;

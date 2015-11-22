@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -13,11 +14,11 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    User findById(UUID id);
+    Optional<User> findById(UUID id);
 
-    User findByUsername(String username); //通过姓名找
+    Optional<User> findByUsername(String username); //通过姓名找
 
-    User findByUserNumber(String userNumber);  //通过学号找
+    Optional<User> findByUserNumber(String userNumber);  //通过学号找
 
     List<User> findByUsernameLike(String username); //姓名like
 

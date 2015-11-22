@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
  * Created by sherry on 15-11-12.
  */
 @Entity
-@Table(name = "salary")
+@Table(name = "salary", indexes = {@Index(name = "index_salary_on_user_id_and_date", columnList = "user_id, date", unique = true)})
 public class Salary extends BaseEntity {
 
     /*工资表月份*/
