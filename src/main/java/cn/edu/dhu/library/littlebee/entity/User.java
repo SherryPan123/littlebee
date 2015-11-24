@@ -43,10 +43,13 @@ public class User extends BaseEntity {
     private String email;
 
     /*手机号*/
+    @Length(min = 6, max = 20)
+    @NotEmpty
     @Column(name = "phone")
     private String phone;
 
     /*性别*/
+    @NotEmpty
     @Column(name = "sex")
     private String sex;
 

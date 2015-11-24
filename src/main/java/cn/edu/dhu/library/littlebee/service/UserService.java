@@ -1,7 +1,7 @@
 package cn.edu.dhu.library.littlebee.service;
 
 import cn.edu.dhu.library.littlebee.entity.User;
-import cn.edu.dhu.library.littlebee.form.UserCreateForm;
+import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -1,9 +1,7 @@
-package cn.edu.dhu.library.littlebee.form;
+package cn.edu.dhu.library.littlebee.controller.form;
 
-import cn.edu.dhu.library.littlebee.entity.Role;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 /**
@@ -35,8 +33,8 @@ public class UserCreateForm {
     @NotEmpty
     private String major = "";
 
-    @NotEmpty
-    private ZonedDateTime entryDate;
+//    @NotEmpty
+//    private ZonedDateTime entryDate;
 
     private String icon;
 
@@ -106,13 +104,13 @@ public class UserCreateForm {
         this.major = major;
     }
 
-    public ZonedDateTime getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(ZonedDateTime entryDate) {
-        this.entryDate = entryDate;
-    }
+//    public ZonedDateTime getEntryDate() {
+//        return entryDate;
+//    }
+//
+//    public void setEntryDate(ZonedDateTime entryDate) {
+//        this.entryDate = entryDate;
+//    }
 
     public String getIcon() {
         return icon;

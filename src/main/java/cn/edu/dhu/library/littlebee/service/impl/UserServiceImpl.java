@@ -1,13 +1,14 @@
 package cn.edu.dhu.library.littlebee.service.impl;
 
 import cn.edu.dhu.library.littlebee.entity.User;
-import cn.edu.dhu.library.littlebee.form.UserCreateForm;
+import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
 import cn.edu.dhu.library.littlebee.repository.UserRepository;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-22.
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(form.getEmail());
         user.setPhone(form.getPhone());
         user.setUsername(form.getUsername());
-        user.setEntryDate(form.getEntryDate());
+        //user.setEntryDate(form.getEntryDate());
         user.setMajor(form.getMajor());
         user.setSex(form.getSex());
 

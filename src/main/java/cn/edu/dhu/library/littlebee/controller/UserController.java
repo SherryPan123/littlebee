@@ -1,7 +1,7 @@
 package cn.edu.dhu.library.littlebee.controller;
 
-import cn.edu.dhu.library.littlebee.form.UserCreateForm;
-import cn.edu.dhu.library.littlebee.form.validator.UserCreateFormValidator;
+import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
+import cn.edu.dhu.library.littlebee.controller.form.validator.UserCreateFormValidator;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -41,23 +41,23 @@ public class UserController {
                 .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
-        return new ModelAndView("user_create", "form", new UserCreateForm());
+        return new ModelAndView("register", "form", new UserCreateForm());
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "user_create";
+            return "register";
         }
         try {
             userService.create(form);
         } catch (DataIntegrityViolationException e) {
-            bindingResult.reject("email.exists", "Email already exists");
-            return "user_create";
+            bindingResult.reject("userNumber.exists", "User Number already exists");
+            return "register";
         }
-        return "redirect:/users";
+        return "redirect:/";
     }
 
 }
