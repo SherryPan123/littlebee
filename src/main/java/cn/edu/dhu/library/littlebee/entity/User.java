@@ -4,10 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -19,7 +16,7 @@ import java.util.List;
 public class User extends BaseEntity {
 
     /*用户姓名*/
-    @Length(min = 4, max = 20)
+    @Length(min = 2, max = 20)
     @NotEmpty
     @Column(name = "username", nullable = false, length = 45)
     private String username;
@@ -66,7 +63,7 @@ public class User extends BaseEntity {
     private ZonedDateTime leaveDate;
 
     /*角色序列*/
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     /*头像*/

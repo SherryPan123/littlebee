@@ -1,5 +1,6 @@
 package cn.edu.dhu.library.littlebee.service.impl;
 
+import cn.edu.dhu.library.littlebee.bean.CurrentUser;
 import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

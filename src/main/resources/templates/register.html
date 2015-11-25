@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+>
 <head>
     <title>User Create</title>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
 <form role="form" name="form" action="" method="post">
 
     <input type="hidden" th:name="*{_csrf.parameterName}" th:value="*{_csrf.token}"/>
@@ -18,7 +15,7 @@
 
     </div>
     <div>
-        <label for="username">Username</label>
+        <label for="username">Name</label>
         <input type="text" name="username" id="username" th:value="*{form.username}" required/>
     </div>
     <div>

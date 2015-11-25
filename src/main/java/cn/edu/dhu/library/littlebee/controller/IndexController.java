@@ -1,11 +1,13 @@
 package cn.edu.dhu.library.littlebee.controller;
 
-import cn.edu.dhu.library.littlebee.entity.Newsletter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by sherry on 15-11-20.
@@ -18,9 +20,9 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value="/login")
-    public String login(Model model){
-        return "login";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
+        return new ModelAndView("login", "error", error);
     }
 
 }

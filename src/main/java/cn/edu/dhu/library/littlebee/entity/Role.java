@@ -3,10 +3,7 @@ package cn.edu.dhu.library.littlebee.entity;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -27,7 +24,7 @@ public class Role extends BaseEntity {
     private String description;
 
     /*权限序列*/
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Permission> permissions;
 
     public String getRoleName() {

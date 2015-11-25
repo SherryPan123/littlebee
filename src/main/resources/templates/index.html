@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello World!</title>
+  <title>Hello World!</title>
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">s
+<h1 th:inline="text">Hello <span sec:authentication="name"></span></h1>
+
+<div sec:authorize="isAuthenticated()">
+  <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
-</form>
+  </form>
+</div>
+<div sec:authorize="isAnonymous()">
+  <form th:action="@{/login}" method="get">
+    <input type="submit" value="Sign In"/>
+  </form>
+  <form th:action="@{/register}" method="get">
+    <input type="submit" value="Register"/>
+  </form>
+</div>
 </body>
 </html>
