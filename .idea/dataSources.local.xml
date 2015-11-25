@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - littlebee@localhost" uuid="b2bc9b03-0120-44af-b6d6-9f9d8654309e">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>littlebee.*</schema-pattern>
+      <default-schemas>littlebee.*</default-schemas>
+    </data-source>
+  </component>
+</project>
