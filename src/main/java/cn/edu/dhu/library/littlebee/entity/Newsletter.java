@@ -74,4 +74,5 @@ public class Newsletter extends BaseEntity {
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
+
 }

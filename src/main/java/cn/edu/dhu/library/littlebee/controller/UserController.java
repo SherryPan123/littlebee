@@ -46,6 +46,7 @@ public class UserController {
         return new ModelAndView("register", "form", new UserCreateForm());
     }
 
+    /*注册*/
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
