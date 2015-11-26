@@ -7,6 +7,7 @@ import cn.edu.dhu.library.littlebee.service.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -54,16 +55,22 @@ public class UserController {
     }
 
     /*profile show*/
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView view(@RequestParam("id") UUID id) {
+    @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
+    public ModelAndView view(@RequestParam(value = "id", required = false) UUID id) {
         try {
-            User user = userService.getUserById(id);
-            if (user == null) {
-                //// TODO: throw exception
-                throw new ServiceException("Invalid user ID");
+            ModelAndView mav = new ModelAndView("user/profile");
+            User user;
+            if (id == null) {
+                user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                mav.addObject("user",user);
+            } else {
+                user = userService.getUserById(id);
+                if (user == null) {
+                    //// TODO: throw exception
+                    throw new ServiceException("Invalid user ID");
+                }
+                mav.addObject("user", user);
             }
-            ModelAndView mav = new ModelAndView("user");
-            mav.addObject("user", user);
             return mav;
 
         } catch (Exception e) {

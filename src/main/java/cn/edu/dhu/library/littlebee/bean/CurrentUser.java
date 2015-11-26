@@ -23,6 +23,10 @@ public class CurrentUser extends User implements UserDetails {
             this.setUserNumber(user.getUsername());
             this.setEmail(user.getEmail());
             this.setPassword(user.getPassword());
+            this.setPhone(user.getPhone());
+            this.setMajor(user.getMajor());
+            this.setSex(user.getSex());
+            this.setEntryDate(user.getEntryDate());
             this.setRoles(user.getRoles());
         }
     }
