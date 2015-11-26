@@ -21,20 +21,16 @@ import java.util.UUID;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private UserRepository userRepository;
+
+    @Override
+    public User getUserById(UUID id) {
+        return userRepository.findById(id);
     }
 
     @Override
-    public Optional<User> getUserById(UUID id) {
-        return Optional.ofNullable(userRepository.findOne(id));
-    }
-
-    @Override
-    public Optional<User> getUserByUserNumber(String userNumber) {
+    public User getUserByUserNumber(String userNumber) {
         return userRepository.findByUserNumber(userNumber);
     }
 

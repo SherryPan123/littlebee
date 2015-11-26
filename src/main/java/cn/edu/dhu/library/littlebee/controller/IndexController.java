@@ -24,16 +24,14 @@ import java.util.Optional;
 public class IndexController {
 
     @Autowired
-    @Qualifier("NewsletterService")
     private NewsletterService newsletterService;
 
     @Autowired
-    @Qualifier("NoticeService")
     private NoticeService noticeService;
 
-    @RequestMapping(value="/index")
+    @RequestMapping(value="/")
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("index");
 
         // fetch newsletter
         Page<Newsletter> newsletters = null;

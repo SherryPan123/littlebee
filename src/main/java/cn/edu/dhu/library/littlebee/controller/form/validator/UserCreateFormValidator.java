@@ -37,7 +37,7 @@ public class UserCreateFormValidator implements Validator {
 
     //验证学号是否重复
     private void validateUserNumber(Errors errors, UserCreateForm form) {
-        if (userService.getUserByUserNumber(form.getUserNumber()).isPresent()) {
+        if (userService.getUserByUserNumber(form.getUserNumber()) != null) {
             errors.reject("userNumber.exists", "User with this userNumber already exists");
         }
     }

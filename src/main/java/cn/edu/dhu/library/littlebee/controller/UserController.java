@@ -2,7 +2,9 @@ package cn.edu.dhu.library.littlebee.controller;
 
 import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
 import cn.edu.dhu.library.littlebee.controller.form.validator.UserCreateFormValidator;
+import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.service.UserService;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 /**
@@ -21,32 +22,23 @@ import java.util.UUID;
 @Controller
 public class UserController {
 
-    private final UserService userService;
-    private final UserCreateFormValidator userCreateFormValidator;
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    public UserController(UserService userService, UserCreateFormValidator userCreateFormValidator) {
-        this.userService = userService;
-        this.userCreateFormValidator = userCreateFormValidator;
-    }
+    private UserCreateFormValidator userCreateFormValidator;
 
     @InitBinder("form")
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(userCreateFormValidator);
     }
 
-    @RequestMapping("/user/{id}")
-    public ModelAndView getUserPage(@PathVariable UUID id) {
-        return new ModelAndView("user", "user", userService.getUserById(id)
-                .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
-    }
-
+    /*注册*/
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
         return new ModelAndView("register", "form", new UserCreateForm());
     }
 
-    /*注册*/
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -59,6 +51,25 @@ public class UserController {
             return "register";
         }
         return "redirect:/";
+    }
+
+    /*profile show*/
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ModelAndView view(@RequestParam("id") UUID id) {
+        try {
+            User user = userService.getUserById(id);
+            if (user == null) {
+                //// TODO: throw exception
+                throw new ServiceException("Invalid user ID");
+            }
+            ModelAndView mav = new ModelAndView("user");
+            mav.addObject("user", user);
+            return mav;
+
+        } catch (Exception e) {
+            //// TODO: throw exception
+            throw new ServiceException(e.getMessage(), e.getCause());
+        }
     }
 
 }

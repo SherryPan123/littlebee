@@ -12,9 +12,9 @@ import java.util.UUID;
  */
 public interface UserService {
 
-    Optional<User> getUserById(UUID id);
+    User getUserById(UUID id);
 
-    Optional<User> getUserByUserNumber(String userNumber);
+    User getUserByUserNumber(String userNumber);
 
     Collection<User> getAllUsers();
 

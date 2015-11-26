@@ -14,11 +14,11 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Optional<User> findById(UUID id);
+    User findById(UUID id);
 
-    Optional<User> findByUsername(String username); //通过姓名找
+    User findByUsername(String username); //通过姓名找
 
-    Optional<User> findByUserNumber(String userNumber);  //通过学号找
+    User findByUserNumber(String userNumber);  //通过学号找
 
     List<User> findByUsernameLike(String username); //姓名like
 
