@@ -5,19 +5,19 @@
     <title>Notice Create</title>
 </head>
 <body>
-<form role="form" name="form" action="" th:object="${message}"
+<form role="form" name="form" action="" th:object="${form}"
        method="post">
 
-    <input type="hidden" th:name="*{_csrf.parameterName}" th:value="*{_csrf.token}"/>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
     <div>
         <label for="title">Notice Title</label>
-        <input type="text" name="title" id="title" th:value="*{form.title}" required autofocus />
+        <input type="text" name="title" id="title" th:value="*{title}" required autofocus />
     </div>
 
     <div>
         <label for="content">Notice Content</label>
-        <input type="text" name="content" id="content" th:value="*{form.content}" />
+        <input type="text" name="content" id="content" th:value="*{content}" />
     </div>
     <button type="submit">Post</button>
 </form>

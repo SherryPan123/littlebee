@@ -38,11 +38,16 @@ public class NoticeController {
 
     /*通知列表*/
     @RequestMapping(value="/notice/list", method = RequestMethod.GET)
-    public ModelAndView noticeList() {
+    public ModelAndView noticeList(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("notice/list");
         //fetch notice
-        List<Notice> notices = noticeService.listOrderByTime(0,20).getContent();
+        Page<Notice> AllNotice = noticeService.listOrderByTime(page, 5);
+        List<Notice> notices = AllNotice.getContent();
+        Integer pageCount = AllNotice.getTotalPages();
+        Integer pageCur = page;
         mav.addObject("notices",notices);
+        mav.addObject("pageCount",pageCount);
+        mav.addObject("pageCur",pageCur);
         return mav;
     }
 

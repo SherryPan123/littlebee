@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <table class="text-body border-table" id="maintable">
+        <table id="maintable">
             <tr>
                 <th>ID</th>
                 <th>Title</th>
@@ -17,8 +17,11 @@
                 <td th:text="${notice.title}"></td>
                 <td th:text="${notice.content}"></td>
             </tr>
-        </table>
 
+        </table>
+        <div th:text="${pageCount}"></div>
+        <div th:text="${pageCur}"></div>
+        <a th:href="@{/notice/list(page=${pageCur+1})}">下一页</a>
     </div>
 </body>
 </html>
