@@ -48,7 +48,7 @@ public class NoticeController {
 
     /*通知视图*/
     @RequestMapping(value = "/notice/view", method = RequestMethod.GET)
-    public ModelAndView noticeView(@RequestParam("id") UUID id) {
+    public ModelAndView noticeView(@RequestParam("id") Integer id) {
         try {
             Notice notice = noticeService.findOne(id);
             if (notice == null) {
@@ -88,7 +88,7 @@ public class NoticeController {
 
     /*删除通知*/
     @RequestMapping(value = "/notice/delete")
-    public String delete(@RequestParam("id") UUID id) {
+    public String delete(@RequestParam("id") Integer id) {
         Notice notice = noticeService.findOne(id);
         noticeService.delete(notice);
         return "redirect:/notice/list";

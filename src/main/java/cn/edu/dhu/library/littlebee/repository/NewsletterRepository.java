@@ -11,7 +11,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-17.
  */
 @Repository
-public interface NewsletterRepository extends JpaRepository<Newsletter, UUID> {
+public interface NewsletterRepository extends JpaRepository<Newsletter, Integer> {
 
     List<Newsletter> findByTitleLike(String title); //通过新闻标题找
 

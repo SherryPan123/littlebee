@@ -13,9 +13,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-17.
  */
 @Repository
-public interface RewardPenaltyRepository extends JpaRepository<RewardPenalty, UUID> {
-
-    RewardPenalty findById(UUID id);
+public interface RewardPenaltyRepository extends JpaRepository<RewardPenalty, Integer> {
 
     List<RewardPenalty> findByDate(ZonedDateTime date);  //通过月份找
 

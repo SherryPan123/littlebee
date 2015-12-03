@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsletter Create</title>
+</head>
+<body>
+<form role="form" name="form" action="" method="post">
+
+    <input type="hidden" th:name="*{_csrf.parameterName}" th:value="*{_csrf.token}"/>
+
+    <div>
+        <label for="newsletterTitle">Newsletter Title</label>
+        <input type="text" name="title" id="newsletterTitle" th:value="*{form.title}" required autofocus />
+    </div>
+
+</form>
+</body>
+</html>
+
+

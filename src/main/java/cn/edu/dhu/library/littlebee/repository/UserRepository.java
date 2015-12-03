@@ -12,9 +12,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-10.
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
-
-    User findById(UUID id);
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByUsername(String username); //通过姓名找
 

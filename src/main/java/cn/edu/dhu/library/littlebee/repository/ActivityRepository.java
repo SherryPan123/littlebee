@@ -11,7 +11,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-17.
  */
 @Repository
-public interface ActivityRepository extends JpaRepository<Activity, UUID> {
+public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
     List<Activity> findByNameLike(String title); //通过活动名称找
 

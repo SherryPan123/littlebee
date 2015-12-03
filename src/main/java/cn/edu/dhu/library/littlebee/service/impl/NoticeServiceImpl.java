@@ -36,7 +36,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public Notice findOne(UUID id){
+    public Notice findOne(Integer id){
         return noticeRepository.findOne(id);
     }
 

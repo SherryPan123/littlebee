@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-26.
  */
 @Repository
-public interface NoticeRepository extends JpaRepository<Notice,UUID> {
+public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 
     Notice findByTitle(String title);
 

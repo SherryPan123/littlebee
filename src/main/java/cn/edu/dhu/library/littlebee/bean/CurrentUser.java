@@ -19,8 +19,8 @@ public class CurrentUser extends User implements UserDetails {
     public CurrentUser(User user) {
         if (user != null) {
             this.setId(user.getId());
-            this.setUsername(user.getUserNumber());
-            this.setUserNumber(user.getUsername());
+            this.setUsername(user.getUsername());
+            this.setUserNumber(user.getUserNumber());
             this.setEmail(user.getEmail());
             this.setPassword(user.getPassword());
             this.setPhone(user.getPhone());

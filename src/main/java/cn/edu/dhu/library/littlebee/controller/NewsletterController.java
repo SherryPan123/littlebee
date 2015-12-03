@@ -48,7 +48,7 @@ public class NewsletterController {
 
     /*通讯稿视图*/
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView view(@RequestParam("id") UUID id) {
+    public ModelAndView view(@RequestParam("id") Integer id) {
         try {
             Newsletter newsletter = newsletterService.findOne(id);
             if (newsletter == null) {

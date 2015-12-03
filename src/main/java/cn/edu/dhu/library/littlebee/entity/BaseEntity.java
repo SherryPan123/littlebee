@@ -1,15 +1,13 @@
 package cn.edu.dhu.library.littlebee.entity;
 
+import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.UUID;
 
 /**
  * Created by sherry on 15-11-10.
@@ -19,10 +17,11 @@ import java.util.UUID;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    //@GeneratedValue(generator="system-uuid")
+    //@GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Integer id;
 
     @CreatedDate
     @Column(name = "created_date")
@@ -32,11 +31,11 @@ public abstract class BaseEntity {
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

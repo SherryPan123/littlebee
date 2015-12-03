@@ -12,9 +12,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-17.
  */
 @Repository
-public interface SalaryRepository extends JpaRepository<Salary, UUID> {
-
-    Salary findById(UUID id);
+public interface SalaryRepository extends JpaRepository<Salary, Integer> {
 
     List<Salary> findByDate(ZonedDateTime date);  //通过月份找
 

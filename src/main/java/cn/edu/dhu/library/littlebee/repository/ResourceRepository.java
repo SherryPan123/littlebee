@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by sherry on 15-11-17.
  */
 @Repository
-public interface ResourceRepository extends JpaRepository<Resource, UUID> {
+public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
     Resource findByDigest(String digest);
 

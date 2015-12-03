@@ -13,7 +13,7 @@ public interface NoticeService {
 
     Page<Notice> listOrderByTime(int page, int size);
 
-    Notice findOne(UUID id);
+    Notice findOne(Integer id);
 
     Notice create(NoticeCreateForm form);
 

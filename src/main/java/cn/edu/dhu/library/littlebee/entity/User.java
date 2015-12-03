@@ -39,6 +39,7 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+
     /*手机号*/
     @Length(min = 6, max = 20)
     @NotEmpty
@@ -71,6 +72,7 @@ public class User extends BaseEntity {
     private String icon;
 
     /*个人介绍*/
+    @Length(max = 300)
     @Column(name = "self_introduction")
     private String selfIntroduction;
 
@@ -80,6 +82,22 @@ public class User extends BaseEntity {
 
     public User() {
 
+    }
+
+    public User(User _user){
+        username = _user.getUsername();
+        userNumber = _user.getUserNumber();
+        password = _user.getPassword();
+        email = _user.getEmail();
+        phone = _user.getPhone();
+        sex = _user.getSex();
+        /*entryDate = _user.getEntryDate();
+        leaveDate = _user.getLeaveDate();
+        icon = _user.getIcon();
+        major = _user.getMajor();
+        roles = _user.getRoles();
+        rewardPenalties = _user.getRewardPenalties();
+        selfIntroduction = _user.getSelfIntroduction();*/
     }
 
     public User(String username, String password, String userNumber) {

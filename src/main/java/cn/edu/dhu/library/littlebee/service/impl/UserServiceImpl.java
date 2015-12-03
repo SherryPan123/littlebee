@@ -1,15 +1,18 @@
 package cn.edu.dhu.library.littlebee.service.impl;
 
+import cn.edu.dhu.library.littlebee.controller.form.PasswordChangeForm;
 import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
 import cn.edu.dhu.library.littlebee.repository.UserRepository;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,8 +28,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User getUserById(UUID id) {
-        return userRepository.findById(id);
+    public User getSessionUser(){
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.findOne(id);
     }
 
     @Override
@@ -56,6 +64,21 @@ public class UserServiceImpl implements UserService {
         user.setSelfIntroduction(form.getSelfIntroduction());
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public void save(User user){
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changePassword(String userNumber, PasswordChangeForm form) {
+        User user = userRepository.findByUserNumber(userNumber);
+        if (user == null) {
+            return;
+        }
+        user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
+        userRepository.save(user);
     }
 
 }
