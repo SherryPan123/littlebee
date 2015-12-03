@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+</head>
+<div id="main">
+    <div>
+        <span><span th:text="${user.username}"></span>'s Profile</span>
+        <div
+             th:unless="${#strings.isEmpty(message)}"
+             th:text="${message}"></div>
+        <div>
+            <img th:src="@{${user.icon}}"/>头像
+            <span>
+                <i></i>
+                <span>Select files...</span>
+                <input id="fileupload" type="file" name="file" />
+            </span>
+        </div>
+
+        <div>
+            <label>姓名</label><span th:text="${user.username}"></span>
+        </div>
+
+        <div>
+            <label>学号</label><span th:text="${user.userNumber}"></span>
+        </div>
+
+        <div>
+            <label>手机</label><span th:text="${user.phone}"></span>
+        </div>
+
+        <div>
+            <label>邮箱</label><span th:text="${user.email}"></span>
+        </div>
+
+        <div>
+            <label>性别</label><span th:text="${user.sex}"></span>
+        </div>
+
+        <div>
+            <label>专业</label><span th:text="${user.major}"></span>
+        </div>
+
+        <div>
+            <label>入职时间</label><span th:text="${user.entryDate}"></span>
+        </div>
+
+        <div>
+            <label>离职时间</label><span th:text="${user.leaveDate}"></span>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

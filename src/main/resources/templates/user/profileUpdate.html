@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+</head>
+<body>
+    <div>
+    <span>Update Profile</span>
+    <div>
+        <form action="#" th:action="@{/user/profileUpdate}" th:object="${user}" method="post">
+            <div>
+                <label for="username">Username</label>
+                <div>
+                    <input id="username" th:field="*{username}" type="text" name="username"/>
+                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+                </div>
+            </div>
+            <div>
+                <label for="phone">Phone</label>
+                <div>
+                    <input id="phone" class="form-control" th:field="*{phone}" type="text" name="phone"/>
+                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <button type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
