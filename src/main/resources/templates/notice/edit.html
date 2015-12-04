@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Notice</title>
+</head>
+<body>
+
+    <form th:object="${editNotice}" th:action="@{/notice/update}" action="#" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{title}" placeholder="Notice Title"/>
+        <input type="text" th:field="*{content}" placeholder="Notice Content"/>
+        <button type="submit">更新</button>
+    </form>
+
+
+</body>
+</html>

@@ -17,7 +17,9 @@ public interface NoticeService {
 
     Notice create(NoticeCreateForm form);
 
-    void delete(Notice notice);
+    boolean delete(Integer id);
+
+    boolean editNotice(Notice editNotice);
 
     Notice findByTitle(String title);
 }

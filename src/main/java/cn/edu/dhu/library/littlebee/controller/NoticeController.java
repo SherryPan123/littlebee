@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -91,11 +93,41 @@ public class NoticeController {
         return "redirect:/notice/list";
     }
 
-    /*删除通知*/
-    @RequestMapping(value = "/notice/delete")
-    public String delete(@RequestParam("id") Integer id) {
-        Notice notice = noticeService.findOne(id);
-        noticeService.delete(notice);
+    @RequestMapping(value = "/notice/{operation}/{id}", method = RequestMethod.GET)
+    public String editRemoveNotice(@PathVariable("operation") String operation,
+                                           @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
+                                           Model model) {
+        if(operation.equals("delete")) {
+            if(noticeService.delete(id)) {
+                redirectAttributes.addFlashAttribute("deletion", "success");
+            }
+            else {
+                redirectAttributes.addFlashAttribute("deletion", "unsuccess");
+            }
+        }
+        else if(operation.equals("edit")){
+            Notice editNotice = noticeService.findOne(id);
+            if(editNotice != null) {
+                model.addAttribute("editNotice", editNotice);
+                redirectAttributes.addFlashAttribute("status","success");
+                return "/notice/edit";
+            }
+            else {
+                redirectAttributes.addFlashAttribute("status","notfound");
+            }
+        }
+        return "redirect:/notice/list";
+    }
+
+    @RequestMapping(value = "/notice/update", method = RequestMethod.POST)
+    public String noticeUpdate(@ModelAttribute("editNotice") Notice editNotice,
+                               final RedirectAttributes redirectAttributes){
+        if(noticeService.editNotice(editNotice)){
+            redirectAttributes.addFlashAttribute("edit", "success");
+        }
+        else{
+            redirectAttributes.addFlashAttribute("edit", "unsuccess");
+        }
         return "redirect:/notice/list";
     }
 

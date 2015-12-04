@@ -49,8 +49,23 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void delete(Notice notice) {
-        noticeRepository.delete(notice);
+    public boolean delete(Integer id) {
+        Notice notice = noticeRepository.findOne(id);
+        if(notice != null){
+            noticeRepository.delete(id);
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean editNotice(Notice editNotice) {
+        if(editNotice != null){
+            noticeRepository.save(editNotice);
+            return true;
+        }
+        return false;
     }
 
     @Override
