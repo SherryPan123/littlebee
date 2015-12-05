@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity Edit</title>
+</head>
+<body>
+
+    <form th:object="${editActivity}" th:action="@{/activity/update}" action="#" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>活动名称</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>活动描述</label>
+            <input type="text" th:field="*{description}"/>
+        </div>
+        <button type="submit">更新</button>
+    </form>
+
+</body>
+</html>
