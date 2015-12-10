@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Activity Post</title>
@@ -32,7 +32,7 @@
                 url:"/user/getUserInJson",
                 //async:false,
                 data:{"userNumber":userIndex},
-                success:function(returnData) {
+                success:function(returnData){
                     userNumber.val(returnData.userNumber);
                     username.html(returnData.username);
                 },
@@ -110,6 +110,7 @@
         </thead>
         <tbody id="users">
 
+
         </tbody>
     </table>
 
@@ -118,6 +119,7 @@
         <input type="reset" value="Reset" /></td>
     </div>
 </form>
+
 
 <!-- user tr sample -->
 <table style="display: none">

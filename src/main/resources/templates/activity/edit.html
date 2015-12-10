@@ -3,6 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Activity Edit</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        var usersTbody = null;
+        var userTrSample = null;
+
+        $(document).ready(function(e) {
+            usersTbody = $("#users");
+            userTrSample = $("#userTrSample");
+            refreshNo();
+        });
+
+        //delay method
+        var delay = (function(){
+            var timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        //get user id and set tr
+        var getUserInJson = function(userIndex,userTr){
+            var userNumber = userTr.find("input.userId");
+            var username = userTr.find("td.username");
+            $.ajax({
+                url:"/user/getUserInJson",
+                //async:false,
+                data:{"userNumber":userIndex},
+                success:function(returnData){
+                    userNumber.val(returnData.userNumber);
+                    username.html(returnData.username);
+                },
+                error:function() {
+                    userNumber.val("");
+                    username.html("Error:NO User Found!");
+                },
+                dataType:"json"
+            });
+        };
+
+        //bing key up event to input.userIndex
+        $(document).on("keyup","input.userIndex",
+            function(){
+                var userIndex = $(this);
+                var userTr = userIndex.parent().parent();
+                delay(
+                    function(){
+                        getUserInJson(userIndex.val(),userTr);
+                    }, 500
+                );
+            }
+        );
+
+        // refresh user No
+        function refreshNo(){
+            var userTrs = usersTbody.children();
+            $.each(userTrs,function(i,item){
+                $(item).find(".NO").html(i+1);
+            });
+        }
+
+        //delete user
+        function deleteUser(img){
+            $(img).parent().parent().remove();
+            refreshNo();
+        }
+
+        //add user
+        function addUser(){
+            usersTbody.append(userTrSample.clone());
+            refreshNo();
+        }
+
+    </script>
 </head>
 <body>
 
@@ -16,8 +91,60 @@
             <label>活动描述</label>
             <input type="text" th:field="*{description}"/>
         </div>
-        <button type="submit">更新</button>
+
+        <p>负责人</p>
+
+        <table width="50%" align="left" cellpadding="2" cellspacing="1"
+               border="0">
+            <thead>
+            <tr>
+                <th width="30px" align="left"><img
+                        src="/images/ico_add.png" width="20" height="20"
+                        onClick="addUser();" /></th>
+                <th width="30px">No.</th>
+                <th width="100px">UserNumber</th>
+                <th align="left" style="padding-left: 30px;">Name</th>
+            </tr>
+            </thead>
+
+            <tbody id="users">
+
+            <tr th:each="user:*{users}">
+                <input name="users" type="hidden" th:value="${user.userNumber}" class="userId" />
+                <td align="left" valign="middle"><img
+                        src="/images/ico_delete.gif" width="18" height="18"
+                        onClick="deleteUser(this);" /></td>
+                <td align="center" class="NO"></td>
+
+                <td><input type="text" class="userIndex" size="10"
+                           maxlength="100" th:value="${user.userNumber}"></td>
+                <td class="username" th:text="${user.username}"></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <div>
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" /></td>
+        </div>
     </form>
+
+    <!-- user tr sample -->
+    <table style="display: none">
+        <tr id="userTrSample">
+            <input name="users" type="hidden" value="" class="userId" />
+            <td align="left" valign="middle"><img
+                    src="/images/ico_delete.gif" width="18" height="18"
+                    onClick="deleteUser(this);" /></td>
+            <td align="center" class="NO"></td>
+
+            <td><input type="text" value="" class="userIndex" size="10"
+                       maxlength="100"></td>
+            <td class="username"></td>
+        </tr>
+    </table>
 
 </body>
 </html>
