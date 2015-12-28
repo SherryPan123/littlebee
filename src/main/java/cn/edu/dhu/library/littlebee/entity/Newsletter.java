@@ -25,7 +25,7 @@ public class Newsletter extends BaseEntity {
 
     /*图片序列*/
     @OneToMany
-    private List<Resource> photos;
+    private List<Resource> resources;
 
     /*发表人*/
     @ManyToOne
@@ -51,12 +51,12 @@ public class Newsletter extends BaseEntity {
         this.content = content;
     }
 
-    public List<Resource> getPhotos() {
-        return photos;
+    public List<Resource> getResources() {
+        return resources;
     }
 
-    public void setPhotos(List<Resource> photos) {
-        this.photos = photos;
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
     public User getAuthor() {

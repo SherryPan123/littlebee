@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+</head>
 <head>
-    <title>User Register</title>
+  <title>Register</title>
+  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<form role="form" name="form" action="" method="post">
 
-    <input type="hidden" th:name="*{_csrf.parameterName}" th:value="*{_csrf.token}"/>
+<div th:include="layouts/layout :: navbarFragment"></div>
 
-    <div>
+<div class="wrapper" id="container">
+  <div class="inner main-con">
+    <form role="form" name="form" action="" method="post">
+      <div>
         <label for="userNumber">User Number</label>
         <input type="text" name="userNumber" id="userNumber" th:value="*{form.userNumber}" required autofocus th:class="${#fields.hasErrors('form.userNumber')}? fieldError"/>
-
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="username">Name</label>
         <input type="text" name="username" id="username" th:value="*{form.username}" required/>
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" th:value="*{form.password}" required/>
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="passwordRepeated">Repeat</label>
         <input type="password" name="passwordRepeated" id="passwordRepeated" th:value="*{form.passwordRepeated}" required/>
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="email">email</label>
         <input type="email" name="email" id="email" th:value="*{form.email}" required/>
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="phone">phone</label>
         <input type="text" name="phone" id="phone" th:value="*{form.phone}" required/>
-    </div>
-    <div>
+      </div>
+      <div>
         <label>sex</label>
         <input type="radio" name="sex" id="M" value="M" th:value="M" required/><label for="M">男</label>
         <input type="radio" name="sex" id="F" value="F" th:value="F" required/><label for="F">女</label>
-    </div>
-    <div>
+      </div>
+      <div>
         <label for="major">major</label>
         <input type="text" name="major" th:value="*{form.major}" id="major" />
-    </div>
-    <button type="submit">Save</button>
-</form>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
 
 </body>
 </html>

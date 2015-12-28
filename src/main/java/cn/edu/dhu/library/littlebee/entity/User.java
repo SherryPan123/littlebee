@@ -39,7 +39,6 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-
     /*手机号*/
     @Length(min = 6, max = 20)
     @NotEmpty
@@ -77,7 +76,7 @@ public class User extends BaseEntity {
     private String selfIntroduction;
 
     /*奖惩情况*/
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
     private List<RewardPenalty> rewardPenalties;
 
     public User() {
