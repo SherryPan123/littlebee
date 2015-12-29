@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by sherry on 15-11-26.
@@ -39,7 +38,7 @@ public class NoticeController {
 
 
     /*通知列表*/
-    @RequestMapping(value="/notice/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/notice/list", method = RequestMethod.GET)
     public ModelAndView noticeList(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("notice/list");
         //fetch notice
@@ -47,9 +46,9 @@ public class NoticeController {
         List<Notice> notices = AllNotice.getContent();
         Integer pageCount = AllNotice.getTotalPages();
         Integer pageCur = page;
-        mav.addObject("notices",notices);
-        mav.addObject("pageCount",pageCount);
-        mav.addObject("pageCur",pageCur);
+        mav.addObject("notices", notices);
+        mav.addObject("pageCount", pageCount);
+        mav.addObject("pageCur", pageCur);
         return mav;
     }
 
@@ -95,25 +94,22 @@ public class NoticeController {
 
     @RequestMapping(value = "/notice/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveNotice(@PathVariable("operation") String operation,
-                                           @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
-                                           Model model) {
-        if(operation.equals("delete")) {
-            if(noticeService.delete(id)) {
+                                   @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
+                                   Model model) {
+        if (operation.equals("delete")) {
+            if (noticeService.delete(id)) {
                 redirectAttributes.addFlashAttribute("deletion", "success");
-            }
-            else {
+            } else {
                 redirectAttributes.addFlashAttribute("deletion", "unsuccess");
             }
-        }
-        else if(operation.equals("edit")){
+        } else if (operation.equals("edit")) {
             Notice editNotice = noticeService.findOne(id);
-            if(editNotice != null) {
+            if (editNotice != null) {
                 model.addAttribute("editNotice", editNotice);
-                redirectAttributes.addFlashAttribute("status","success");
+                redirectAttributes.addFlashAttribute("status", "success");
                 return "/notice/edit";
-            }
-            else {
-                redirectAttributes.addFlashAttribute("status","notfound");
+            } else {
+                redirectAttributes.addFlashAttribute("status", "notfound");
             }
         }
         return "redirect:/notice/list";
@@ -121,11 +117,10 @@ public class NoticeController {
 
     @RequestMapping(value = "/notice/update", method = RequestMethod.POST)
     public String noticeUpdate(@ModelAttribute("editNotice") Notice editNotice,
-                               final RedirectAttributes redirectAttributes){
-        if(noticeService.editNotice(editNotice)){
+                               final RedirectAttributes redirectAttributes) {
+        if (noticeService.editNotice(editNotice)) {
             redirectAttributes.addFlashAttribute("edit", "success");
-        }
-        else{
+        } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");
         }
         return "redirect:/notice/list";

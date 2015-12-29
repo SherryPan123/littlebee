@@ -72,10 +72,9 @@ public class ActivityController {
     public String saveActivity(@ModelAttribute("activity") Activity activity,
                                final RedirectAttributes redirectAttributes) {
 
-        if(activityService.save(activity)) {
+        if (activityService.save(activity)) {
             redirectAttributes.addFlashAttribute("saveActivity", "success");
-        }
-        else {
+        } else {
             redirectAttributes.addFlashAttribute("saveActivity", "unsuccess");
         }
         return "redirect:/activity/list";
@@ -85,22 +84,19 @@ public class ActivityController {
     public String editRemoveActivity(@PathVariable("operation") String operation,
                                      @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
                                      Model model) {
-        if(operation.equals("delete")) {
-            if(activityService.delete(id)) {
+        if (operation.equals("delete")) {
+            if (activityService.delete(id)) {
                 redirectAttributes.addFlashAttribute("deletion", "success");
-            }
-            else {
+            } else {
                 redirectAttributes.addFlashAttribute("deletion", "unsuccess");
             }
-        }
-        else if(operation.equals("edit")){
+        } else if (operation.equals("edit")) {
             Activity editActivity = activityService.findOne(id);
-            if(editActivity != null) {
+            if (editActivity != null) {
                 model.addAttribute("editActivity", editActivity);
                 return "activity/edit";
-            }
-            else {
-                redirectAttributes.addFlashAttribute("status","notfound");
+            } else {
+                redirectAttributes.addFlashAttribute("status", "notfound");
             }
         }
         return "redirect:/activity/list";
@@ -109,10 +105,9 @@ public class ActivityController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateActivity(@ModelAttribute("editActivity") Activity editActivity,
                                  final RedirectAttributes redirectAttributes) {
-        if(activityService.editActivity(editActivity)) {
+        if (activityService.editActivity(editActivity)) {
             redirectAttributes.addFlashAttribute("edit", "success");
-        }
-        else {
+        } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");
         }
         return "redirect:/activity/list";

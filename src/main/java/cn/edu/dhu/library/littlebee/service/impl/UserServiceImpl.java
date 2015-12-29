@@ -1,21 +1,21 @@
 package cn.edu.dhu.library.littlebee.service.impl;
 
+import cn.edu.dhu.library.littlebee.bean.CurrentUser;
 import cn.edu.dhu.library.littlebee.controller.form.PasswordChangeForm;
-import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.controller.form.UserCreateForm;
+import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.repository.UserRepository;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Created by sherry on 15-11-22.
@@ -27,8 +27,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public void reloadSessionUser() {
+        CurrentUser user = new CurrentUser(getUserById(getSessionUser().getId()));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
     @Override
-    public User getSessionUser(){
+    public User getSessionUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 

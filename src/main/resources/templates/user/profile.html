@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>profile</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
 </head>
-<div id="main">
-    <div>
+<head>
+    <title>Login</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+
         <span><span th:text="${user.username}"></span>'s Profile</span>
         <div
              th:unless="${#strings.isEmpty(message)}"
              th:text="${message}"></div>
         <div>
-            <img th:src="@{${user.icon}}"/>头像
+            <img th:src="${user.icon}"/>头像
             <span>
                 <i></i>
-                <span>Select files...</span>
-                <input id="fileupload" type="file" name="file" />
+                <form th:action="@{/user/avatar}" method="post" enctype="multipart/form-data">
+                    <label>Select files...</label>
+                    <input id="fileupload" type="file" name="file" />
+                    <input type="submit" value="Upload">
+                </form>
             </span>
         </div>
 
@@ -55,11 +65,10 @@
         <div>
             <label>离职时间</label><span th:text="${user.leaveDate}"></span>
         </div>
-
     </div>
-
-
 </div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
 
 </body>
 </html>

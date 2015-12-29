@@ -2,15 +2,13 @@ package cn.edu.dhu.library.littlebee.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by sherry on 15-11-12.
  */
 @Entity
-@Table(name = "resource")
+@Table(name = "resource", indexes = { @Index(columnList = "digest") })
 public class Resource extends BaseEntity {
 
     /*特征码*/
@@ -25,6 +23,26 @@ public class Resource extends BaseEntity {
     /*文件类型*/
     @Column(name = "content_type", nullable = true, length = 255)
     private String contentType;
+
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
+
+    @Column(name = "size", nullable = false)
+    private Long size;
+
+    @Transient
+    private String url;
+
+    public Resource() {
+
+    }
+
+    public Resource(Long size, String digest, String name, String contentType) {
+        this.size = size;
+        this.digest = digest;
+        this.name = name;
+        this.contentType = contentType;
+    }
 
     public String getDigest() {
         return digest;
@@ -50,4 +68,27 @@ public class Resource extends BaseEntity {
         this.contentType = contentType;
     }
 
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

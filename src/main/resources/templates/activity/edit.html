@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="layouts/layout :: headerFragment">
+</head>
 <head>
     <meta charset="UTF-8">
     <title>Activity Edit</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
@@ -80,8 +83,8 @@
     </script>
 </head>
 <body>
-
-    <form th:object="${editActivity}" th:action="@{/activity/update}" action="#" method="post">
+<div th:include="layouts/layout :: navbarFragment"></div>
+<form th:object="${editActivity}" th:action="@{/activity/update}" action="#" method="post">
         <input type="hidden" th:field="*{id}"/>
         <div>
             <label>活动名称</label>
@@ -145,6 +148,6 @@
             <td class="username"></td>
         </tr>
     </table>
-
+<div th:include="layouts/layout :: footerFragment"></div>
 </body>
 </html>

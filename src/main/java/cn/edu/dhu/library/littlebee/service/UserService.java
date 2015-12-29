@@ -13,6 +13,8 @@ import java.util.UUID;
  */
 public interface UserService {
 
+    void reloadSessionUser();
+
     User getSessionUser();
 
     User getUserById(Integer id);

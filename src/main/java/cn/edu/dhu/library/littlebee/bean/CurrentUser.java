@@ -28,6 +28,7 @@ public class CurrentUser extends User implements UserDetails {
             this.setSex(user.getSex());
             this.setEntryDate(user.getEntryDate());
             this.setRoles(user.getRoles());
+            this.setIcon(user.getIcon());
         }
     }
 
