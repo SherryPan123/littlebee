@@ -497,7 +497,7 @@ a:hover {
 
 .panel-post .post-wrap {
     margin: 11px 5px;
-    padding-bottom: 13px;
+    padding-bottom: 5px;
     line-height: 28px;
 }
 
@@ -611,7 +611,7 @@ a:hover {
 }
 
 .post-11 .post-wrap {
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 }
 
 .panel-style3 {
