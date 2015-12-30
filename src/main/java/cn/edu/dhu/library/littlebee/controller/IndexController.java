@@ -31,13 +31,11 @@ public class IndexController {
         ModelAndView mav = new ModelAndView("index");
 
         // fetch newsletter
-        Page<Newsletter> newsletters = null;
-        newsletters = newsletterService.listOrderByTime(0, 5);
+        Page<Newsletter> newsletters = newsletterService.listOrderByTime(0, 10);
         mav.addObject("newsletters", newsletters);
 
         // fetch notice
-        Page<Notice> notices = null;
-        notices = noticeService.listOrderByTime(0, 5);
+        Page<Notice> notices = noticeService.listOrderByTime(0, 11);
         mav.addObject("notices", notices);
 
         return mav;
