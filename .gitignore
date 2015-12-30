@@ -17,3 +17,5 @@ out
 log
 .gradle
 .DS_Store
+
+uploads
