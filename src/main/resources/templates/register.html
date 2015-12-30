@@ -2,53 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-</head>
-<head>
-  <title>Register</title>
-  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+  <title id="pageTitle">注册 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 
 <div class="wrapper" id="container">
   <div class="inner main-con">
-    <form role="form" name="form" action="" method="post">
-      <div>
-        <label for="userNumber">User Number</label>
-        <input type="text" name="userNumber" id="userNumber" th:value="*{form.userNumber}" required autofocus th:class="${#fields.hasErrors('form.userNumber')}? fieldError"/>
-      </div>
-      <div>
-        <label for="username">Name</label>
-        <input type="text" name="username" id="username" th:value="*{form.username}" required/>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" th:value="*{form.password}" required/>
-      </div>
-      <div>
-        <label for="passwordRepeated">Repeat</label>
-        <input type="password" name="passwordRepeated" id="passwordRepeated" th:value="*{form.passwordRepeated}" required/>
-      </div>
-      <div>
-        <label for="email">email</label>
-        <input type="email" name="email" id="email" th:value="*{form.email}" required/>
-      </div>
-      <div>
-        <label for="phone">phone</label>
-        <input type="text" name="phone" id="phone" th:value="*{form.phone}" required/>
-      </div>
-      <div>
-        <label>sex</label>
-        <input type="radio" name="sex" id="M" value="M" th:value="M" required/><label for="M">男</label>
-        <input type="radio" name="sex" id="F" value="F" th:value="F" required/><label for="F">女</label>
-      </div>
-      <div>
-        <label for="major">major</label>
-        <input type="text" name="major" th:value="*{form.major}" id="major" />
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <div class="login_form">
+      <h3>注&nbsp;&nbsp;&nbsp;&nbsp;册</h3>
+
+      <form name="form" th:action="@{/register}" method="post" th:object="${form}">
+        <div class="form_group">
+          <label class="form_label">学号</label>
+          <input type="text" class="form_control" th:field="*{userNumber}" placeholder="学号" autofocus />
+          <div th:if="${#fields.hasErrors('userNumber')}" class="alert alert-danger" th:errors="*{userNumber}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">姓名</label>
+          <input type="text" class="form_control" th:field="*{username}" placeholder="姓名" required />
+          <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" th:errors="*{username}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">密码</label>
+          <input type="password" class="form_control" th:field="*{password}" placeholder="密码" required />
+          <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" th:errors="*{password}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">确认密码</label>
+          <input type="password" class="form_control" th:field="*{passwordRepeated}" placeholder="密码" required />
+          <div th:if="${#fields.hasErrors('passwordRepeated')}" class="alert alert-danger" th:errors="*{passwordRepeated}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">邮箱</label>
+          <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" required />
+          <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">手机</label>
+          <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" required />
+          <div th:if="${#fields.hasErrors('phone')}" class="alert alert-danger" th:errors="*{phone}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">性别</label>
+          <input type="radio" th:field="*{sex}" th:value="M" required />
+          <label>男</label>
+          <input type="radio" th:field="*{sex}" th:value="F" required />
+          <label>女</label>
+          <div th:if="${#fields.hasErrors('sex')}" class="alert alert-danger" th:errors="*{sex}"></div>
+        </div>
+        <div class="form_group">
+          <label class="form_label">专业</label>
+          <input type="text" class="form_control" th:field="*{major}" placeholder="专业" required />
+          <div th:if="${#fields.hasErrors('major')}" class="alert alert-danger" th:errors="*{major}"></div>
+        </div>
+        <div class="form_group">
+          <div class="center">
+            <button type="submit" class="btn btn-primary">注册</button>
+            <button type="reset" class="btn btn-default">重置</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

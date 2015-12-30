@@ -1,5 +1,7 @@
 package cn.edu.dhu.library.littlebee.controller.form;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -7,21 +9,27 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class UserCreateForm {
 
+    @Length(min = 2, max = 20)
     @NotEmpty
     private String username = "";
 
+    @Length(min = 6, max = 10)
     @NotEmpty
     private String userNumber = "";
 
+    @Length(min = 6, max = 256)
     @NotEmpty
     private String password = "";
 
+    @Length(min = 6, max = 256)
     @NotEmpty
     private String passwordRepeated = "";
 
+    @Email
     @NotEmpty
     private String email = "";
 
+    @Length(min = 6, max = 20)
     @NotEmpty
     private String phone = "";
 
@@ -36,6 +44,7 @@ public class UserCreateForm {
 
     private String icon;
 
+    @Length(max = 300)
     private String selfIntroduction;
 
     public String getUsername() {

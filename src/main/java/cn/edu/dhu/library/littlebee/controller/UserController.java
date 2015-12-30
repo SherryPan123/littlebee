@@ -20,8 +20,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Created by sherry on 15-11-19.
@@ -58,7 +61,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
+    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
@@ -68,6 +71,7 @@ public class UserController {
             bindingResult.reject("userNumber.exists", "User Number already exists");
             return "register";
         }
+        redirectAttributes.addFlashAttribute("message", "注册成功!");
         return "redirect:/";
     }
 

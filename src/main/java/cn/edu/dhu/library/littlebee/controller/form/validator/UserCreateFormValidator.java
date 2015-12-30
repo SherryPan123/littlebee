@@ -31,14 +31,14 @@ public class UserCreateFormValidator implements Validator {
     //验证密码是否相同
     private void validatePasswords(Errors errors, UserCreateForm form) {
         if (!form.getPassword().equals(form.getPasswordRepeated())) {
-            errors.reject("password.no_match", "Passwords do not match");
+            errors.rejectValue("password", "password.mismatch", "两次输入的密码不一致!");
         }
     }
 
     //验证学号是否重复
     private void validateUserNumber(Errors errors, UserCreateForm form) {
         if (userService.getUserByUserNumber(form.getUserNumber()) != null) {
-            errors.reject("userNumber.exists", "User with this userNumber already exists");
+            errors.rejectValue("userNumber", "userNumber.exist", "用户名已被使用!");
         }
     }
 

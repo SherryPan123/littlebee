@@ -29,7 +29,7 @@ public class NoticeCreateFormValidator implements Validator {
 
     private void validateTitle(Errors errors, NoticeCreateForm form) {
         if (noticeService.findByTitle(form.getTitle()) != null) {
-            errors.reject("notice.exists", "Notice with this title already exists");
+            errors.rejectValue("notice", "notice.exist", "Notice with this title already exists");
         }
     }
 

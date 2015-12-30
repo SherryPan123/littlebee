@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Little Bee</title>
+  <title th:include=":: #pageTitle">东华大学爱书小蜜蜂服务队</title>
   <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 
   <script th:src="@{/js/jquery.min.js}"></script>
@@ -68,8 +68,6 @@
       <div class="banner"></div>
     </div>
   </div>
-
-  <div th:if="${message != null}" class="alert alert-success" th:text="${message}"></div>
 
 </div>
 

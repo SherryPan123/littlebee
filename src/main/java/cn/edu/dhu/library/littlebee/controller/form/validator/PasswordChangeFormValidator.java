@@ -24,7 +24,7 @@ public class PasswordChangeFormValidator implements Validator {
 
     private void validatePasswords(Errors errors, PasswordChangeForm form) {
         if (!form.getPassword().equals(form.getPasswordRepeated())) {
-            errors.reject("password.no_match", "Passwords do not match");
+            errors.rejectValue("password", "password.mismatch", "两次输入的密码不一致!");
         }
     }
 
