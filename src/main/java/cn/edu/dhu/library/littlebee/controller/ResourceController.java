@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +33,10 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public String formUpload() {
-        return "resource/upload";
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String formUpload(Model model) {
+        model.addAttribute(resourceService.getAllFileResources());
+        return "/resource/list";
     }
 
     @Transactional
@@ -45,22 +47,22 @@ public class ResourceController {
                 throw new FileUploadException("The file is empty.");
             }
 
-            // metadata persistence
             String digest = resourceService.calcDigest(file.getBytes());
+
+            // metadata persistence
             Resource resource = resourceService.findByDigest(digest);
             if (resource == null) {
                 resource = new Resource(file.getSize(), digest, file.getOriginalFilename(), file.getContentType());
             }
-            resource = resourceService.save(resource);
-            logger.info("Resource Digest: '{}'", resource.getDigest());
+            System.out.println("Resource Digest: " + resource.getDigest());
 
-            // save to filesystem
             resourceService.saveFile(file.getBytes(), resource.getDigest(), file.getOriginalFilename());
 
-            // save pins to timeline
-            resource.setUrl("/resources/view/" + resource.getId());
+            resource.setUrl("/resource/view/" + resource.getDigest());
 
-            return "resource/view";
+            resourceService.save(resource);
+            logger.info("Resource Digest: '{}'", resource.getDigest());
+            return "redirect:/resource/list";
         } catch (Exception e) {
             e.printStackTrace();
             return null;
