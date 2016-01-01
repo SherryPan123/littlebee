@@ -15,7 +15,7 @@
 .info-section {
     margin: 20px;
     overflow: hidden;
-    width: 80%;
+    width: 70%;
     padding: 20px 19px 10px 19px;
     background: #fff;
 }
@@ -105,4 +105,34 @@
 
 .center {
     text-align: center;
+}
+
+
+.share-collection h4 {
+  color: #666;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+.share-collection a {
+  display: inline-block;
+  margin: 5px;
+  width: 64px;
+  height: 64px;
+  opacity: .8;
+  transition: opacity .3s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+}
+
+.inner_left {
+    width:80%;
+    float:left;
+}
+
+.inner_right {
+    width:20%;
+    float:left;
 }
