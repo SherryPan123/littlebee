@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+/* CSS Document */
+#container .inner {
+
+}
+
+.profile-cover {
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 0 0 1px #DDE8EF;
+    background-color: #DDE8EF;
+    height: 200px;
+}
+
+.info-section {
+    margin: 20px;
+    overflow: hidden;
+    width: 80%;
+    padding: 20px 19px 10px 19px;
+    background: #fff;
+}
+
+.avatar {
+    position: relative;
+    left: 100px;
+    top: 50px;
+    width: 120px;
+    height: 160px;
+    padding: 5px;
+    background-color: #fff;
+    z-index: 100;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+}
+
+.avatar-image {
+    max-width: 120px;
+    max-height: 160px;
+    min-width: 100px;
+    min-height: 144px;
+    overflow: hidden;
+}
+
+.avatar-title {
+    position: relative;
+    left: 20px;
+    bottom: 20px;
+    color: #204d74;
+    margin: 0 0 0 230px;
+    font-size: 15px;
+}
+
+.operate-area {
+    height: 50px;
+    padding-bottom: 0;
+    border-radius: 0 0 3px 3px;
+    border-bottom: 1px solid #d1d1d1;
+    box-shadow: 0 0 0 1px #d1d1d1;
+    background: #fff;
+    position: relative;
+    border-top: 0;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-bottom: 0;
+}
+
+.upload-avatar {
+    float: left;
+    position: relative;
+    margin: 11px 0 0 250px;
+    font-size: 14px;
+    color: #666;
+    height: 15px;
+    line-height: 15px;
+    display: block;
+}
+
+.operate-area > a {
+    margin-top: 8px;
+    margin-right: 8px;
+}
+
+.info-line {
+    width: 80%;
+    height: 20px;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+.info-title {
+    width: 30%;
+    float: left;
+    text-align: right;
+    font-weight: 700;
+}
+
+.info-value {
+    width: 65%;
+    float: right;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.center {
+    text-align: center;
+}
