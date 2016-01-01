@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+  <title id="pageTitle">错误 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+  <div class="inner main-con">
+
+    <div class="login_form">
+      <h3>错&nbsp;&nbsp;&nbsp;&nbsp;误</h3>
+      <div class="alert alert-danger">
+        <span th:if="${message} and ${message.length() != 0}" th:text="${message}">message ...</span>
+        <span th:unless="${message} and ${message.length() != 0}">Cause unknown (no exception details available)</span>
+      </div>
+      <p class="center"><span id="jumpTo">5</span>秒后跳转到首页...</p>
+    </div>
+  </div>
+</div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
+
+<script type="text/javascript">
+  function countDown(secs, surl){
+    var jumpTo = document.getElementById('jumpTo');
+    jumpTo.innerHTML = secs;
+    if (--secs>0) {
+      setTimeout("countDown("+secs+",'"+surl+"')", 1000);
+    } else {
+      location.href = surl;
+    }
+  }
+  countDown(5, '/');
+</script>
+
+</body>
+</html>
