@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by sherry on 15-12-29.
@@ -67,6 +68,13 @@ public class ResourceServiceImpl implements ResourceService {
         filename += "/" + originalFilename;
         System.out.println(filename); //
         return filename;
+    }
+
+    @Override
+    public List<Resource> getAllFileResources() {
+        String contentType = "";
+        List<Resource> resources = resourceRepository.findByContentType(contentType);
+        return resources;
     }
 
     public void saveFile(byte[] bytes, String digest, String originalFilename) throws IOException {

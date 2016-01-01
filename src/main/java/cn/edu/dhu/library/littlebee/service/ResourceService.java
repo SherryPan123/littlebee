@@ -4,6 +4,7 @@ import cn.edu.dhu.library.littlebee.entity.Resource;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by sherry on 15-12-29.
@@ -19,6 +20,8 @@ public interface ResourceService {
     void saveFile(byte[] bytes, String digest, String originalFilename) throws IOException;
 
     String getFilePath(String digest, String name);
+
+    List<Resource> getAllFileResources();
 
 //    Resource save(Resource resource);
 }

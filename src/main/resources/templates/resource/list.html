@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">下载专区 - 东华大学爱书小蜜蜂服务队</title>
+    <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div>
+    <span>
+        <i></i>
+        <form th:action="@{/resource/upload}" method="post" enctype="multipart/form-data">
+            <label>选择文件</label>
+            <input id="fileupload" type="file" name="file" />
+            <input type="submit" value="Upload">
+        </form>
+    </span>
+</div>
+
+<table>
+    <tr th:if="${#lists.isEmpty(resources)}">
+        <td colspan="4" align="center">暂无资源</td>
+    </tr>
+    <tr>
+        <td>资源名称</td>
+        <td>资源描述</td>
+    </tr>
+    <tr th:each="resource:${resources}">
+        <td th:text="${resource.name}"></td>
+        <td th:text="${resource.url}"></td>
+    </tr>
+</table>
+
+<div th:include="layouts/layout :: footerFragment"></div>
+
+</body>
+</html>

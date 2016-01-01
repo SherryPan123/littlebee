@@ -4,6 +4,7 @@ import cn.edu.dhu.library.littlebee.entity.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,4 +15,5 @@ public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
     Resource findByDigest(String digest);
 
+    List<Resource> findByContentType(String contentType);
 }

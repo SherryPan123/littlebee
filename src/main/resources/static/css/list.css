@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+.list_title {
+    background-color:#fefeff;
+    position: relative;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.list_title h3 {
+    font-size: 18px;
+    color: #5a5a59;
+    margin-bottom: 25px;
+}
+
+.list_title .add_activity {
+    float: right;
+}
+
+.list_content #message {
+}
+
+.empty_message {
+    background-color: blue;
+}
+
+.warning_message {
+    background-color: red;
+}
+
+.success_message {
+    background-color: green;
+}
+
+.list_content ul {
+    margin-left: 20px;
+}
+
+.list_content ul li {
+    position: relative;
+    border-bottom: 2px solid #f1f1f1;
+    height: 35px;
+    line-height: 35px;
+}
+
+.list_content ul li #_name {
+
+}
+
+.list_content ul li .list_button {
+    float: right;
+    margin-right: 20px;
+}
+
+.page_tr {
+    padding-top: 50px;
+    float: right;
+    margin-right: 20px;
+    height:35px;
+    line-height: 35px;
+}
+
+.add_item {
+    margin-top: 20px;
+    float:left;
+    margin-left: 20px;
+}
+
+.main-con {
+    height:auto;
+    min-height: 500px;
+}
