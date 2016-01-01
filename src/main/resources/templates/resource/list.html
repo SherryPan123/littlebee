@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head th:include="layouts/layout :: headerFragment">
-</head>
-<head>
-    <title>下载专区</title>
-    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    <title id="pageTitle">下载专区 - 东华大学爱书小蜜蜂服务队</title>
+    <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -23,7 +22,7 @@
 
 <table>
     <tr th:if="${#lists.isEmpty(resources)}">
-        <td colspan="4" align="center">No Resources Posted Yet!!!</td>
+        <td colspan="4" align="center">暂无资源</td>
     </tr>
     <tr>
         <td>资源名称</td>

@@ -5,10 +5,12 @@ import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.service.ActivityService;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.beans.PropertyEditorSupport;
@@ -56,10 +58,17 @@ public class ActivityController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String savePage(Model model) {
-        model.addAttribute("activities", activityService.getAllActivities());
-        model.addAttribute("users", userService.getAllUsers());
-        return "activity/list";
+    public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
+        ModelAndView mav = new ModelAndView("activity/list");
+        //fetch activities
+        Page<Activity> AllActivity = activityService.listOrderByTime(page, 5);
+        List<Activity> activities = AllActivity.getContent();
+        Integer pageCount = AllActivity.getTotalPages();
+        Integer pageCur = page;
+        mav.addObject("activities", activities);
+        mav.addObject("pageCount", pageCount);
+        mav.addObject("pageCur", pageCur);
+        return mav;
     }
 
     @RequestMapping(value = "/post", method = RequestMethod.GET)

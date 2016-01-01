@@ -1,49 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Activity List</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">活动列表 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
+<link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
 
-<div th:if="${deletion eq 'unsuccess'}">
-    <div>
-        <strong>Error!</strong> Activity Not Deleted.
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="list_title">
+            <h3>活动列表</h3>
+            <hr>
+        </div>
+        <div class="list_content">
+            <div>
+                <div>
+                    <div th:if="${#lists.isEmpty(activities)}" class="empty_message">
+                        <span align="center">No Activity Posted Yet!!!</span>
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'unsuccess'}" class="warning_message">
+                    <div>
+                        <strong>错误!</strong>活动未被删除
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'success'}" class="success_message">
+                    <div>
+                        <strong>成功!</strong>活动成功删除
+                    </div>
+                </div>
+                <div th:if="${edit eq 'success'}" class="success_message">
+                    <strong>Success!</strong> Activity Update Successfully.
+                </div>
+                <div th:if="${edit eq 'unsuccess'}" class="warning_message">
+                    <strong>Failed!</strong> Activity Cannot be found.
+                </div>
+            </div>
+
+            <ul th:each="activity:${activities}">
+                <li>
+                    <time></time>
+                    <span id="_name" th:text="${activity.name}"></span>
+                    <!--
+                    <span id="activity_description" th:text="${activity.description}"></span>
+                    -->
+                    <span class="list_button">
+                        <button><a th:href="@{/activity/delete/{id}(id=${activity.id})}">删除</a></button>
+                    </span>
+                    <span class="list_button">
+                        <button><a th:href="@{/activity/edit/{id}(id=${activity.id})}">编辑</a></button>
+                    </span>
+                </li>
+            </ul>
+            <a class="add_item" th:href="@{/activity/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
+            <div class="page_tr">
+                <a th:href="@{/activity/list(page=${pageCur-1})}">上一页</a>
+                <a th:href="@{/activity/list(page=${pageCur+1})}">下一页</a>
+                <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
+            </div>
+
+        </div>
     </div>
 </div>
-<div th:if="${deletion eq 'success'}">
-    <div>
-        <strong>Success!</strong> Activity Deleted Successfully.
-    </div>
-</div>
-<div th:if="${edit eq 'success'}">
-    <strong>Success!</strong> Activity Update Successfully.
-</div>
-<div th:if="${edit eq 'unsuccess'}">
-    <strong>Failed!</strong> Activity Cannot be found.
-</div>
-
-<tbody>
-<table>
-<tr th:if="${#lists.isEmpty(activities)}">
-    <td colspan="4" align="center">No Activity Posted Yet!!!</td>
-</tr>
-<tr>
-    <td>活动名称</td>
-    <td>活动描述</td>
-</tr>
-<tr th:each="activity:${activities}">
-    <td th:text="${activity.name}"></td>
-    <td th:text="${activity.description}"></td>
-    <td>
-        <a th:href="@{/activity/edit/{id}(id=${activity.id})}">编辑</a>
-    </td>
-    <td>
-        <a th:href="@{/activity/delete/{id}(id=${activity.id})}">删除</a>
-    </td>
-</tr>
-</table>
-<a th:href="@{/activity/post}">添加</a>
-</tbody>
+<div th:include="layouts/layout :: footerFragment"></div>
 </body>
 </html>

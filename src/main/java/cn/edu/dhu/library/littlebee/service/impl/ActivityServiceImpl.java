@@ -4,6 +4,9 @@ import cn.edu.dhu.library.littlebee.entity.Activity;
 import cn.edu.dhu.library.littlebee.repository.ActivityRepository;
 import cn.edu.dhu.library.littlebee.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +63,12 @@ public class ActivityServiceImpl implements ActivityService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<Activity> listOrderByTime(Integer page, int size) {
+        Pageable pageable = new PageRequest(page, size, sortByTimeDesc());
+        return activityRepository.findAll(pageable);
     }
 
 }
