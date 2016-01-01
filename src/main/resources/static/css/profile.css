@@ -15,7 +15,6 @@
 .info-section {
     margin: 20px;
     overflow: hidden;
-    width: 70%;
     padding: 20px 19px 10px 19px;
     background: #fff;
 }
@@ -78,8 +77,8 @@
 }
 
 .operate-area > a {
-    margin-top: 8px;
-    margin-right: 8px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .info-line {
@@ -107,32 +106,41 @@
     text-align: center;
 }
 
-
-.share-collection h4 {
-  color: #666;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #eee;
+h4 {
+    color: #666;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
 }
+
+.share-collection {
+    width: 250px;
+}
+
 .share-collection a {
-  display: inline-block;
-  margin: 5px;
-  width: 64px;
-  height: 64px;
-  opacity: .8;
-  transition: opacity .3s;
+    display: inline-block;
+    margin: 20px;
+    width: 64px;
+    height: 64px;
+    opacity: .8;
+    transition: opacity .3s;
+}
 
-  &:hover {
+.share-collection a:hover {
     opacity: 1;
-  }
+}
 
+.share-collection img {
+    width: 70px;
 }
 
 .inner_left {
-    width:80%;
-    float:left;
+    width: 600px;
+    float: left;
+    margin-right: 20px;
 }
 
 .inner_right {
-    width:20%;
-    float:left;
+    width: 250px;
+    float: right;
 }

@@ -10,8 +10,6 @@
 
 <div class="wrapper" id="container">
   <div class="inner main-con">
-
-
     <div class="profile-cover">
       <div class="avatar">
         <img class="avatar-image" th:src="${user.icon}"/>
@@ -28,14 +26,12 @@
           <button class="btn btn-sm btn-primary" type="submit">上传</button>
         </form>
       </div>
-      <a class="btn btn-primary fr" th:href="@{/user/passwordChange}">编辑资料</a>
+      <a class="btn btn-sm btn-primary fr" th:href="@{/user/passwordChange}">编辑资料</a>
     </div>
 
-
     <div class="info-section">
-
       <div class="inner_left">
-
+        <h4>Information</h4>
         <div class="info-line">
           <div class="info-title">ID：</div>
           <div class="info-value" th:text="${user.id}"></div>
@@ -72,31 +68,20 @@
           <div class="info-title">离职时间：</div>
           <div class="info-value" th:text="${user.leaveDate}"></div>
         </div>
-
       </div>
 
       <div class="inner_right">
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="share-collection">
-                <h4>Contact</h4>
-                <a href="#"><img th:src="@{/public/dropbox.png}" /></a>
-                <a href="#"><img th:src="@{/public/email.png}" /></a>
-                <a href="#"><img th:src="@{/public/facebook.png}" /></a>
-                <a href="#"><img th:src="@{/public/twitter.png}" /></a>
-                <a href="#"><img th:src="@{/public/instagram.png}" /></a>
-                <a href="#"><img th:src="@{/public/tumblr.png}" /></a>
-              </div>
-            </div>
-          </div>
+        <div class="share-collection">
+          <h4>Contact</h4>
+          <a href="#"><img th:src="@{/images/dropbox.png}" /></a>
+          <a href="#"><img th:src="@{/images/email.png}" /></a>
+          <a href="#"><img th:src="@{/images/facebook.png}" /></a>
+          <a href="#"><img th:src="@{/images/twitter.png}" /></a>
+          <a href="#"><img th:src="@{/images/instagram.png}" /></a>
+          <a href="#"><img th:src="@{/images/tumblr.png}" /></a>
         </div>
       </div>
-
-  </div>
-
-
-
+    </div>
   </div>
 </div>
 
