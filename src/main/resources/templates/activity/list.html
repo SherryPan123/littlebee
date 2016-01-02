@@ -18,25 +18,19 @@
         <div class="list_content">
             <div>
                 <div>
-                    <div th:if="${#lists.isEmpty(activities)}" class="empty_message">
-                        <span align="center">No Activity Posted Yet!!!</span>
+                    <div th:if="${#lists.isEmpty(activities)}" class="alert alert-warning">
+                        <span align="center">暂无活动!</span>
                     </div>
                 </div>
-                <div th:if="${deletion eq 'unsuccess'}" class="warning_message">
+                <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
                     <div>
-                        <strong>错误!</strong>活动未被删除
+                        <strong>错误!</strong> 活动未被删除
                     </div>
                 </div>
-                <div th:if="${deletion eq 'success'}" class="success_message">
+                <div th:if="${deletion eq 'success'}" class="alert alert-success">
                     <div>
-                        <strong>成功!</strong>活动成功删除
+                        <strong>成功!</strong> 活动成功删除
                     </div>
-                </div>
-                <div th:if="${edit eq 'success'}" class="success_message">
-                    <strong>Success!</strong> Activity Update Successfully.
-                </div>
-                <div th:if="${edit eq 'unsuccess'}" class="warning_message">
-                    <strong>Failed!</strong> Activity Cannot be found.
                 </div>
             </div>
 

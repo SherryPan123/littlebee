@@ -2,9 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-    <title id="pageTitle">活动发布 - 东华大学爱书小蜜蜂服务队</title>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <title id="pageTitle">活动发布 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
@@ -12,73 +10,67 @@
 <div th:include="layouts/layout :: navbarFragment"></div>
 
 <div class="wrapper" id="container">
-    <div class="inner main-con">
-        <div class="login_form">
-            <h3>活&nbsp;动&nbsp;发&nbsp;布</h3>
-            <form th:object="${activity}" th:action="@{/activity/save}" action="#" method="post">
-                <div>
-                    <div class="form_group">
-                        <label for="name"  class="form_label">活动名称</label>
-                        <input type="text" class="form_control"  name="name" id="name" th:field="*{name}" required autofocus />
-                    </div>
-                    <div class="form_group">
-                        <label for="description" class="form_label">活动描述</label>
+  <div class="inner main-con">
+    <div class="login_form">
+      <h3>活&nbsp;动&nbsp;发&nbsp;布</h3>
+      <form th:object="${activity}" th:action="@{/activity/save}" action="#" method="post">
+        <div>
+          <div class="form_group">
+            <label for="name"  class="form_label">活动名称</label>
+            <input type="text" class="form_control"  name="name" id="name" th:field="*{name}" required autofocus />
+          </div>
+          <div class="form_group">
+            <label for="description" class="form_label">活动描述</label>
+            <textarea class="form_control" style="height:200px;" name="description" id="description">
+            </textarea>
+          </div>
 
-                        <textarea class="form_control" style="height:200px;" name="description" id="description">
+          <div class="form_group">
+            <div>
+              <label class="form_label">负责人</label>
+            </div>
 
-                        </textarea>
+            <table width="50%" align="left" cellpadding="2" cellspacing="1" border="0">
+              <thead>
+              <tr>
+                <th width="30px" align="left">
+                  <img th:src="@{/images/ico_add.png}" width="20" height="20" onClick="addUser();" />
+                </th>
+                <th width="30px">序号</th>
+                <th width="100px">学号</th>
+                <th align="left" style="padding-left: 30px;">姓名</th>
+              </tr>
+              </thead>
+              <tbody id="users">
 
-                    </div>
-
-                    <div class="form_group">
-                        <div>
-                            <label class="form_label">负责人</label>
-                        </div>
-
-
-                        <table width="50%" align="left" cellpadding="2" cellspacing="1"
-                               border="0">
-                            <thead>
-                            <tr>
-                                <th width="30px" align="left"><img
-                                        src="/images/ico_add.png" width="20" height="20"
-                                        onClick="addUser();" /></th>
-                                <th width="30px">序号</th>
-                                <th width="100px">学号</th>
-                                <th align="left" style="padding-left: 30px;">姓名</th>
-                            </tr>
-                            </thead>
-                            <tbody id="users">
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="form_group">
-                    <div class="center">
-                        <button class="btn btn-primary" type="submit">提交</button>
-                        <button class="btn btn-default" type="reset">重置</button>
-                    </div>
-                </div>
-            </form>
-
-            <!-- user tr sample -->
-            <table style="display: none">
-                <tr id="userTrSample">
-                    <input name="users" type="hidden" value="" class="userId" />
-                    <td align="left" valign="middle"><img
-                            src="/images/ico_delete.gif" width="18" height="18"
-                            onClick="deleteUser(this);" /></td>
-                    <td align="center" class="NO"></td>
-
-                    <td><input type="text" value="" class="userIndex" size="10"
-                               maxlength="100"></td>
-                    <td class="username"></td>
-                </tr>
+              </tbody>
             </table>
+          </div>
         </div>
+        <div class="form_group">
+          <div class="center">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <button class="btn btn-default" type="reset">重置</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- user tr sample -->
+      <table style="display: none">
+        <tr id="userTrSample">
+          <input name="users" type="hidden" value="" class="userId" />
+          <td align="left" valign="middle">
+            <img th:src="@{/images/ico_delete.gif}" width="18" height="18" onClick="deleteUser(this);" />
+          </td>
+          <td align="center" class="NO"></td>
+          <td>
+            <input type="text" value="" class="userIndex" size="10" maxlength="100">
+          </td>
+          <td class="username"></td>
+        </tr>
+      </table>
     </div>
+  </div>
 </div>
 <div th:include="layouts/layout :: footerFragment"></div>
 
