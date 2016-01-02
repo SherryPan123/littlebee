@@ -1,139 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Activity Post</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">活动发布 - 东华大学爱书小蜜蜂服务队</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" language="javascript">
-        var usersTbody = null;
-        var userTrSample = null;
-
-        $(document).ready(function(e) {
-            usersTbody = $("#users");
-            userTrSample = $("#userTrSample");
-            refreshNo();
-        });
-
-        //delay method
-        var delay = (function(){
-            var timer = 0;
-            return function(callback, ms){
-                clearTimeout (timer);
-                timer = setTimeout(callback, ms);
-            };
-        })();
-
-        //get user id and set tr
-        var getUserInJson = function(userIndex,userTr){
-            var userNumber = userTr.find("input.userId");
-            var username = userTr.find("td.username");
-            $.ajax({
-                url:"/user/getUserInJson",
-                //async:false,
-                data:{"userNumber":userIndex},
-                success:function(returnData){
-                    userNumber.val(returnData.userNumber);
-                    username.html(returnData.username);
-                },
-                error:function() {
-                    userNumber.val("");
-                    username.html("Error:NO User Found!");
-                },
-                dataType:"json"
-            });
-        };
-
-        //bing key up event to input.userIndex
-        $(document).on("keyup","input.userIndex",
-            function(){
-                var userIndex = $(this);
-                var userTr = userIndex.parent().parent();
-                delay(
-                    function(){
-                        getUserInJson(userIndex.val(),userTr);
-                    }, 500
-                );
-            }
-        );
-
-        // refresh user No
-        function refreshNo(){
-            var userTrs = usersTbody.children();
-            $.each(userTrs,function(i,item){
-                $(item).find(".NO").html(i+1);
-            });
-        }
-
-        //delete user
-        function deleteUser(img){
-            $(img).parent().parent().remove();
-            refreshNo();
-        }
-
-        //add user
-        function addUser(){
-            usersTbody.append(userTrSample.clone());
-            refreshNo();
-        }
-
-    </script>
 </head>
 <body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
-<form th:object="${activity}" th:action="@{/activity/save}" action="#" method="post">
+<div th:include="layouts/layout :: navbarFragment"></div>
 
-    <div>
-        <label for="name">Activity Name</label>
-        <input type="text" name="name" id="name" th:field="*{name}" required autofocus />
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <h3>活&nbsp;动&nbsp;发&nbsp;布</h3>
+            <form th:object="${activity}" th:action="@{/activity/save}" action="#" method="post">
+                <div>
+                    <div class="form_group">
+                        <label for="name"  class="form_label">活动名称</label>
+                        <input type="text" class="form_control"  name="name" id="name" th:field="*{name}" required autofocus />
+                    </div>
+                    <div class="form_group">
+                        <label for="description" class="form_label">活动描述</label>
+
+                        <textarea class="form_control" style="height:200px;" name="description" id="description">
+
+                        </textarea>
+
+                    </div>
+
+                    <div class="form_group">
+                        <div>
+                            <label class="form_label">负责人</label>
+                        </div>
+
+
+                        <table width="50%" align="left" cellpadding="2" cellspacing="1"
+                               border="0">
+                            <thead>
+                            <tr>
+                                <th width="30px" align="left"><img
+                                        src="/images/ico_add.png" width="20" height="20"
+                                        onClick="addUser();" /></th>
+                                <th width="30px">序号</th>
+                                <th width="100px">学号</th>
+                                <th align="left" style="padding-left: 30px;">姓名</th>
+                            </tr>
+                            </thead>
+                            <tbody id="users">
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form_group">
+                    <div class="center">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                        <button class="btn btn-default" type="reset">重置</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- user tr sample -->
+            <table style="display: none">
+                <tr id="userTrSample">
+                    <input name="users" type="hidden" value="" class="userId" />
+                    <td align="left" valign="middle"><img
+                            src="/images/ico_delete.gif" width="18" height="18"
+                            onClick="deleteUser(this);" /></td>
+                    <td align="center" class="NO"></td>
+
+                    <td><input type="text" value="" class="userIndex" size="10"
+                               maxlength="100"></td>
+                    <td class="username"></td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div>
-        <label for="description">Activity description</label>
-        <input type="text" name="description" id="description" />
-    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
 
-    <p>负责人</p>
-
-    <table width="50%" align="left" cellpadding="2" cellspacing="1"
-           border="0">
-        <thead>
-        <tr>
-            <th width="30px" align="left"><img
-                    src="/images/ico_add.png" width="20" height="20"
-                    onClick="addUser();" /></th>
-            <th width="30px">No.</th>
-            <th width="100px">UserNumber</th>
-            <th align="left" style="padding-left: 30px;">Name</th>
-        </tr>
-        </thead>
-        <tbody id="users">
-
-
-        </tbody>
-    </table>
-
-    <div>
-        <input type="submit" value="Submit" />
-        <input type="reset" value="Reset" /></td>
-    </div>
-</form>
-
-
-<!-- user tr sample -->
-<table style="display: none">
-    <tr id="userTrSample">
-        <input name="users" type="hidden" value="" class="userId" />
-        <td align="left" valign="middle"><img
-                src="/images/ico_delete.gif" width="18" height="18"
-                onClick="deleteUser(this);" /></td>
-        <td align="center" class="NO"></td>
-
-        <td><input type="text" value="" class="userIndex" size="10"
-                   maxlength="100"></td>
-        <td class="username"></td>
-    </tr>
-</table>
-
-
+<script th:src="@{/js/search_name.js}"></script>
 </body>
 </html>
