@@ -13,7 +13,7 @@ public class Salary extends BaseEntity {
 
     /*工资表月份*/
     @Column(name = "date")
-    private ZonedDateTime date; // PNT: year_month can not be used..  By Jiaye
+    private ZonedDateTime date;
 
     /*用户*/
     @ManyToOne
