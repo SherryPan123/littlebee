@@ -1,6 +1,8 @@
 package cn.edu.dhu.library.littlebee.repository;
 
 import cn.edu.dhu.library.littlebee.entity.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
     Resource findByDigest(String digest);
 
-    List<Resource> findByContentType(String contentType);
+    Page<Resource> findByContentType(String contentType, Pageable pageable);
+
+    Page<Resource> findByType(String type, Pageable pageable);
 }

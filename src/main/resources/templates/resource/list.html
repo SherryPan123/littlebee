@@ -2,37 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-    <title id="pageTitle">下载专区 - 东华大学爱书小蜜蜂服务队</title>
-    <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
+  <title id="pageTitle">下载专区 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
+<link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 
-<div>
-    <span>
-        <i></i>
-        <form th:action="@{/resource/upload}" method="post" enctype="multipart/form-data">
+<div class="wrapper" id="container">
+  <div class="inner main-con">
+    <div class="list_title">
+      <h3>下载专区</h3>
+      <hr>
+    </div>
+    <div class="list_content">
+      <div>
+        <span>
+          <i></i>
+          <form th:action="@{/resource/upload}" method="post" enctype="multipart/form-data">
             <label>选择文件</label>
             <input id="fileupload" type="file" name="file" />
             <input type="submit" value="Upload">
-        </form>
-    </span>
+          </form>
+        </span>
+      </div>
+      <ul th:each="resource:${resources}">
+        <li>
+          <time th:text="${#temporals.format(resource.createdDate, 'yyyy/MM/dd')}"></time>
+          <span id="_name" th:text="${resource.name}"></span>
+          <span id="_url" th:text="${resource.url}"></span>
+          <!--<span id="activity_description" th:text="${activity.description}"></span>-->
+          <span class="list_button">
+              <a class="btn btn-sm btn-danger" th:href="@{/resource/delete/{id}(id=${resource.id})}">删除</a>
+          </span>
+          <span class="list_button">
+              <a class="btn btn-sm btn-warning" th:href="@{/resource/edit/{id}(id=${resource.id})}">编辑</a>
+          </span>
+        </li>
+      </ul>
+      <div class="page_tr">
+        <a th:href="@{/resource/list(page=${pageCur-1})}">上一页</a>
+        <a th:href="@{/resource/list(page=${pageCur+1})}">下一页</a>
+        <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table>
-    <tr th:if="${#lists.isEmpty(resources)}">
-        <td colspan="4" align="center">暂无资源</td>
-    </tr>
-    <tr>
-        <td>资源名称</td>
-        <td>资源描述</td>
-    </tr>
-    <tr th:each="resource:${resources}">
-        <td th:text="${resource.name}"></td>
-        <td th:text="${resource.url}"></td>
-    </tr>
-</table>
 
 <div th:include="layouts/layout :: footerFragment"></div>
 

@@ -7,6 +7,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by sherry on 15-12-29.
@@ -34,9 +37,16 @@ public class ResourceController {
     private ResourceService resourceService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String formUpload(Model model) {
-        model.addAttribute(resourceService.getAllFileResources());
-        return "/resource/list";
+    public ModelAndView formUpload(@RequestParam(defaultValue = "0") Integer page) {
+        ModelAndView mav = new ModelAndView("resource/list");
+        Page<Resource> AllResource = resourceService.getResourcesByType("Downloads", page, 5);
+        List<Resource> resources = AllResource.getContent();
+        Integer pageCount = AllResource.getTotalPages();
+        Integer pageCur = page;
+        mav.addObject("resources", resources);
+        mav.addObject("pageCount", pageCount);
+        mav.addObject("pageCur", pageCur);
+        return mav;
     }
 
     @Transactional
@@ -59,6 +69,7 @@ public class ResourceController {
             resourceService.saveFile(file.getBytes(), resource.getDigest(), file.getOriginalFilename());
 
             resource.setUrl("/resource/view/" + resource.getDigest());
+            resource.setType("Downloads");
 
             resourceService.save(resource);
             logger.info("Resource Digest: '{}'", resource.getDigest());

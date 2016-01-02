@@ -6,6 +6,10 @@ import cn.edu.dhu.library.littlebee.service.ResourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +33,10 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private ResourceRepository resourceRepository;
+
+    private Sort sortByTimeDesc() {
+        return new Sort(Sort.Direction.DESC, "createdDate");
+    }
 
     public String calcDigest(byte[] bytes) throws NoSuchAlgorithmException {
         // calculate the file checksum
@@ -71,9 +79,9 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> getAllFileResources() {
-        String contentType = "";
-        List<Resource> resources = resourceRepository.findByContentType(contentType);
+    public Page<Resource> getResourcesByType(String type, Integer page, int size) {
+        Pageable pageable = new PageRequest(page, size, sortByTimeDesc());
+        Page<Resource> resources = resourceRepository.findByType(type, pageable);
         return resources;
     }
 

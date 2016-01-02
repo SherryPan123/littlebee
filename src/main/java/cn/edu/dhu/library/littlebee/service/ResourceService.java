@@ -1,6 +1,7 @@
 package cn.edu.dhu.library.littlebee.service;
 
 import cn.edu.dhu.library.littlebee.entity.Resource;
+import org.springframework.data.domain.Page;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +22,7 @@ public interface ResourceService {
 
     String getFilePath(String digest, String name);
 
-    List<Resource> getAllFileResources();
+    Page<Resource> getResourcesByType(String type, Integer page, int size);
 
 //    Resource save(Resource resource);
 }

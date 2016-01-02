@@ -20,6 +20,9 @@ public class Resource extends BaseEntity {
     @Column(name = "description", nullable = true, length = 255)
     private String description;
 
+    @Column(name = "type", nullable = true, length = 255)
+    private String type;
+
     /*文件类型*/
     @Column(name = "content_type", nullable = true, length = 255)
     private String contentType;
@@ -90,5 +93,13 @@ public class Resource extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
