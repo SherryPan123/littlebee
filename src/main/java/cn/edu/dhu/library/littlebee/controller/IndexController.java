@@ -2,8 +2,10 @@ package cn.edu.dhu.library.littlebee.controller;
 
 import cn.edu.dhu.library.littlebee.entity.Newsletter;
 import cn.edu.dhu.library.littlebee.entity.Notice;
+import cn.edu.dhu.library.littlebee.entity.Resource;
 import cn.edu.dhu.library.littlebee.service.NewsletterService;
 import cn.edu.dhu.library.littlebee.service.NoticeService;
+import cn.edu.dhu.library.littlebee.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,9 @@ public class IndexController {
     @Autowired
     private NoticeService noticeService;
 
+    @Autowired
+    private ResourceService resourceService;
+
     @RequestMapping(value = "/")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
@@ -37,6 +42,10 @@ public class IndexController {
         // fetch notice
         Page<Notice> notices = noticeService.listOrderByTime(0, 11);
         mav.addObject("notices", notices);
+
+        // fetch resource
+        Page<Resource> resources = resourceService.getResourcesByType("Downloads", 0, 11);
+        mav.addObject("resources", resources);
 
         return mav;
     }

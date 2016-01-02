@@ -81,15 +81,10 @@
           <div id="wp_news_w7">
             <p></p>
             <ul class="news-list">
-              <li class="news-item item-1">
-                <a href='/e0/cd/c427a123085/page.htm' target='_blank' title='人民日报评论员：抓好民主生活会这个“关键动作”'
-                   alt='人民日报评论员：抓好民主生活会这个“关键动作”'>人民日报评论员：抓好民...</a>
-                <span class="item-date">12-11</span>
-              </li>
-              <li class="news-item item-2">
-                <a href='/e0/cc/c427a123084/page.htm' target='_blank' title='人民日报评论员：牢牢把握“三个见实效”的目标要求'
-                   alt='人民日报评论员：牢牢把握“三个见实效”的目标要求'>人民日报评论员：牢牢把...</a>
-                <span class="item-date">12-11</span>
+              <li class="news-item item-1" th:each="resource:${resources.content}">
+                <a th:href='@{/resource/view/{digest}(digest=${resource.digest})}' target='_blank' th:title='${resource.name}'
+                   th:alt='${resource.name}' th:text="${resource.name}"></a>
+                <span class="item-date" th:text="${#temporals.format(resource.createdDate, 'MM-dd')}"></span>
               </li>
             </ul>
           </div>

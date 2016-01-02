@@ -36,7 +36,7 @@
               <a class="btn btn-sm btn-danger" th:href="@{/resource/delete/{id}(id=${resource.id})}">删除</a>
           </span>
           <span class="list_button">
-              <a class="btn btn-sm btn-warning" th:href="@{/resource/edit/{id}(id=${resource.id})}">编辑</a>
+              <a class="btn btn-sm btn-warning" th:href="@{/resource/view/{digest}(digest=${resource.digest})}">下载</a>
           </span>
         </li>
       </ul>
