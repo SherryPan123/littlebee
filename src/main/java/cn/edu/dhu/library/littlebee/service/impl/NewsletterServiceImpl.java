@@ -42,4 +42,32 @@ public class NewsletterServiceImpl implements NewsletterService {
         return newsletterRepository.findOne(id);
     }
 
+    @Override
+    public boolean save(Newsletter newsletter) {
+        if(newsletter != null){
+            newsletterRepository.save(newsletter);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        Newsletter newsletter = newsletterRepository.findOne(id);
+        if(newsletter != null){
+            newsletterRepository.delete(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editNewsletter(Newsletter editNewsletter) {
+        if(editNewsletter != null){
+            newsletterRepository.save(editNewsletter);
+            return true;
+        }
+        return false;
+    }
+
 }

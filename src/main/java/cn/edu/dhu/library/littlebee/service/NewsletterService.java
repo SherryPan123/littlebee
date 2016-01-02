@@ -15,4 +15,9 @@ public interface NewsletterService {
 
     Newsletter findOne(Integer id);
 
+    boolean save(Newsletter newsletter);
+
+    boolean delete(Integer id);
+
+    boolean editNewsletter(Newsletter editNewsletter);
 }

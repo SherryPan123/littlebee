@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-    <title id="pageTitle">通讯稿发布 - 东华大学爱书小蜜蜂服务队</title>
+    <title id="pageTitle">通讯稿编辑 - 东华大学爱书小蜜蜂服务队</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
-
 <div class="wrapper" id="container">
     <div class="inner main-con">
         <div class="login_form">
             <h3>通&nbsp;讯&nbsp;稿&nbsp;发&nbsp;布</h3>
-            <form th:object="${newsletter}" th:action="@{/newsletter/save}" action="#" method="post">
+            <form th:object="${editNewsletter}" th:action="@{/newsletter/update}" action="#" method="post">
                 <div>
+                    <input type="hidden" th:field="*{id}"/>
                     <div class="form_group">
                         <label for="title"  class="form_label">通讯稿名称</label>
                         <input type="text" class="form_control"  name="title" id="title" th:field="*{title}" required autofocus />
@@ -39,5 +40,7 @@
     </div>
 </div>
 <div th:include="layouts/layout :: footerFragment"></div>
+
+<script th:src="@{/js/search_name.js}"></script>
 </body>
 </html>
