@@ -7,6 +7,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 
 import javax.servlet.Filter;
@@ -29,6 +30,11 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
     @Bean
     public SpringSecurityDialect springSecurityDialect(){
         return new SpringSecurityDialect();
+    }
+
+    @Bean
+    public Java8TimeDialect java8TimeDialect() {
+        return new Java8TimeDialect();
     }
 
     @Bean

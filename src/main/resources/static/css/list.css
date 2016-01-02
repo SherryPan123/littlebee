@@ -52,6 +52,11 @@
     margin-right: 20px;
 }
 
+.activity_description {
+    float: right;
+    margin-right: 20px;
+}
+
 .page_tr {
     padding-top: 50px;
     float: right;

@@ -36,16 +36,14 @@
 
             <ul th:each="activity:${activities}">
                 <li>
-                    <time></time>
+                    <time th:text="${#temporals.format(activity.createdDate, 'yyyy/MM/dd')}"></time>
                     <span id="_name" th:text="${activity.name}"></span>
-                    <!--
-                    <span id="activity_description" th:text="${activity.description}"></span>
-                    -->
+                    <!--<span id="activity_description" th:text="${activity.description}"></span>-->
                     <span class="list_button">
-                        <button><a th:href="@{/activity/delete/{id}(id=${activity.id})}">删除</a></button>
+                        <a class="btn btn-sm btn-danger" th:href="@{/activity/delete/{id}(id=${activity.id})}">删除</a>
                     </span>
                     <span class="list_button">
-                        <button><a th:href="@{/activity/edit/{id}(id=${activity.id})}">编辑</a></button>
+                        <a class="btn btn-sm btn-warning" th:href="@{/activity/edit/{id}(id=${activity.id})}">编辑</a>
                     </span>
                 </li>
             </ul>
