@@ -116,7 +116,10 @@
                   <span class="news-col"></span>
                   <a th:href="@{/notice/view/{id}(id=${notice.id})}" target="_blank" th:title="${notice.title}"
                      th:alt="${notice.title}" th:text="${notice.title}"></a>
-                  <span class="item-date">12-29</span> <!--th:text="${notice.createdDate}"-->
+                  <span class="item-date" th:text="${#temporals.format(notice.createdDate, 'MM-dd')}"></span>
+                  <!--
+                  <th:text="${notice.createdDate}"></span>
+                  -->
                 </li>
               </ul>
               <p>
