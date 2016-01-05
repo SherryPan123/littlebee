@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -78,7 +79,7 @@ public class NoticeController {
     }
 
     //todo:安全权限验证
-    @RequestMapping(value = "/notice/post", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/notice/post", method = RequestMethod.POST)
     public String handleNoticeCreateForm(@Valid @ModelAttribute("form") NoticeCreateForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "notice/post";
@@ -88,6 +89,18 @@ public class NoticeController {
         } catch (DataIntegrityViolationException e) {
             bindingResult.reject("title.exists", "Notice failed to post");
             return "notice/post";
+        }
+        return "redirect:/notice/list";
+    }*/
+
+    @RequestMapping(value = "/notice/save", method = RequestMethod.POST)
+    public String saveNotice(@ModelAttribute("notice") Notice notice,
+                                 final RedirectAttributes redirectAttributes) {
+
+        if (noticeService.save(notice)) {
+            redirectAttributes.addFlashAttribute("saveNotice", "success");
+        } else {
+            redirectAttributes.addFlashAttribute("saveNotice", "unsuccess");
         }
         return "redirect:/notice/list";
     }
@@ -118,7 +131,11 @@ public class NoticeController {
     @RequestMapping(value = "/notice/update", method = RequestMethod.POST)
     public String noticeUpdate(@ModelAttribute("editNotice") Notice editNotice,
                                final RedirectAttributes redirectAttributes) {
-        if (noticeService.editNotice(editNotice)) {
+        Notice oldNotice = noticeService.findOne(editNotice.getId());
+        oldNotice.setTitle(editNotice.getTitle());
+        oldNotice.setContent(editNotice.getContent());
+        oldNotice.setModifiedDate(ZonedDateTime.now());
+        if (noticeService.editNotice(oldNotice)) {
             redirectAttributes.addFlashAttribute("edit", "success");
         } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");

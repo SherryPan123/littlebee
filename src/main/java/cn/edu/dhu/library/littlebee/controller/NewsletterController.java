@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -100,7 +101,12 @@ public class NewsletterController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateNewsletter(@ModelAttribute("editNewsletter") Newsletter editNewsletter,
                                  final RedirectAttributes redirectAttributes) {
-        if (newsletterService.editNewsletter(editNewsletter)) {
+        Newsletter oldNewsletter = newsletterService.findOne(editNewsletter.getId());
+        oldNewsletter.setTitle(editNewsletter.getTitle());
+        oldNewsletter.setContent(editNewsletter.getContent());
+        oldNewsletter.setResources(editNewsletter.getResources());
+        oldNewsletter.setModifiedDate(ZonedDateTime.now());
+        if (newsletterService.editNewsletter(oldNewsletter)) {
             redirectAttributes.addFlashAttribute("edit", "success");
         } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");

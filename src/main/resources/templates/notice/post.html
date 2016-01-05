@@ -1,4 +1,49 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">通知发布 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <h3>通&nbsp;知&nbsp;发&nbsp;布</h3>
+            <form th:object="${notice}" th:action="@{/notice/save}" action="#" method="post">
+                <div>
+                    <div class="form_group">
+                        <label for="title"  class="form_label">通知名称</label>
+                        <input type="text" class="form_control"  name="title" id="title" required autofocus />
+                    </div>
+                    <div class="form_group">
+                        <label for="content" class="form_label">通知描述</label>
+                    <textarea class="form_control" style="height:200px;" name="content" id="content">
+                    </textarea>
+                    </div>
+
+
+                </div>
+                <div class="form_group">
+                    <div class="center">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                        <button class="btn btn-default" type="reset">重置</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -21,3 +66,4 @@
 </form>
 </body>
 </html>
+-->

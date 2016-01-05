@@ -73,4 +73,13 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeRepository.findByTitle(title);
     }
 
+    @Override
+    public boolean save(Notice notice) {
+        if(notice != null){
+            noticeRepository.save(notice);
+            return true;
+        }
+        return false;
+    }
+
 }

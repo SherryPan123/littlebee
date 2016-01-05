@@ -18,11 +18,11 @@
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form_group">
                         <label for="title"  class="form_label">通讯稿名称</label>
-                        <input type="text" class="form_control"  name="title" id="title" th:field="*{title}" required autofocus />
+                        <input type="text" class="form_control" name="title" id="title" th:field="*{title}" required autofocus />
                     </div>
                     <div class="form_group">
                         <label for="content" class="form_label">通讯稿描述</label>
-                    <textarea class="form_control" style="height:200px;" name="content" id="content">
+                    <textarea class="form_control" style="height:200px;" name="content" id="content" th:field="*{content}" >
                     </textarea>
                     </div>
 

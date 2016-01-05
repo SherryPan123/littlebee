@@ -16,7 +16,7 @@ public class Newsletter extends BaseEntity {
     /*通讯稿标题*/
     @Length(min = 0, max = 255)
     @NotEmpty
-    @Column(name = "title", unique = true, nullable = false, length = 255)
+    @Column(name = "title", nullable = false, length = 255)
     private String title;
 
     /*通讯稿内容*/

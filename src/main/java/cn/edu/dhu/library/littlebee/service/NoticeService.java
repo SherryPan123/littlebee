@@ -22,4 +22,6 @@ public interface NoticeService {
     boolean editNotice(Notice editNotice);
 
     Notice findByTitle(String title);
+
+    boolean save(Notice notice);
 }

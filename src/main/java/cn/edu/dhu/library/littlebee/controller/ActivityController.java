@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.beans.PropertyEditorSupport;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +115,12 @@ public class ActivityController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateActivity(@ModelAttribute("editActivity") Activity editActivity,
                                  final RedirectAttributes redirectAttributes) {
-        if (activityService.editActivity(editActivity)) {
+        Activity oldActivity = activityService.findOne(editActivity.getId());
+        oldActivity.setName(editActivity.getName());
+        oldActivity.setDescription(editActivity.getDescription());
+        oldActivity.setUsers(editActivity.getUsers());
+        oldActivity.setModifiedDate(ZonedDateTime.now());
+        if (activityService.editActivity(oldActivity)) {
             redirectAttributes.addFlashAttribute("edit", "success");
         } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");
