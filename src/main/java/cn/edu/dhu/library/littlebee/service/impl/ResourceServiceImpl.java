@@ -85,6 +85,16 @@ public class ResourceServiceImpl implements ResourceService {
         return resources;
     }
 
+    @Override
+    public boolean delete(Integer id) {
+        Resource resource = resourceRepository.findOne(id);
+        if(resource != null){
+            resourceRepository.delete(id);
+            return true;
+        }
+        return false;
+    }
+
     public void saveFile(byte[] bytes, String digest, String originalFilename) throws IOException {
         // store the bytes to file
         // File digest format: `{Digest1}-{Digest2}-{Digest3}-{Digest4}`

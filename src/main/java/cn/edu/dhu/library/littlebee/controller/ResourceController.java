@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -87,12 +88,24 @@ public class ResourceController {
             File file = new File(resourceService.getFilePath(digest, resource.getName()));
             response.setContentType(resource.getContentType());
             response.setContentLength(resource.getSize().intValue());
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + resource.getName() + "\"");
             InputStream is = new FileInputStream(file);
             IOUtils.copy(is, response.getOutputStream());
         } catch (Exception e) {
             logger.error("Could not show resource " + digest, e);
             //throw new ResourceNotFoundException(e.getMessage(), e.getCause());
         }
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String editRemoveResource(@PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
+                                     Model model) {
+        if (resourceService.delete(id)) {
+            redirectAttributes.addFlashAttribute("deletion", "success");
+        } else {
+            redirectAttributes.addFlashAttribute("deletion", "unsuccess");
+        }
+        return "redirect:/resource/list";
     }
 
 }

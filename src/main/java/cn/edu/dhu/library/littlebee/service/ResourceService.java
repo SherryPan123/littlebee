@@ -24,5 +24,7 @@ public interface ResourceService {
 
     Page<Resource> getResourcesByType(String type, Integer page, int size);
 
+    boolean delete(Integer id);
+
 //    Resource save(Resource resource);
 }
