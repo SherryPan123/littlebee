@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-    <title id="pageTitle">通知列表 - 东华大学爱书小蜜蜂服务队</title>
+    <title id="pageTitle">角色列表 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
 <link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
@@ -12,45 +12,45 @@
 <div class="wrapper" id="container">
     <div class="inner main-con">
         <div class="list_title">
-            <h3>通知列表</h3>
+            <h3>活动列表</h3>
             <hr>
         </div>
         <div class="list_content">
             <div>
                 <div>
-                    <div th:if="${#lists.isEmpty(notices)}" class="alert alert-warning">
-                        <span align="center">暂无通知!</span>
+                    <div th:if="${#lists.isEmpty(roles)}" class="alert alert-warning">
+                        <span align="center">暂无角色!</span>
                     </div>
                 </div>
                 <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
                     <div>
-                        <strong>错误!</strong> 通知未被删除
+                        <strong>错误!</strong> 角色未被删除
                     </div>
                 </div>
                 <div th:if="${deletion eq 'success'}" class="alert alert-success">
                     <div>
-                        <strong>成功!</strong> 通知成功删除
+                        <strong>成功!</strong> 角色成功删除
                     </div>
                 </div>
             </div>
 
-            <ul th:each="notice:${notices}">
+            <ul th:each="role:${roles}">
                 <li>
-                    <time th:text="${#temporals.format(notice.createdDate, 'yyyy/MM/dd')}"></time>
-                    <span id="_title" th:text="${notice.title}"></span>
-                    <!--<span id="notice_content" th:text="${notice.content}"></span>-->
+                    <time th:text="${#temporals.format(role.createdDate, 'yyyy/MM/dd')}"></time>
+                    <span id="_name" th:text="${role.roleName}"></span>
+                    <span id="role_description" th:text="${role.description}"></span>-->
                     <span class="list_button">
-                        <a class="btn btn-sm btn-danger" th:href="@{/notice/delete/{id}(id=${notice.id})}">删除</a>
+                        <a class="btn btn-sm btn-danger" th:href="@{/admin/role/delete/{id}(id=${role.id})}">删除</a>
                     </span>
                     <span class="list_button">
-                        <a class="btn btn-sm btn-warning" th:href="@{/notice/edit/{id}(id=${notice.id})}">编辑</a>
+                        <a class="btn btn-sm btn-warning" th:href="@{/admin/role/edit/{id}(id=${role.id})}">编辑</a>
                     </span>
                 </li>
             </ul>
-            <a class="add_item" th:href="@{/notice/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
+            <a class="add_item" th:href="@{/admin/role/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
             <div class="page_tr">
-                <a th:href="@{/notice/list(page=${pageCur-1})}">上一页</a>
-                <a th:href="@{/notice/list(page=${pageCur+1})}">下一页</a>
+                <a th:href="@{/role/list(page=${pageCur-1})}">上一页</a>
+                <a th:href="@{/role/list(page=${pageCur+1})}">下一页</a>
                 <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
             </div>
 

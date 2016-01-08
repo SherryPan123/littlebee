@@ -16,4 +16,10 @@ public interface RoleService {
 
     List<Role> findAll();
 
+    boolean editRole(Role oldRole);
+
+    Role findOne(Integer id);
+
+    boolean delete(Integer id);
+
 }

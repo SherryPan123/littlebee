@@ -43,6 +43,30 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findAll();
     }
 
+    @Override
+    public boolean editRole(Role editRole) {
+        if(editRole != null){
+            roleRepository.save(editRole);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Role findOne(Integer id) {
+        return roleRepository.findOne(id);
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        Role role = roleRepository.findOne(id);
+        if(role != null){
+            roleRepository.delete(id);
+            return true;
+        }
+        return false;
+    }
+
     private Sort sortByTimeDesc() {
         return new Sort(Sort.Direction.DESC, "createdDate");
     }

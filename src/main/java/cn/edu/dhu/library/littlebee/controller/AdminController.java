@@ -73,7 +73,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
-    public String updateNewsletter(@ModelAttribute("editUser") User editUser,
+    public String updateUser(@ModelAttribute("editUser") User editUser,
                                    final RedirectAttributes redirectAttributes) {
         User oldUser = userService.getUserById(editUser.getId());
         oldUser.setUserNumber(editUser.getUserNumber());

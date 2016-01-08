@@ -8,21 +8,30 @@
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
+
 <div class="wrapper" id="container">
     <div class="inner main-con">
         <div class="login_form">
             <h3>角&nbsp;色&nbsp;添&nbsp;加</h3>
-            <form th:object="${role}" th:action="@{/role/save}" action="#" method="post">
+            <form th:object="${role}" th:action="@{/admin/role/save}" action="#" method="post">
                 <div>
-                    <input type="hidden" th:field="*{id}"/>
                     <div class="form_group">
-                        <label for="title"  class="form_label">角色名称</label>
-                        <input type="text" class="form_control"  name="title" id="title" required autofocus />
+                        <label class="form_label">角色名称</label>
+                        <input type="text" class="form_control" th:field="*{roleName}"/>
+                    </div>
+                    <div>
+                        <label for="description" class="form_label">角色描述</label>
+                        <textarea class="form_control" style="height:80px;" name="description" id="description">
+                        </textarea>
                     </div>
                     <div class="form_group">
-                        <label for="content" class="form_label">角色描述</label>
-                    <textarea class="form_control" style="height:200px;" name="content" id="content">
-                    </textarea>
+                        <label class="form_label">权限</label>
+                        <ul>
+                            <li th:each="permission : ${permissions}">
+                                <input type="checkbox" th:field="*{permissions}" th:value="${permission.id}"/>
+                                <label th:text="${permission.name}">PERMISSION_ROLE</label>
+                            </li>
+                        </ul>
                     </div>
 
                 </div>
@@ -38,6 +47,5 @@
     </div>
 </div>
 <div th:include="layouts/layout :: footerFragment"></div>
-
 </body>
 </html>

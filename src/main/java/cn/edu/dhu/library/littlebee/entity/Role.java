@@ -14,7 +14,7 @@ import java.util.List;
 public class Role extends BaseEntity {
 
     /*角色名称*/
-    @Length(min = 4, max = 20)
+    @Length(min = 1, max = 20)
     @NotEmpty
     @Column(name = "role_name", unique = true, nullable = false, length = 45)
     private String roleName;
@@ -24,7 +24,7 @@ public class Role extends BaseEntity {
     private String description;
 
     /*权限序列*/
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Permission> permissions;
 
     public String getRoleName() {
