@@ -41,26 +41,26 @@
       <div class="main-menu">
         <div id="wp_nav_w3">
           <ul class="wp-menu clearfix">
-            <li class="menu-item i1"><a class="menu-link" th:href="@{/}" target="_self">网站首页</a></li>
-            <li class="menu-item i2"><a class="menu-link" th:href="@{/newsletter/list}" target="_self">新闻动态</a></li>
-            <li class="menu-item i3"><a class="menu-link" th:href="@{/notice/list}" target="_self">活动通知</a></li>
-            <li class="menu-item i4"><a class="menu-link" th:href="@{/}" target="_self">队员风采</a></li>
-            <li class="menu-item i5"><a class="menu-link" th:href="@{/resource/list}" target="_self">下载专区</a></li>
-            <li class="menu-item i6"><a class="menu-link" th:href="@{/}" target="_self">我要提问</a></li>
-            <li class="menu-item i7"><a class="menu-link" th:href="@{/activity/list}" target="_self">活动管理</a></li>
-            <li class="menu-item split i8"><a class="menu-link"></a></li>
-            <li class="menu-item user i8">
-              <a sec:authorize="isAnonymous()" class="menu-link" th:href="@{/register}">注册</a>
-              <a sec:authorize="isAuthenticated()" class="menu-link" th:href="@{/user/profile}"><span sec:authentication="name"></span></a>
-            </li>
-            <li class="menu-item user i9">
-              <a sec:authorize="isAnonymous()" class="menu-link" th:href="@{/login}">登录</a>
-              <a sec:authorize="isAuthenticated()" class="menu-link" th:href="@{/logout}">注销</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <li class="menu-item i1"><a class="menu-link" th:href="@{/}" target="_self">网站首页</a></li>
+    <li class="menu-item i2"><a class="menu-link" th:href="@{/newsletter/list}" target="_self">新闻动态</a></li>
+    <li class="menu-item i3"><a class="menu-link" th:href="@{/notice/list}" target="_self">活动通知</a></li>
+    <li class="menu-item i4"><a class="menu-link" th:href="@{/}" target="_self">队员风采</a></li>
+    <li class="menu-item i5"><a class="menu-link" th:href="@{/resource/list}" target="_self">下载专区</a></li>
+    <li class="menu-item i6"><a class="menu-link" th:href="@{/}" target="_self">我要提问</a></li>
+    <li class="menu-item i7"><a class="menu-link" th:href="@{/admin}" target="_self">后台管理</a></li>
+    <li class="menu-item split i8"><a class="menu-link"></a></li>
+    <li class="menu-item user i8">
+      <a sec:authorize="isAnonymous()" class="menu-link" th:href="@{/register}">注册</a>
+      <a sec:authorize="isAuthenticated()" class="menu-link" th:href="@{/user/profile}"><span sec:authentication="name"></span></a>
+    </li>
+    <li class="menu-item user i9">
+      <a sec:authorize="isAnonymous()" class="menu-link" th:href="@{/login}">登录</a>
+      <a sec:authorize="isAuthenticated()" class="menu-link" th:href="@{/logout}">注销</a>
+    </li>
+  </ul>
+  </div>
+</div>
+</div>
   </div>
 
   <div class="wrapper" id="banner">

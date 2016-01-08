@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">用户列表 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="list_title">
+            <h3>用户列表</h3>
+            <hr>
+        </div>
+        <div class="list_content">
+            <div>
+                <div>
+                    <div th:if="${#lists.isEmpty(users)}" class="alert alert-warning">
+                        <span align="center">暂无用户!</span>
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
+                    <div>
+                        <strong>错误!</strong> 用户未被删除
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'success'}" class="alert alert-success">
+                    <div>
+                        <strong>成功!</strong> 用户成功删除
+                    </div>
+                </div>
+                <div th:if="${edit eq 'unsuccess'}" class="alert alert-success">
+                    <div>
+                        <strong>错误!</strong> 用户修改出错
+                    </div>
+                </div>
+                <div th:if="${edit eq 'success'}" class="alert alert-success">
+                    <div>
+                        <strong>成功!</strong> 用户成功修改
+                    </div>
+                </div>
+            </div>
+
+            <ul th:each="user:${users}">
+                <li>
+                    <time th:text="${#temporals.format(user.createdDate, 'yyyy/MM/dd')}"></time>
+                    <span id="user_name" th:text="${user.username}"></span>
+                    <span id="user_userNumber" th:text="${user.userNumber}"></span>
+                    <span id="user_major" th:text="${user.major}"></span>
+                    <span id="user_phone" th:text="${user.phone}"></span>
+                    <span id="user_email" th:text="${user.email}"></span>
+                    <span class="list_button">
+                        <a class="btn btn-sm btn-danger" th:href="@{/admin/user/delete/{id}(id=${user.id})}">删除</a>
+                    </span>
+                    <span class="list_button">
+                        <a class="btn btn-sm btn-warning" th:href="@{/admin/user/edit/{id}(id=${user.id})}">编辑</a>
+                    </span>
+                </li>
+            </ul>
+            <div class="page_tr">
+                <a th:href="@{/admin/user/list(page=${pageCur-1})}">上一页</a>
+                <a th:href="@{/admin/user/list(page=${pageCur+1})}">下一页</a>
+                <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>

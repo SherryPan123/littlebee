@@ -7,6 +7,9 @@ import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.repository.UserRepository;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -86,6 +89,35 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> listOrderByUserNumber(Integer page, int size) {
+        Pageable pageable = new PageRequest(page, size, sortByUserNumber());
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        User user = userRepository.findOne(id);
+        if(user != null){
+            userRepository.delete(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editUser(User editUser) {
+        if(editUser != null){
+            userRepository.save(editUser);
+            return true;
+        }
+        return false;
+    }
+
+    private Sort sortByUserNumber() {
+        return new Sort(Sort.Direction.ASC, "userNumber");
     }
 
 }

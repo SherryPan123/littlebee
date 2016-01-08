@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">用户资料修改 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <h3>资&nbsp;料&nbsp;修&nbsp;改</h3>
+
+            <form name="form" th:action="@{/admin/user/update}" method="post" th:object="${editUser}">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form_group">
+                    <label class="form_label">学号</label>
+                    <input type="text" class="form_control" th:field="*{userNumber}" placeholder="学号" autofocus />
+                    <div th:if="${#fields.hasErrors('userNumber')}" class="alert alert-danger" th:errors="*{userNumber}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">姓名</label>
+                    <input type="text" class="form_control" th:field="*{username}" placeholder="姓名" required />
+                    <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" th:errors="*{username}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">邮箱</label>
+                    <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" required />
+                    <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">手机</label>
+                    <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" required />
+                    <div th:if="${#fields.hasErrors('phone')}" class="alert alert-danger" th:errors="*{phone}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">专业</label>
+                    <input type="text" class="form_control" th:field="*{major}" placeholder="专业" required />
+                    <div th:if="${#fields.hasErrors('major')}" class="alert alert-danger" th:errors="*{major}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">入职时间</label>
+                    <input type="text" class="form_control" th:field="*{entryDate}" placeholder="入职时间" />
+                    <div th:if="${#fields.hasErrors('entryDate')}" class="alert alert-danger" th:errors="*{entryDate}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">离职时间</label>
+                    <input type="text" class="form_control" th:field="*{leaveDate}" placeholder="离职时间" />
+                    <div th:if="${#fields.hasErrors('leaveDate')}" class="alert alert-danger" th:errors="*{leaveDate}"></div>
+                </div>
+                <div class="form_group">
+                    <label class="form_label">角色</label>
+                    <ul>
+                        <li th:each="role : ${roles}">
+                            <input type="checkbox" th:field="*{roles}" th:value="${role.id}"/>
+                            <label th:text="${role.roleName}">ROLE_USER</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form_group">
+                    <div class="center">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="reset" class="btn btn-default">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
+
+</body>
+</html>

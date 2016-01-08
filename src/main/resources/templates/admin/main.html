@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">后台管理 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<a href="/admin/user/list">用户管理</a>
+<a href="/admin/role/list">角色管理</a>
+<a href="/admin/permission/list">权限管理</a>
+
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>

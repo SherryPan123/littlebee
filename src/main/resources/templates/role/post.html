@@ -2,29 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="layouts/layout :: headerFragment">
-    <title id="pageTitle">通知发布 - 东华大学爱书小蜜蜂服务队</title>
+    <title id="pageTitle">角色添加 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
-
 <div class="wrapper" id="container">
     <div class="inner main-con">
         <div class="login_form">
-            <h3>通&nbsp;知&nbsp;发&nbsp;布</h3>
-            <form th:object="${notice}" th:action="@{/notice/save}" action="#" method="post">
+            <h3>角&nbsp;色&nbsp;添&nbsp;加</h3>
+            <form th:object="${role}" th:action="@{/role/save}" action="#" method="post">
                 <div>
+                    <input type="hidden" th:field="*{id}"/>
                     <div class="form_group">
-                        <label for="title"  class="form_label">通知名称</label>
+                        <label for="title"  class="form_label">角色名称</label>
                         <input type="text" class="form_control"  name="title" id="title" required autofocus />
                     </div>
                     <div class="form_group">
-                        <label for="content" class="form_label">通知描述</label>
+                        <label for="content" class="form_label">角色描述</label>
                     <textarea class="form_control" style="height:200px;" name="content" id="content">
                     </textarea>
                     </div>
-
 
                 </div>
                 <div class="form_group">
@@ -39,5 +38,6 @@
     </div>
 </div>
 <div th:include="layouts/layout :: footerFragment"></div>
+
 </body>
 </html>

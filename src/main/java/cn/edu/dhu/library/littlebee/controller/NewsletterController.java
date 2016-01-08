@@ -5,6 +5,7 @@ import cn.edu.dhu.library.littlebee.service.NewsletterService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,12 +59,14 @@ public class NewsletterController {
         }
     }
 
+    @PreAuthorize("hasAuthority('POST_NEWSLETTER')")
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String postPage(Model model) {
         model.addAttribute("newsletter", new Newsletter());
         return "newsletter/post";
     }
 
+    @PreAuthorize("hasAuthority('POST_NEWSLETTER')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveNewsletter(@ModelAttribute("newsletter") Newsletter newsletter,
                                final RedirectAttributes redirectAttributes) {
