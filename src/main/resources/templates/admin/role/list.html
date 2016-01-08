@@ -38,7 +38,7 @@
                 <li>
                     <time th:text="${#temporals.format(role.createdDate, 'yyyy/MM/dd')}"></time>
                     <span id="_name" th:text="${role.roleName}"></span>
-                    <span id="role_description" th:text="${role.description}"></span>-->
+                    <span id="role_description" th:text="${role.description}"></span>
                     <span class="list_button">
                         <a class="btn btn-sm btn-danger" th:href="@{/admin/role/delete/{id}(id=${role.id})}">删除</a>
                     </span>

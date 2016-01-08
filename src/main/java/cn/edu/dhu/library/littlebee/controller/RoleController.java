@@ -104,5 +104,4 @@ public class RoleController {
         return "redirect:/admin/role/list";
     }
 
-
 }

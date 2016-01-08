@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">权限添加 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <h3>权&nbsp;限&nbsp;添&nbsp;加</h3>
+            <form th:object="${permission}" th:action="@{/admin/permission/save}" action="#" method="post">
+                <div>
+                    <div class="form_group">
+                        <label class="form_label">角色名称</label>
+                        <input type="text" class="form_control" th:field="*{name}"/>
+                    </div>
+                    <div>
+                        <label for="description" class="form_label">角色描述</label>
+                        <textarea class="form_control" style="height:80px;" name="description" id="description">
+                        </textarea>
+                    </div>
+
+                </div>
+                <div class="form_group">
+                    <div class="center">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                        <button class="btn btn-default" type="reset">重置</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>

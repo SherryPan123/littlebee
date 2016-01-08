@@ -13,4 +13,10 @@ public interface PermissionService {
 
     List<Permission> findAll();
 
+    boolean save(Permission permission);
+
+    Permission findOne(Integer id);
+
+    boolean editPermission(Permission oldPermission);
+
 }

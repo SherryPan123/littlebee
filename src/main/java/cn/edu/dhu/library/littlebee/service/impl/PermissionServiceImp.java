@@ -34,4 +34,28 @@ public class PermissionServiceImp implements PermissionService {
         return permissionRepository.findAll();
     }
 
+    @Override
+    public boolean save(Permission permission) {
+        if(permission != null){
+            permissionRepository.save(permission);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Permission findOne(Integer id) {
+        return permissionRepository.findOne(id);
+    }
+
+    @Override
+    public boolean editPermission(Permission editPermission) {
+        if(editPermission != null){
+            permissionRepository.save(editPermission);
+            return true;
+        }
+        return false;
+    }
+
+
 }

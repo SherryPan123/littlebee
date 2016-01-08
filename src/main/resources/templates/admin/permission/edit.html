@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">权限编辑 - 东华大学爱书小蜜蜂服务队</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <h3>权&nbsp;限&nbsp;编&nbsp;辑</h3>
+            <form th:object="${editPermission}" th:action="@{/admin/permission/update}" action="#" method="post">
+                <div>
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form_group">
+                        <label class="form_label">角色名称</label>
+                        <input type="text" class="form_control" th:field="*{name}"/>
+                    </div>
+                    <div>
+                        <label for="description" class="form_label">角色描述</label>
+                        <textarea class="form_control" style="height:80px;" name="description" id="description" th:field="*{description}">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form_group">
+                    <div class="center">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                        <button class="btn btn-default" type="reset">重置</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
+
+<script th:src="@{/js/search_name.js}"></script>
+</body>
+</html>
