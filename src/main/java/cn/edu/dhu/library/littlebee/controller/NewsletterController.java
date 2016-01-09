@@ -59,14 +59,14 @@ public class NewsletterController {
         }
     }
 
-    @PreAuthorize("hasAuthority('POST_NEWSLETTER')")
+    @PreAuthorize("hasAuthority('manageNewsletter')")
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String postPage(Model model) {
         model.addAttribute("newsletter", new Newsletter());
         return "newsletter/post";
     }
 
-    @PreAuthorize("hasAuthority('POST_NEWSLETTER')")
+    @PreAuthorize("hasAuthority('manageNewsletter')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveNewsletter(@ModelAttribute("newsletter") Newsletter newsletter,
                                final RedirectAttributes redirectAttributes) {
@@ -79,6 +79,7 @@ public class NewsletterController {
         return "redirect:/newsletter/list";
     }
 
+    @PreAuthorize("hasAuthority('manageNewsletter')")
     @RequestMapping(value = "/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveNewsletter(@PathVariable("operation") String operation,
                                      @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -101,6 +102,7 @@ public class NewsletterController {
         return "redirect:/newsletter/list";
     }
 
+    @PreAuthorize("hasAuthority('manageNewsletter')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateNewsletter(@ModelAttribute("editNewsletter") Newsletter editNewsletter,
                                  final RedirectAttributes redirectAttributes) {

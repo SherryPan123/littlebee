@@ -3,6 +3,7 @@ package cn.edu.dhu.library.littlebee.controller;
 import cn.edu.dhu.library.littlebee.entity.Permission;
 import cn.edu.dhu.library.littlebee.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class PermissionController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/permission/post", method = RequestMethod.GET)
     public String postPage(Model model) {
         List<Permission> permissions = permissionService.findAll();
@@ -38,6 +40,7 @@ public class PermissionController {
         return "/admin/permission/post";
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/permission/save", method = RequestMethod.POST)
     public String savePermission(@ModelAttribute("permission") Permission permission,
                            final RedirectAttributes redirectAttributes) {
@@ -49,7 +52,7 @@ public class PermissionController {
         return "redirect:/admin/permission/list";
     }
 
-
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/permission/{operation}/{id}", method = RequestMethod.GET)
     public String editRemovePermission(@PathVariable("operation") String operation,
                                  @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -72,6 +75,7 @@ public class PermissionController {
         return "redirect:/admin/permission/list";
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/permission/update", method = RequestMethod.POST)
     public String updatePermission(@ModelAttribute("editPermission") Permission editPermission,
                              final RedirectAttributes redirectAttributes) {

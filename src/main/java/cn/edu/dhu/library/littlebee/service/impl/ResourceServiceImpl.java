@@ -69,11 +69,11 @@ public class ResourceServiceImpl implements ResourceService {
         int pre = 0;
         for( int i = 0; i < 4; i++){
             String s = digest.substring(pre, pre + div[i]);
-            filename += "/" + s;
+            filename += File.separator + s;
             pre = pre + div[i];
         }
         new File(filename).mkdirs();  // create directories recursively
-        filename += "/" + originalFilename;
+        filename += File.separator + originalFilename;
         System.out.println(filename); //
         return filename;
     }

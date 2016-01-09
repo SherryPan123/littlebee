@@ -8,6 +8,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -73,26 +74,13 @@ public class NoticeController {
     }
 
     /*post notice*/
+    @PreAuthorize("hasAuthority('manageNotice')")
     @RequestMapping(value = "/notice/post", method = RequestMethod.GET)
     public ModelAndView getNoticeCreatePage() {
         return new ModelAndView("notice/post", "form", new NoticeCreateForm());
     }
 
-    //todo:安全权限验证
-    /*@RequestMapping(value = "/notice/post", method = RequestMethod.POST)
-    public String handleNoticeCreateForm(@Valid @ModelAttribute("form") NoticeCreateForm form, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "notice/post";
-        }
-        try {
-            noticeService.create(form);
-        } catch (DataIntegrityViolationException e) {
-            bindingResult.reject("title.exists", "Notice failed to post");
-            return "notice/post";
-        }
-        return "redirect:/notice/list";
-    }*/
-
+    @PreAuthorize("hasAuthority('manageNotice')")
     @RequestMapping(value = "/notice/save", method = RequestMethod.POST)
     public String saveNotice(@ModelAttribute("notice") Notice notice,
                                  final RedirectAttributes redirectAttributes) {
@@ -105,6 +93,7 @@ public class NoticeController {
         return "redirect:/notice/list";
     }
 
+    @PreAuthorize("hasAuthority('manageNotice')")
     @RequestMapping(value = "/notice/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveNotice(@PathVariable("operation") String operation,
                                    @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -128,6 +117,7 @@ public class NoticeController {
         return "redirect:/notice/list";
     }
 
+    @PreAuthorize("hasAuthority('noticeNewsletter')")
     @RequestMapping(value = "/notice/update", method = RequestMethod.POST)
     public String noticeUpdate(@ModelAttribute("editNotice") Notice editNotice,
                                final RedirectAttributes redirectAttributes) {

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -50,6 +51,7 @@ public class ResourceController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('manageResource')")
     @Transactional
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFormUpload(@RequestParam MultipartFile file) {
@@ -97,6 +99,7 @@ public class ResourceController {
         }
     }
 
+    @PreAuthorize("hasAuthority('manageResource')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String editRemoveResource(@PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
                                      Model model) {

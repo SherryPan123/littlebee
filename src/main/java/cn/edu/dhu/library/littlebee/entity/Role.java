@@ -24,7 +24,7 @@ public class Role extends BaseEntity {
     private String description;
 
     /*权限序列*/
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Permission> permissions;
 
     public String getRoleName() {

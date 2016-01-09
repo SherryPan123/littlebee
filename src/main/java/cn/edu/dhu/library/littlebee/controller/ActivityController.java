@@ -6,6 +6,7 @@ import cn.edu.dhu.library.littlebee.service.ActivityService;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -72,12 +73,14 @@ public class ActivityController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('manageActivity')")
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String postPage(Model model) {
         model.addAttribute("activity", new Activity());
         return "activity/post";
     }
 
+    @PreAuthorize("hasAuthority('manageActivity')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveActivity(@ModelAttribute("activity") Activity activity,
                                final RedirectAttributes redirectAttributes) {
@@ -90,6 +93,7 @@ public class ActivityController {
         return "redirect:/activity/list";
     }
 
+    @PreAuthorize("hasAuthority('manageActivity')")
     @RequestMapping(value = "/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveActivity(@PathVariable("operation") String operation,
                                      @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -112,6 +116,7 @@ public class ActivityController {
         return "redirect:/activity/list";
     }
 
+    @PreAuthorize("hasAuthority('manageActivity')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateActivity(@ModelAttribute("editActivity") Activity editActivity,
                                  final RedirectAttributes redirectAttributes) {

@@ -7,6 +7,7 @@ import cn.edu.dhu.library.littlebee.service.PermissionService;
 import cn.edu.dhu.library.littlebee.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,7 @@ public class RoleController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/role/post", method = RequestMethod.GET)
     public String postPage(Model model) {
         List<Permission> permissions = permissionService.findAll();
@@ -51,6 +53,7 @@ public class RoleController {
         return "/admin/role/post";
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/role/save", method = RequestMethod.POST)
     public String saveRole(@ModelAttribute("role") Role role,
                                  final RedirectAttributes redirectAttributes) {
@@ -62,7 +65,7 @@ public class RoleController {
         return "redirect:/admin/role/list";
     }
 
-
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/role/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveRole(@PathVariable("operation") String operation,
                                  @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -88,6 +91,7 @@ public class RoleController {
         return "redirect:/admin/role/list";
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @RequestMapping(value = "/role/update", method = RequestMethod.POST)
     public String updateRole(@ModelAttribute("editRole") Role editRole,
                                    final RedirectAttributes redirectAttributes) {

@@ -6,6 +6,7 @@ import cn.edu.dhu.library.littlebee.service.RoleService;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class AdminController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('manageUser')")
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("/admin/user/list");
@@ -48,6 +50,7 @@ public class AdminController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('manageUser')")
     @RequestMapping(value = "/user/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveUser(@PathVariable("operation") String operation,
                                        @PathVariable("id") Integer id, final RedirectAttributes redirectAttributes,
@@ -72,6 +75,7 @@ public class AdminController {
         return "redirect:/admin/user/list";
     }
 
+    @PreAuthorize("hasAuthority('manageUser')")
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute("editUser") User editUser,
                                    final RedirectAttributes redirectAttributes) {
