@@ -27,3 +27,28 @@
 .center {
     text-align: center;
 }
+
+.width_longer {
+    width: 665px;
+}
+
+.description_label {
+    margin-bottom: 10px;
+    text-align: right;
+    width: 16.66666667%;
+    position: relative;
+    min-height: 1px;
+    padding-left: 60px;
+    padding-top: 7px;
+    font-weight: 700;
+    font-size:14px;
+}
+
+.description_control {
+    display: block;
+    position: relative;
+    padding: 6px 12px;
+    max-height: 500px;
+    line-height: 1.42857143;
+    margin-top:15px;
+}

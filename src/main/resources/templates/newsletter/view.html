@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Newsletter View</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">通讯稿详情 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div  class="wrapper" id="container">
+    <div class="inner main-con">
+
+    </div>
+</div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
 </body>
 </html>

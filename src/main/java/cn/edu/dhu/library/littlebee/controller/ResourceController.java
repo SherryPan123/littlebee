@@ -12,10 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -81,6 +79,41 @@ public class ResourceController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @PreAuthorize("hasAuthority('manageResource')")
+    @Transactional
+    @ResponseBody
+    @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+    public Object uploadImage(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) {
+        // upload change image to bytes[] to database or other cloud space
+        // 处理图片....返回一个图片的URL
+        // code......
+        try {
+            if (file.isEmpty()) {
+                throw new FileUploadException("The file is empty.");
+            }
+            String digest = resourceService.calcDigest(file.getBytes());
+            // metadata persistence
+            Resource resource = resourceService.findByDigest(digest);
+            if (resource == null) {
+                resource = new Resource(file.getSize(), digest, file.getOriginalFilename(), file.getContentType());
+            }
+            System.out.println("Resource Digest: " + resource.getDigest());
+            resourceService.saveFile(file.getBytes(), resource.getDigest(), file.getOriginalFilename());
+            resource.setUrl("/resource/view/" + resource.getDigest());
+            resource.setType("Photo");
+            resourceService.save(resource);
+            logger.info("Resource Digest: '{}'", resource.getDigest());
+            // 最后返回一个URL给ckeditor;其中image/imagePath.png为image存后的路径；第一个参数来自前台的一个标志，第三个参数错误返回码
+            //这里返回的JavaScript代码为ckeditor API中回调函数要求返回格式
+            return "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("
+                    + CKEditorFuncNum + ",'"  + resource.getUrl() + "', '');</script>";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @RequestMapping(value = "/view/{digest}", method = RequestMethod.GET)
