@@ -20,7 +20,7 @@ public class Newsletter extends BaseEntity {
     private String title;
 
     /*通讯稿内容*/
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content", nullable = true, length = 50000)
     private String content;
 
     /*图片序列*/

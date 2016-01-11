@@ -9,10 +9,11 @@
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
+
 <div class="wrapper" id="container">
     <div class="inner main-con">
-        <div class="login_form">
-            <h3>通&nbsp;讯&nbsp;稿&nbsp;发&nbsp;布</h3>
+        <div class="login_form width_longer">
+            <h3>通&nbsp;讯&nbsp;稿&nbsp;编&nbsp;辑</h3>
             <form th:object="${editNewsletter}" th:action="@{/newsletter/update}" action="#" method="post">
                 <div>
                     <input type="hidden" th:field="*{id}"/>
@@ -21,12 +22,12 @@
                         <input type="text" class="form_control" name="title" id="title" th:field="*{title}" required autofocus />
                     </div>
                     <div class="form_group">
-                        <label for="content" class="form_label">通讯稿描述</label>
-                    <textarea class="form_control" style="height:200px;" name="content" id="content" th:field="*{content}" >
-                    </textarea>
+                        <label for="content" class="description_label">通讯稿描述</label>
+                        <div class="description_control">
+                        <textarea style="height:200px;" th:field="*{content}" id="content">
+                        </textarea>
+                        </div>
                     </div>
-
-
                 </div>
                 <div class="form_group">
                     <div class="center">
@@ -35,12 +36,16 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 <div th:include="layouts/layout :: footerFragment"></div>
-
-<script th:src="@{/js/search_name.js}"></script>
+<script th:src="@{/js/ckeditor/ckeditor.js}"></script>
+<script>
+     CKEDITOR.replace( 'content', {
+        language: 'zh-cn',
+    });
+    //CKEDITOR.replace( 'content' );
+</script>
 </body>
 </html>

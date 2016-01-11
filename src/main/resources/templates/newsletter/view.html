@@ -5,13 +5,17 @@
     <title id="pageTitle">通讯稿详情 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
-<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/view.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 
-<div  class="wrapper" id="container">
+<div class="wrapper" id="container">
     <div class="inner main-con">
-
+        <div class="newsletter">
+            <h2 th:text="${newsletter.title}" class="title"></h2>
+            <div class="content" th:utext="${newsletter.content}">
+            </div>
+        </div>
     </div>
 </div>
 

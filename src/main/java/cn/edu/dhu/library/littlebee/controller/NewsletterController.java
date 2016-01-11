@@ -42,11 +42,10 @@ public class NewsletterController {
 
     /*通讯稿视图*/
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView view(@RequestParam("id") Integer id) {
+    public ModelAndView view(@PathVariable("id") Integer id) {
         try {
             Newsletter newsletter = newsletterService.findOne(id);
             if (newsletter == null) {
-                //// TODO: throw exception
                 throw new ServiceException("Invalid Newsletter ID");
             }
             ModelAndView mav = new ModelAndView("newsletter/view");
@@ -54,7 +53,6 @@ public class NewsletterController {
             return mav;
 
         } catch (Exception e) {
-            //// TODO: throw exception
             throw new ServiceException(e.getMessage(), e.getCause());
         }
     }
