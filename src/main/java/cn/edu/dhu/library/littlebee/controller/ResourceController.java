@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -86,9 +87,6 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
     public Object uploadImage(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) {
-        // upload change image to bytes[] to database or other cloud space
-        // 处理图片....返回一个图片的URL
-        // code......
         try {
             if (file.isEmpty()) {
                 throw new FileUploadException("The file is empty.");
@@ -123,7 +121,7 @@ public class ResourceController {
             File file = new File(resourceService.getFilePath(digest, resource.getName()));
             response.setContentType(resource.getContentType());
             response.setContentLength(resource.getSize().intValue());
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + resource.getName() + "\"");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + resourceService.getFilename(resource.getName()) + "\"");
             InputStream is = new FileInputStream(file);
             IOUtils.copy(is, response.getOutputStream());
         } catch (Exception e) {

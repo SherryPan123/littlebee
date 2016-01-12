@@ -26,5 +26,7 @@ public interface ResourceService {
 
     boolean delete(Integer id);
 
+    String getFilename(String filename);
+
 //    Resource save(Resource resource);
 }

@@ -12,9 +12,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -93,6 +97,30 @@ public class ResourceServiceImpl implements ResourceService {
             return true;
         }
         return false;
+    }
+
+    //得到中文名字的下载资源
+    private static final char[] HEX_CHARS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B',
+            'C', 'D', 'E', 'F' };
+
+    @Override
+    public String getFilename(String filename) {
+        try{
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            if (request.getHeader("User-Agent").indexOf("MSIE") != -1) {
+                return '\"' + java.net.URLEncoder.encode(filename, "UTF-8") + '\"';
+            }
+            byte[] bytes = filename.getBytes("UTF-8");
+            StringBuilder buff = new StringBuilder(bytes.length << 2);
+            buff.append("=?UTF-8?Q?");
+            for (byte b : bytes) {
+                int unsignedByte = b & 0xFF;
+                buff.append('=').append(HEX_CHARS[unsignedByte >> 4]).append(HEX_CHARS[unsignedByte & 0xF]);
+            }
+            return buff.append("?=").toString();
+        }catch(UnsupportedEncodingException e){
+            return filename;
+        }
     }
 
     public void saveFile(byte[] bytes, String digest, String originalFilename) throws IOException {
