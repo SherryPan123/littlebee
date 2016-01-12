@@ -49,8 +49,8 @@
             </ul>
             <a class="add_item" th:href="@{/newsletter/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
             <div class="page_tr">
-                <a th:href="@{/newsletter/list(page=${pageCur-1})}">上一页</a>
-                <a th:href="@{/newsletter/list(page=${pageCur+1})}">下一页</a>
+                <a th:href="@{/newsletter/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
+                <a th:href="@{/newsletter/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>
                 <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
             </div>
 
