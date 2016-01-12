@@ -34,6 +34,7 @@
 
 .list_content ul {
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 .list_content ul li {
@@ -74,4 +75,9 @@
 .main-con {
     height:auto;
     min-height: 500px;
+}
+
+.time {
+    float:right;
+    padding-right:20px;
 }

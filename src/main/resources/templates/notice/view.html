@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Notice View</title>
-</head>
-<body>
-<div>
-    <div>
-        <label>标题</label><span th:text="${notice.title}"></span>
-    </div>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <div>
-        <label>内容</label><span th:text="${notice.content}"></span>
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">通知详情 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="login_form">
+            <div>
+                <h1 class="center"><span th:text="${notice.title}"></span></h1>
+            </div>
+
+            <div style="margin-top:20px; min-height:180px">
+                <span th:text="${notice.content}"></span>
+            </div>
+        </div>
     </div>
 </div>
+<div th:include="layouts/layout :: footerFragment"></div>
 </body>
 </html>

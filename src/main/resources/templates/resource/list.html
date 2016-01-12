@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:include="layouts/layout :: headerFragment">
   <title id="pageTitle">下载专区 - 东华大学爱书小蜜蜂服务队</title>
@@ -34,11 +34,10 @@
         </div>
       </div>
 
-
       <div>
         <span>
           <i></i>
-          <form th:action="@{/resource/upload}" method="post" enctype="multipart/form-data">
+          <form th:action="@{/resource/upload}" method="post" enctype="multipart/form-data" sec:authorize="hasAuthority('manageResource')">
             <label>选择文件</label>
             <input id="fileupload" type="file" name="file" />
             <input type="submit" value="Upload">
@@ -47,16 +46,16 @@
       </div>
       <ul th:each="resource:${resources}">
         <li>
-          <time th:text="${#temporals.format(resource.createdDate, 'yyyy/MM/dd')}"></time>
-          <span id="_name" th:text="${resource.name}"></span>
-          <span id="_url" th:text="${resource.url}"></span>
-          <!--<span id="activity_description" th:text="${activity.description}"></span>-->
+          <a id="_name" th:href='@{/resource/view/{digest}(digest=${resource.digest})}' target='_blank' th:text="${resource.name}"></a>
+          <!--<span id="_name" th:text="${resource.name}"></span>
+          <span id="_url" th:text="${resource.url}"></span>-->
           <span class="list_button">
-              <a class="btn btn-sm btn-danger" th:href="@{/resource/delete/{id}(id=${resource.id})}">删除</a>
+              <a class="btn btn-sm btn-danger" th:href="@{/resource/delete/{id}(id=${resource.id})}" sec:authorize="hasAuthority('manageResource')">删除</a>
           </span>
           <span class="list_button">
               <a class="btn btn-sm btn-warning" th:href="@{/resource/view/{digest}(digest=${resource.digest})}">下载</a>
           </span>
+          <time class="time" th:text="${#temporals.format(resource.createdDate, 'yyyy/MM/dd')}"></time>
         </li>
       </ul>
       <div class="page_tr">

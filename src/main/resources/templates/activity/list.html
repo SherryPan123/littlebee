@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:include="layouts/layout :: headerFragment">
     <title id="pageTitle">活动列表 - 东华大学爱书小蜜蜂服务队</title>
@@ -36,18 +36,17 @@
 
             <ul th:each="activity:${activities}">
                 <li>
-                    <time th:text="${#temporals.format(activity.createdDate, 'yyyy/MM/dd')}"></time>
                     <span id="_name" th:text="${activity.name}"></span>
-                    <!--<span id="activity_description" th:text="${activity.description}"></span>-->
-                    <span class="list_button">
+                    <span class="list_button" sec:authorize="hasAuthority('manageActivity')">
                         <a class="btn btn-sm btn-danger" th:href="@{/activity/delete/{id}(id=${activity.id})}">删除</a>
                     </span>
-                    <span class="list_button">
+                    <span class="list_button" sec:authorize="hasAuthority('manageActivity')">
                         <a class="btn btn-sm btn-warning" th:href="@{/activity/edit/{id}(id=${activity.id})}">编辑</a>
                     </span>
+                    <time class="time" th:text="${#temporals.format(activity.createdDate, 'yyyy/MM/dd')}"></time>
                 </li>
             </ul>
-            <a class="add_item" th:href="@{/activity/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
+            <a class="add_item" th:href="@{/activity/post}" sec:authorize="hasAuthority('manageActivity')"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
             <div class="page_tr">
                 <a th:href="@{/activity/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
                 <a th:href="@{/activity/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>

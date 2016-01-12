@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:include="layouts/layout :: headerFragment">
     <title id="pageTitle">通知列表 - 东华大学爱书小蜜蜂服务队</title>
@@ -36,18 +36,21 @@
 
             <ul th:each="notice:${notices}">
                 <li>
-                    <time th:text="${#temporals.format(notice.createdDate, 'yyyy/MM/dd')}"></time>
-                    <span id="_title" th:text="${notice.title}"></span>
+                    <a th:href="@{/notice/view/{id}(id=${notice.id})}">
+                    <span id="_title" th:text="${notice.title}">
+                    </span></a>
                     <!--<span id="notice_content" th:text="${notice.content}"></span>-->
-                    <span class="list_button">
+                    <span class="list_button" sec:authorize="hasAuthority('manageNotice')">
                         <a class="btn btn-sm btn-danger" th:href="@{/notice/delete/{id}(id=${notice.id})}">删除</a>
                     </span>
-                    <span class="list_button">
+                    <span class="list_button" sec:authorize="hasAuthority('manageNotice')">
                         <a class="btn btn-sm btn-warning" th:href="@{/notice/edit/{id}(id=${notice.id})}">编辑</a>
                     </span>
+                    <time class="time" th:text="${#temporals.format(notice.createdDate, 'yyyy/MM/dd')}"></time>
                 </li>
             </ul>
-            <a class="add_item" th:href="@{/notice/post}"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
+            <a class="add_item" th:href="@{/notice/post}" sec:authorize="hasAuthority('manageNotice')">
+                <img src="/images/ico_add.png" width="20" height="20" />添加</a>
             <div class="page_tr">
                 <a th:href="@{/notice/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
                 <a th:href="@{/notice/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>

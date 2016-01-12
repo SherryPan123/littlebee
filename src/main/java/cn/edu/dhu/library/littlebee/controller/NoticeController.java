@@ -48,6 +48,11 @@ public class NoticeController {
         List<Notice> notices = AllNotice.getContent();
         Integer pageCount = AllNotice.getTotalPages();
         Integer pageCur = page;
+
+        if (pageCur >= pageCount) {
+            throw new IllegalArgumentException("Page index is illegal.");
+        }
+
         mav.addObject("notices", notices);
         mav.addObject("pageCount", pageCount);
         mav.addObject("pageCur", pageCur);
@@ -55,8 +60,8 @@ public class NoticeController {
     }
 
     /*通知视图*/
-    @RequestMapping(value = "/notice/view", method = RequestMethod.GET)
-    public ModelAndView noticeView(@RequestParam("id") Integer id) {
+    @RequestMapping(value = "/notice/view/{id}", method = RequestMethod.GET)
+    public ModelAndView noticeView(@PathVariable("id") Integer id) {
         try {
             Notice notice = noticeService.findOne(id);
             if (notice == null) {
