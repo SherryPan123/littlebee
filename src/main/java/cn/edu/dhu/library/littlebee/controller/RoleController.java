@@ -2,7 +2,6 @@ package cn.edu.dhu.library.littlebee.controller;
 
 import cn.edu.dhu.library.littlebee.entity.Permission;
 import cn.edu.dhu.library.littlebee.entity.Role;
-import cn.edu.dhu.library.littlebee.service.ActivityService;
 import cn.edu.dhu.library.littlebee.service.PermissionService;
 import cn.edu.dhu.library.littlebee.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class RoleController {
 
     @RequestMapping(value = "/role/list", method = RequestMethod.GET)
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
-        ModelAndView mav = new ModelAndView("/admin/role/list");
+        ModelAndView mav = new ModelAndView("admin/role/list");
         //fetch roles
         Page<Role> AllRoles = roleService.listOrderByTime(page, 20);
         List<Role> roles = AllRoles.getContent();
@@ -50,7 +49,7 @@ public class RoleController {
         List<Permission> permissions = permissionService.findAll();
         model.addAttribute("role", new Role());
         model.addAttribute("permissions", permissions);
-        return "/admin/role/post";
+        return "admin/role/post";
     }
 
     @PreAuthorize("hasAuthority('admin')")
@@ -83,7 +82,7 @@ public class RoleController {
             if (editRole != null) {
                 model.addAttribute("editRole", editRole);
                 model.addAttribute("permissions", permissions);
-                return "/admin/role/edit";
+                return "admin/role/edit";
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
             }

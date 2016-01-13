@@ -31,14 +31,14 @@ public class AdminController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView adminPage() {
-        ModelAndView mav = new ModelAndView("/admin/main");
+        ModelAndView mav = new ModelAndView("admin/main");
         return mav;
     }
 
     @PreAuthorize("hasAuthority('manageUser')")
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
-        ModelAndView mav = new ModelAndView("/admin/user/list");
+        ModelAndView mav = new ModelAndView("admin/user/list");
         //fetch users
         Page<User> AllUsers = userService.listOrderByUserNumber(page, 20);
         List<User> users = AllUsers.getContent();
@@ -67,7 +67,7 @@ public class AdminController {
             if (editUser != null) {
                 model.addAttribute("editUser", editUser);
                 model.addAttribute("roles", roles);
-                return "/admin/user/edit";
+                return "admin/user/edit";
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
             }

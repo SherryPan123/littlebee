@@ -25,7 +25,7 @@ public class PermissionController {
 
     @RequestMapping(value = "/permission/list", method = RequestMethod.GET)
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
-        ModelAndView mav = new ModelAndView("/admin/permission/list");
+        ModelAndView mav = new ModelAndView("admin/permission/list");
         //fetch permissions
         List<Permission> permissions = permissionService.findAll();
         mav.addObject("permissions", permissions);
@@ -37,7 +37,7 @@ public class PermissionController {
     public String postPage(Model model) {
         List<Permission> permissions = permissionService.findAll();
         model.addAttribute("permission", new Permission());
-        return "/admin/permission/post";
+        return "admin/permission/post";
     }
 
     @PreAuthorize("hasAuthority('admin')")
@@ -67,7 +67,7 @@ public class PermissionController {
             Permission editPermission = permissionService.findOne(id);
             if (editPermission != null) {
                 model.addAttribute("editPermission", editPermission);
-                return "/admin/permission/edit";
+                return "admin/permission/edit";
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
             }

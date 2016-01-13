@@ -50,21 +50,21 @@ public class WebMvcConfig extends WebMvcAutoConfigurationAdapter {
         return multipartResolver;
     }
 
-    @Autowired
-    private ThymeleafProperties properties;
-
-    @Value("${spring.thymeleaf.templates_root:}")
-    private String templatesRoot;
-
-    @Bean
-    public ITemplateResolver defaultTemplateResolver() {
-        TemplateResolver resolver = new FileTemplateResolver();
-        resolver.setSuffix(properties.getSuffix());
-        resolver.setPrefix(templatesRoot);
-        resolver.setTemplateMode(properties.getMode());
-        resolver.setCharacterEncoding(properties.getEncoding());
-        resolver.setCacheable(properties.isCache());
-        return resolver;
-    }
+//    @Autowired
+//    private ThymeleafProperties properties;
+//
+//    @Value("${spring.thymeleaf.templates_root:}")
+//    private String templatesRoot;
+//
+//    @Bean
+//    public ITemplateResolver defaultTemplateResolver() {
+//        TemplateResolver resolver = new FileTemplateResolver();
+//        resolver.setSuffix(properties.getSuffix());
+//        resolver.setPrefix(templatesRoot);
+//        resolver.setTemplateMode(properties.getMode());
+//        resolver.setCharacterEncoding(properties.getEncoding());
+//        resolver.setCacheable(properties.isCache());
+//        return resolver;
+//    }
 
 }

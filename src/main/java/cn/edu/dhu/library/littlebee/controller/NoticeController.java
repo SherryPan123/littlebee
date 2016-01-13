@@ -114,7 +114,7 @@ public class NoticeController {
             if (editNotice != null) {
                 model.addAttribute("editNotice", editNotice);
                 redirectAttributes.addFlashAttribute("status", "success");
-                return "/notice/edit";
+                return "notice/edit";
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
             }

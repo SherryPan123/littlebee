@@ -401,6 +401,7 @@ a:hover {
     width: 976px;
     padding: 12px;
     background: #fff;
+    min-height:550px;
 }
 
 /**首页三列布局**/
