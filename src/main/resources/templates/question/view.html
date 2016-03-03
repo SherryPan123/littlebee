@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">问题详情 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/view.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="newsletter">
+            <h2 th:text="${question.title}" class="title"></h2>
+            <div class="content" th:utext="${question.content}">
+            </div>
+            <div th:text="${question.user.username}"></div>
+
+
+            <ul th:each="reply:${replies}">
+                <li>
+                    <span id="reply_content" th:text="${reply.content}"></span>
+                    <span class="list_button">
+                        <a class="btn btn-sm btn-danger" th:href="@{/reply/delete/{id}(id=${reply.id})}">删除</a>
+                    </span>
+                    <!--<time class="time" th:text="${#temporals.format(reply.createdDate, 'yyyy/MM/dd')}"></time>-->
+                </li>
+            </ul>
+        </div>
+
+        <form th:object="${reply}" th:action="@{/reply/save/{id}(id=${question.id})}" action="#" method="post">
+            <div class="form_group">
+                <label for="content" class="form_label">回复</label>
+                <span th:field="${reply.id}">这是ID:</span>
+                <textarea class="form_control" style="min-height:200px;" id="content" th:field="${reply.content}" >
+                </textarea>
+            </div>
+            <div class="form_group">
+                <div class="center">
+                    <button class="btn btn-primary" type="submit">提交</button>
+                    <button class="btn btn-default" type="reset">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>

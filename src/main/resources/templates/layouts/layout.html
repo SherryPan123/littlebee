@@ -46,7 +46,7 @@
     <li class="menu-item i3"><a class="menu-link" th:href="@{/notice/list}" target="_self">活动通知</a></li>
     <li class="menu-item i4"><a class="menu-link" th:href="@{/}" target="_self">队员风采</a></li>
     <li class="menu-item i5"><a class="menu-link" th:href="@{/resource/list}" target="_self">下载专区</a></li>
-    <li class="menu-item i6"><a class="menu-link" th:href="@{/}" target="_self">我要提问</a></li>
+    <li class="menu-item i6"><a class="menu-link" th:href="@{/question/add}" target="_self">我要提问</a></li>
     <li class="menu-item i7"><a class="menu-link" th:href="@{/admin/main}" target="_self" sec:authorize="hasRole('admin')">后台管理</a></li>
     <li class="menu-item i7" sec:authorize="!hasRole('admin')"><a class="menu-link" th:href="@{/activity/list}" target="_self">活动管理</a></li>
     <li class="menu-item split i8"><a class="menu-link"></a></li>

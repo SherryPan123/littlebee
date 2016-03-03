@@ -49,7 +49,7 @@ public class NoticeController {
         Integer pageCount = AllNotice.getTotalPages();
         Integer pageCur = page;
 
-        if (pageCur >= pageCount) {
+        if ((pageCur > 0 && pageCur >= pageCount) || (pageCur < 0)) {
             throw new IllegalArgumentException("Page index is illegal.");
         }
 

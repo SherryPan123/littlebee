@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:include="layouts/layout :: headerFragment">
+    <title id="pageTitle">问题列表 - 东华大学爱书小蜜蜂服务队</title>
+</head>
+<body>
+<link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
+
+<div th:include="layouts/layout :: navbarFragment"></div>
+
+<div class="wrapper" id="container">
+    <div class="inner main-con">
+        <div class="list_title">
+            <h3>问题列表</h3>
+            <hr>
+        </div>
+        <div class="list_content">
+            <div>
+                <div>
+                    <div th:if="${#lists.isEmpty(questions)}" class="alert alert-warning">
+                        <span align="center">暂无问题!</span>
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
+                    <div>
+                        <strong>错误!</strong> 问题未被删除
+                    </div>
+                </div>
+                <div th:if="${deletion eq 'success'}" class="alert alert-success">
+                    <div>
+                        <strong>成功!</strong> 问题成功删除
+                    </div>
+                </div>
+            </div>
+
+            <ul th:each="question:${questions}">
+                <li>
+                    <a th:href="@{/question/view/{id}(id=${question.id})}">
+                    <span id="_title" th:text="${question.title}">
+                    </span></a>
+                    <span id="question_content" th:text="${question.content}"></span>
+                    <span id="question_author" th:text="${question.user.username}"></span>
+                    <span class="list_button">
+                        <a class="btn btn-sm btn-danger" th:href="@{/question/delete/{id}(id=${question.id})}">删除</a>
+                    </span>
+                    <span th:text="${question.status}">个回答</span>
+                    <time class="time" th:text="${#temporals.format(question.createdDate, 'yyyy/MM/dd')}"></time>
+                </li>
+            </ul>
+             <img src="/images/ico_add.png" width="20" height="20" />添加
+            <div class="page_tr">
+                <a th:href="@{/question/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
+                <a th:href="@{/question/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>
+                <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:include="layouts/layout :: footerFragment"></div>
+</body>
+</html>
