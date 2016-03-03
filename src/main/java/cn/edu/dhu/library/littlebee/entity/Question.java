@@ -1,9 +1,12 @@
 package cn.edu.dhu.library.littlebee.entity;
 
-import org.hibernate.annotations.ListIndexBase;
+import org.hibernate.annotations.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -25,12 +28,8 @@ public class Question extends BaseEntity {
     @ManyToOne
     private User user;
 
-    /*回答个数*/
-    @Column(name = "status")
-    private Integer status;
-
     /*回答*/
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @OrderColumn(name = "sequence", nullable = false)
     @ListIndexBase(1)
     private List<Reply> replies;
@@ -57,14 +56,6 @@ public class Question extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public List<Reply> getReplies() {

@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sherrypan on 16-3-2.
  */
@@ -32,8 +35,8 @@ public class ReplyController {
     @Autowired
     private ReplyService replyService;
 
-    @RequestMapping(value = "/reply/save/{id}", method = RequestMethod.POST)
-    public ModelAndView reply(@PathVariable("id") Integer questionId,
+    @RequestMapping(value = "/reply/save/{questionId}", method = RequestMethod.POST)
+    public ModelAndView reply(@PathVariable("questionId") Integer questionId,
                               @ModelAttribute("reply") Reply reply) {
         ModelAndView mav = new ModelAndView();
         try {
@@ -47,7 +50,7 @@ public class ReplyController {
                 replyService.save(reply);
                 questionService.save(question);
             }
-            mav.setView(new RedirectView("/question/list.html", true));
+            mav.setView(new RedirectView("/question/view/" + questionId, true));
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e.getCause());
         }
@@ -55,18 +58,30 @@ public class ReplyController {
     }
 
     @RequestMapping(value = "/reply/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,
-                         final RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("id") Integer id, final RedirectAttributes redirectAttributes) {
+        Question question;
         try {
             Reply reply = replyService.findOne(id);
-            if (null == reply)
-                throw new ServiceException("invalid Reply id");
-            replyService.delete(id);
+            if (null == reply) {
+                throw new ServiceException("Invalid Reply Id");
+            }
+            question = reply.getQuestion();
+            List<Reply> replyList = new ArrayList<>(question.getReplies());
+            question.getReplies().clear();
+            questionService.save(question);
+            replyList.remove(reply);
+            question.setReplies(replyList);
+            questionService.save(question);
+            if (replyService.delete(id)) {
+                redirectAttributes.addFlashAttribute("deletion", "success");
+            } else {
+                redirectAttributes.addFlashAttribute("deletion", "unsuccess");
+            }
         } catch (ServiceException e) {
             throw new ServiceException(e.getMessage(), e.getCause());
         }
 
-        return "redirect:/question/list.html";
+        return "redirect:/question/view/" + question.getId();
     }
 
 }

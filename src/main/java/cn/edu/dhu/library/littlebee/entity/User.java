@@ -35,18 +35,15 @@ public class User extends BaseEntity {
 
     /*用户邮箱*/
     @Email
-    @NotEmpty
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email")
     private String email;
 
     /*手机号*/
     @Length(min = 6, max = 20)
-    @NotEmpty
     @Column(name = "phone")
     private String phone;
 
     /*性别*/
-    @NotEmpty
     @Column(name = "sex")
     private String sex;
 

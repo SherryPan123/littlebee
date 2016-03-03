@@ -38,17 +38,17 @@
                 <li>
                     <a th:href="@{/question/view/{id}(id=${question.id})}">
                     <span id="_title" th:text="${question.title}">
-                    </span></a>
+                    </span>
+                    </a>
                     <span id="question_content" th:text="${question.content}"></span>
                     <span id="question_author" th:text="${question.user.username}"></span>
                     <span class="list_button">
                         <a class="btn btn-sm btn-danger" th:href="@{/question/delete/{id}(id=${question.id})}">删除</a>
                     </span>
-                    <span th:text="${question.status}">个回答</span>
+                    <span th:text="${#lists.size(question.replies)}"></span><span>个回答</span>
                     <time class="time" th:text="${#temporals.format(question.createdDate, 'yyyy/MM/dd')}"></time>
                 </li>
             </ul>
-             <img src="/images/ico_add.png" width="20" height="20" />添加
             <div class="page_tr">
                 <a th:href="@{/question/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
                 <a th:href="@{/question/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>

@@ -4,6 +4,7 @@ import cn.edu.dhu.library.littlebee.entity.Question;
 import cn.edu.dhu.library.littlebee.entity.Reply;
 import cn.edu.dhu.library.littlebee.entity.User;
 import cn.edu.dhu.library.littlebee.service.QuestionService;
+import cn.edu.dhu.library.littlebee.service.ReplyService;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class QuestionController {
         try {
             Question question = questionService.findOne(id);
             if (null == question)
-                throw new ServiceException("invalid Contest id");
+                throw new ServiceException("Invalid Question Id");
             if(questionService.delete(id)) {
                 redirectAttributes.addFlashAttribute("deletion", "success");
             }

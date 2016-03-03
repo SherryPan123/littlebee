@@ -11,6 +11,17 @@
 
 <div class="wrapper" id="container">
     <div class="inner main-con">
+        <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
+            <div>
+                <strong>错误!</strong> 问题未被删除
+            </div>
+        </div>
+        <div th:if="${deletion eq 'success'}" class="alert alert-success">
+            <div>
+                <strong>成功!</strong> 问题成功删除
+            </div>
+        </div>
+
         <div class="newsletter">
             <h2 th:text="${question.title}" class="title"></h2>
             <div class="content" th:utext="${question.content}">
@@ -21,6 +32,7 @@
             <ul th:each="reply:${replies}">
                 <li>
                     <span id="reply_content" th:text="${reply.content}"></span>
+                    <span id="reply_author" th:text="${reply.user.username}"></span>
                     <span class="list_button">
                         <a class="btn btn-sm btn-danger" th:href="@{/reply/delete/{id}(id=${reply.id})}">删除</a>
                     </span>
@@ -29,10 +41,10 @@
             </ul>
         </div>
 
-        <form th:object="${reply}" th:action="@{/reply/save/{id}(id=${question.id})}" action="#" method="post">
+        <form th:object="${reply}" th:action="@{/reply/save/{questionId}(questionId=${question.id})}" action="#" method="post">
+
             <div class="form_group">
                 <label for="content" class="form_label">回复</label>
-                <span th:field="${reply.id}">这是ID:</span>
                 <textarea class="form_control" style="min-height:200px;" id="content" th:field="${reply.content}" >
                 </textarea>
             </div>

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Reply extends BaseEntity {
 
     /*回答内容*/
-    @Column(name = "content", nullable = true, length = 20000)
+    @Column(name = "content", nullable = false, length = 20000)
     private String content;
 
     /*回答者*/
