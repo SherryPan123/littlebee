@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.time.ZonedDateTime;
+
 /**
  * Created by sherry on 15-11-22.
  */
@@ -26,21 +28,16 @@ public class UserCreateForm {
     private String passwordRepeated = "";
 
     @Email
-    @NotEmpty
     private String email = "";
 
     @Length(min = 6, max = 20)
-    @NotEmpty
     private String phone = "";
 
-    @NotEmpty
     private String sex = "";
 
-    @NotEmpty
     private String major = "";
 
-//    @NotEmpty
-//    private ZonedDateTime entryDate;
+    private ZonedDateTime entryDate;
 
     private String icon;
 
@@ -111,13 +108,13 @@ public class UserCreateForm {
         this.major = major;
     }
 
-//    public ZonedDateTime getEntryDate() {
-//        return entryDate;
-//    }
-//
-//    public void setEntryDate(ZonedDateTime entryDate) {
-//        this.entryDate = entryDate;
-//    }
+    public ZonedDateTime getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(ZonedDateTime entryDate) {
+        this.entryDate = entryDate;
+    }
 
     public String getIcon() {
         return icon;

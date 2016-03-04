@@ -4,6 +4,10 @@ import cn.edu.dhu.library.littlebee.entity.Permission;
 import cn.edu.dhu.library.littlebee.repository.PermissionRepository;
 import cn.edu.dhu.library.littlebee.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,5 +61,14 @@ public class PermissionServiceImp implements PermissionService {
         return false;
     }
 
+    @Override
+    public Page<Permission> listOrderByTime(int page, int size) {
+        Pageable pageable = new PageRequest(page, size, sortByTimeDesc());
+        return permissionRepository.findAll(pageable);
+    }
+
+    private Sort sortByTimeDesc() {
+        return new Sort(Sort.Direction.DESC, "createdDate");
+    }
 
 }

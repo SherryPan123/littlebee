@@ -44,8 +44,8 @@
                 </div>
             </div>
 
-            <ul th:each="user:${users}">
-                <li>
+            <ul th:each="user,iterStat:${users}">
+                <li th:if="${iterStat.index!=0}">
                     <time th:text="${#temporals.format(user.createdDate, 'yyyy/MM/dd')}"></time>
                     <span id="user_name" th:text="${user.username}"></span>
                     <span id="user_userNumber" th:text="${user.userNumber}"></span>

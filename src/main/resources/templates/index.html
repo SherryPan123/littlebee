@@ -55,7 +55,7 @@
             <p></p>
             <ul class="news-list">
               <li class="news-item item-1" th:each="newsletter:${newsletters.content}">
-                <a th:href="@{/newsletter/view/{id}(id=${newsletter.id})}" th:title="${newsletter.title}"
+                <a class="xwdt ovrfl_hid" th:href="@{/newsletter/view/{id}(id=${newsletter.id})}" th:title="${newsletter.title}"
                    th:alt="${newsletter.title}" th:text="${newsletter.title}"></a>
                 <span class="news-date" th:text="${#temporals.format(newsletter.createdDate, 'MM-dd')}"></span>
               </li>
@@ -114,7 +114,7 @@
               <ul class="news-list">
                 <li class="news-item item-1" th:each="notice:${notices.content}">
                   <span class="news-col"></span>
-                  <a th:href="@{/notice/view/{id}(id=${notice.id})}" target="_blank" th:title="${notice.title}"
+                  <a class="hdtz ovrfl_hid" th:href="@{/notice/view/{id}(id=${notice.id})}" target="_blank" th:title="${notice.title}"
                      th:alt="${notice.title}" th:text="${notice.title}"></a>
                   <span class="item-date" th:text="${#temporals.format(notice.createdDate, 'MM-dd')}"></span>
                 </li>
@@ -163,22 +163,29 @@
         <div class="post-wrap">
           <div id="wp_news_w93">
             <ul class="news-list clearfix">
-              <li class="news-item item-1">
-                <a href='' target='_blank' title='test1'
-                   alt='test1'>图书馆的借书流程</a>
+              <li class="news-item item-1" th:each="question:${questions}">
+                <a class="cjwt ovrfl_hid" th:href='@{/question/view/{id}(id=${question.id})}' target='_blank' th:title='${question.user.username}'
+                   th:alt='${question.title}' th:text="${question.title}"></a>
               </li>
-              <li class="news-item item-2">
-                <a href='' target='_blank' title='test2'
-                   alt='test2'>怎样加入小蜜蜂</a>
-              </li>
-              <li class="news-item item-3">
-                <a href='' target='_blank' title='test3'
-                   alt='test3'>创意空间ipad预约流程</a>
-              </li>
-              <li class="news-item item-4">
-                <a href='' target='_blank' title='test4'
-                   alt='test4'>新书库座位预约方法</a>
-              </li>
+
+
+
+              <!--<li class="news-item item-1">-->
+                <!--<a class="cjwt ovrfl_hid" href='' target='_blank' title='test1'-->
+                   <!--alt='test1'>图书馆的借书流程</a>-->
+              <!--</li>-->
+              <!--<li class="news-item item-2">-->
+                <!--<a class="cjwt ovrfl_hid" href='' target='_blank' title='test2'-->
+                   <!--alt='test2'>怎样加入新书库座位预新书库座位预新书库座位预小蜜蜂</a>-->
+              <!--</li>-->
+              <!--<li class="news-item item-3">-->
+                <!--<a href='' target='_blank' title='test3'-->
+                   <!--alt='test3'>创意空间ipad预约流程</a>-->
+              <!--</li>-->
+              <!--<li class="news-item item-4">-->
+                <!--<a href='' target='_blank' title='test4'-->
+                   <!--alt='test4'>新新书库座位预新书库座位预书库座位预约方法</a>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>

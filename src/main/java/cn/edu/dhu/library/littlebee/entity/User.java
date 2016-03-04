@@ -39,7 +39,7 @@ public class User extends BaseEntity {
     private String email;
 
     /*手机号*/
-    @Length(min = 6, max = 20)
+    @Length(max = 20)
     @Column(name = "phone")
     private String phone;
 

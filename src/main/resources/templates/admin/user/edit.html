@@ -18,27 +18,27 @@
                 <input type="hidden" th:field="*{id}"/>
                 <div class="form_group">
                     <label class="form_label">学号</label>
-                    <input type="text" class="form_control" th:field="*{userNumber}" placeholder="学号" autofocus />
+                    <input type="text" class="form_control" th:field="*{userNumber}" placeholder="6到10位" autofocus required />
                     <div th:if="${#fields.hasErrors('userNumber')}" class="alert alert-danger" th:errors="*{userNumber}"></div>
                 </div>
                 <div class="form_group">
                     <label class="form_label">姓名</label>
-                    <input type="text" class="form_control" th:field="*{username}" placeholder="姓名" required />
+                    <input type="text" class="form_control" th:field="*{username}" placeholder="6到10位" required />
                     <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" th:errors="*{username}"></div>
                 </div>
                 <div class="form_group">
                     <label class="form_label">邮箱</label>
-                    <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" required />
+                    <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" />
                     <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
                 </div>
                 <div class="form_group">
                     <label class="form_label">手机</label>
-                    <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" required />
+                    <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" />
                     <div th:if="${#fields.hasErrors('phone')}" class="alert alert-danger" th:errors="*{phone}"></div>
                 </div>
                 <div class="form_group">
                     <label class="form_label">专业</label>
-                    <input type="text" class="form_control" th:field="*{major}" placeholder="专业" required />
+                    <input type="text" class="form_control" th:field="*{major}" placeholder="专业" />
                     <div th:if="${#fields.hasErrors('major')}" class="alert alert-danger" th:errors="*{major}"></div>
                 </div>
                 <div class="form_group">

@@ -2,9 +2,11 @@ package cn.edu.dhu.library.littlebee.controller;
 
 import cn.edu.dhu.library.littlebee.entity.Newsletter;
 import cn.edu.dhu.library.littlebee.entity.Notice;
+import cn.edu.dhu.library.littlebee.entity.Question;
 import cn.edu.dhu.library.littlebee.entity.Resource;
 import cn.edu.dhu.library.littlebee.service.NewsletterService;
 import cn.edu.dhu.library.littlebee.service.NoticeService;
+import cn.edu.dhu.library.littlebee.service.QuestionService;
 import cn.edu.dhu.library.littlebee.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,9 @@ public class IndexController {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
+    private QuestionService questionService;
+
     @RequestMapping(value = "/")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
@@ -46,6 +51,11 @@ public class IndexController {
         // fetch resource
         Page<Resource> resources = resourceService.getResourcesByType("Downloads", 0, 11);
         mav.addObject("resources", resources);
+
+        // fetch question
+        Page<Question> questions = questionService.listOrderByTime(0, 5);
+        System.out.println("共有 ："+questions.getTotalPages());
+        mav.addObject("questions", questions);
 
         return mav;
     }

@@ -17,7 +17,7 @@
       <form name="form" th:action="@{/register}" method="post" th:object="${form}">
         <div class="form_group">
           <label class="form_label">学号</label>
-          <input type="text" class="form_control" th:field="*{userNumber}" placeholder="学号" autofocus />
+          <input type="text" class="form_control" th:field="*{userNumber}" placeholder="6到10位" autofocus />
           <div th:if="${#fields.hasErrors('userNumber')}" class="alert alert-danger" th:errors="*{userNumber}"></div>
         </div>
         <div class="form_group">
@@ -32,30 +32,30 @@
         </div>
         <div class="form_group">
           <label class="form_label">确认密码</label>
-          <input type="password" class="form_control" th:field="*{passwordRepeated}" placeholder="密码" required />
+          <input type="password" class="form_control" th:field="*{passwordRepeated}" placeholder="确认密码" required />
           <div th:if="${#fields.hasErrors('passwordRepeated')}" class="alert alert-danger" th:errors="*{passwordRepeated}"></div>
         </div>
         <div class="form_group">
           <label class="form_label">邮箱</label>
-          <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" required />
+          <input type="email" class="form_control" th:field="*{email}" placeholder="邮箱" />
           <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
         </div>
         <div class="form_group">
           <label class="form_label">手机</label>
-          <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" required />
+          <input type="text" class="form_control" th:field="*{phone}" placeholder="手机" />
           <div th:if="${#fields.hasErrors('phone')}" class="alert alert-danger" th:errors="*{phone}"></div>
         </div>
         <div class="form_group">
           <label class="form_label">性别</label>
-          <input type="radio" th:field="*{sex}" th:value="M" required />
+          <input type="radio" th:field="*{sex}" th:value="M" />
           <label>男</label>
-          <input type="radio" th:field="*{sex}" th:value="F" required />
+          <input type="radio" th:field="*{sex}" th:value="F" />
           <label>女</label>
           <div th:if="${#fields.hasErrors('sex')}" class="alert alert-danger" th:errors="*{sex}"></div>
         </div>
         <div class="form_group">
           <label class="form_label">专业</label>
-          <input type="text" class="form_control" th:field="*{major}" placeholder="专业" required />
+          <input type="text" class="form_control" th:field="*{major}" placeholder="专业" />
           <div th:if="${#fields.hasErrors('major')}" class="alert alert-danger" th:errors="*{major}"></div>
         </div>
         <div class="form_group">

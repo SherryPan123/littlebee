@@ -24,4 +24,5 @@ public interface NoticeService {
     Notice findByTitle(String title);
 
     boolean save(Notice notice);
+
 }

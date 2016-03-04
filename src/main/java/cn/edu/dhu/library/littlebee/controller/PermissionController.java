@@ -3,6 +3,7 @@ package cn.edu.dhu.library.littlebee.controller;
 import cn.edu.dhu.library.littlebee.entity.Permission;
 import cn.edu.dhu.library.littlebee.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +28,18 @@ public class PermissionController {
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("admin/permission/list");
         //fetch permissions
+        Page<Permission> AllPermission = permissionService.listOrderByTime(page, 5);
         List<Permission> permissions = permissionService.findAll();
+        Integer pageCount = AllPermission.getTotalPages();
+        Integer pageCur = page;
+
+        if ((pageCur > 0 && pageCur >= pageCount) || (pageCur < 0)) {
+            throw new IllegalArgumentException("Page index is illegal.");
+        }
+        mav.addObject("pageCount", pageCount);
+        mav.addObject("pageCur", pageCur);
         mav.addObject("permissions", permissions);
+
         return mav;
     }
 

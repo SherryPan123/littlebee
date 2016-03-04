@@ -122,7 +122,7 @@ public class NoticeController {
         return "redirect:/notice/list";
     }
 
-    @PreAuthorize("hasAuthority('noticeNewsletter')")
+    @PreAuthorize("hasAuthority('manageNotice')")
     @RequestMapping(value = "/notice/update", method = RequestMethod.POST)
     public String noticeUpdate(@ModelAttribute("editNotice") Notice editNotice,
                                final RedirectAttributes redirectAttributes) {

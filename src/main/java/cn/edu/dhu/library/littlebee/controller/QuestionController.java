@@ -35,7 +35,7 @@ public class QuestionController {
     public ModelAndView questionList(@RequestParam(defaultValue = "0") int page) {
         ModelAndView mav = new ModelAndView("question/list");
         //fetch questions
-        Page<Question> allQuestions = questionService.listOrderByTime(page, 5);
+        Page<Question> allQuestions = questionService.listOrderByTime(page, 15);
         List<Question> questions = allQuestions.getContent();
         int pageCount = allQuestions.getTotalPages();
         int pageCur = page;
@@ -70,7 +70,7 @@ public class QuestionController {
         }
     }
 
-
+    @PreAuthorize("hasAuthority('askQuestion')")
     @RequestMapping(value = "/question/add", method = RequestMethod.GET)
     public ModelAndView add() {
         ModelAndView mav = new ModelAndView("question/post");
@@ -78,7 +78,7 @@ public class QuestionController {
         return mav;
     }
 
-
+    @PreAuthorize("hasAuthority('askQuestion')")
     @RequestMapping(value = "/question/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("question") Question question) {
         ModelAndView mav = new ModelAndView();
@@ -95,6 +95,7 @@ public class QuestionController {
         }
     }
 
+    @PreAuthorize("hasAuthority('manageQuestion')")
     @RequestMapping(value = "/question/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Integer id, final RedirectAttributes redirectAttributes) {
         try {

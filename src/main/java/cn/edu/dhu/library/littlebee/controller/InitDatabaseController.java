@@ -65,6 +65,10 @@ public class InitDatabaseController {
         permission.setName("askQuestion");
         permission.setDescription("提问");
         permissionService.save(permission);
+        permission = new Permission();
+        permission.setName("manageQuestion");
+        permission.setDescription("提问");
+        permissionService.save(permission);
 
         Role role = new Role();
         role.setRoleName("admin");
@@ -78,6 +82,7 @@ public class InitDatabaseController {
         role.getPermissions().add(permissionService.findOne(6));
         role.getPermissions().add(permissionService.findOne(7));
         role.getPermissions().add(permissionService.findOne(8));
+        role.getPermissions().add(permissionService.findOne(9));
         roleService.save(role);
         role = new Role();
         role.setRoleName("队长");
@@ -90,6 +95,7 @@ public class InitDatabaseController {
         role.getPermissions().add(permissionService.findOne(6));
         role.getPermissions().add(permissionService.findOne(7));
         role.getPermissions().add(permissionService.findOne(8));
+        role.getPermissions().add(permissionService.findOne(9));
         roleService.save(role);
         role = new Role();
         role.setRoleName("队委");
@@ -101,6 +107,7 @@ public class InitDatabaseController {
         role.getPermissions().add(permissionService.findOne(6));
         role.getPermissions().add(permissionService.findOne(7));
         role.getPermissions().add(permissionService.findOne(8));
+        role.getPermissions().add(permissionService.findOne(9));
         roleService.save(role);
         role = new Role();
         role.setRoleName("队员");

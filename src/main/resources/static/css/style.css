@@ -94,7 +94,7 @@ body {
 }
 
 body, p {
-    font: 13px/1 "simsun", "Microsoft YaHei", "\u5b8b\u4f53", Tahoma, Geneva, sans-serif;
+    font: 14px/1 "simsun", "Microsoft YaHei", "\u5b8b\u4f53", Tahoma, Geneva, sans-serif;
     color: #333;
 }
 
@@ -2379,4 +2379,11 @@ button, input, optgroup, select, textarea {
 
 .glyphicon-bell:before {
     content: "\e123";
+}
+
+.ovrfl_hid {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

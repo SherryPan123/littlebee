@@ -1,6 +1,7 @@
 package cn.edu.dhu.library.littlebee.service;
 
 import cn.edu.dhu.library.littlebee.entity.Permission;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface PermissionService {
     Permission findOne(Integer id);
 
     boolean editPermission(Permission oldPermission);
+
+    Page<Permission> listOrderByTime(int page, int size);
 
 }
