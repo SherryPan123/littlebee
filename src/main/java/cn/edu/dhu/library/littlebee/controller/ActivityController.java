@@ -63,7 +63,7 @@ public class ActivityController {
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("activity/list");
         //fetch activities
-        Page<Activity> AllActivity = activityService.listOrderByTime(page, 5);
+        Page<Activity> AllActivity = activityService.listOrderByTime(page, 15);
         List<Activity> activities = AllActivity.getContent();
         Integer pageCount = AllActivity.getTotalPages();
         Integer pageCur = page;

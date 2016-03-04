@@ -30,7 +30,7 @@ public class NewsletterController {
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("newsletter/list");
         //fetch newsletters
-        Page<Newsletter> AllNewsletters = newsletterService.listOrderByTime(page, 5);
+        Page<Newsletter> AllNewsletters = newsletterService.listOrderByTime(page, 15);
         List<Newsletter> newsletters = AllNewsletters.getContent();
         Integer pageCount = AllNewsletters.getTotalPages();
         Integer pageCur = page;

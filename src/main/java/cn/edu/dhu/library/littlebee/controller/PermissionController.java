@@ -28,7 +28,7 @@ public class PermissionController {
     public ModelAndView savePage(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("admin/permission/list");
         //fetch permissions
-        Page<Permission> AllPermission = permissionService.listOrderByTime(page, 5);
+        Page<Permission> AllPermission = permissionService.listOrderByTime(page, 15);
         List<Permission> permissions = permissionService.findAll();
         Integer pageCount = AllPermission.getTotalPages();
         Integer pageCur = page;

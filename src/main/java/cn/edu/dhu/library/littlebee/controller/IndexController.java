@@ -54,7 +54,6 @@ public class IndexController {
 
         // fetch question
         Page<Question> questions = questionService.listOrderByTime(0, 5);
-        System.out.println("共有 ："+questions.getTotalPages());
         mav.addObject("questions", questions);
 
         return mav;

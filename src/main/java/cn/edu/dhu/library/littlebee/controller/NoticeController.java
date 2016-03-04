@@ -44,7 +44,7 @@ public class NoticeController {
     public ModelAndView noticeList(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("notice/list");
         //fetch notice
-        Page<Notice> AllNotice = noticeService.listOrderByTime(page, 5);
+        Page<Notice> AllNotice = noticeService.listOrderByTime(page, 15);
         List<Notice> notices = AllNotice.getContent();
         Integer pageCount = AllNotice.getTotalPages();
         Integer pageCur = page;

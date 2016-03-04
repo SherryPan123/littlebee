@@ -40,7 +40,7 @@ public class ResourceController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView formUpload(@RequestParam(defaultValue = "0") Integer page) {
         ModelAndView mav = new ModelAndView("resource/list");
-        Page<Resource> AllResource = resourceService.getResourcesByType("Downloads", page, 5);
+        Page<Resource> AllResource = resourceService.getResourcesByType("Downloads", page, 15);
         List<Resource> resources = AllResource.getContent();
         Integer pageCount = AllResource.getTotalPages();
         Integer pageCur = page;
