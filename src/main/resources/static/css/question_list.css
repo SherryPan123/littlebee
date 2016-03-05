@@ -117,3 +117,10 @@
     font: 15px;
     font-color: #353F79;
 }
+
+span, pre, a.title-link {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.question-title {width:700px;}

@@ -20,9 +20,9 @@
                 <div class="ask_info">
                     <span class="ask_author" th:text="${question.user.username}"></span>
                     <span id="v-times" class="f-pipe" style="">|</span>
-                <span class="ask_time">
+                <!--<span class="ask_time">-->
                     <time class="time" th:text="${#temporals.format(question.createdDate, 'yyyy.MM.dd')}"></time>
-                </span>
+                <!--</span>-->
                 </div>
                 <pre class="ask_content" th:text="${question.content}"></pre>
             </div>

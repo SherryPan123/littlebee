@@ -75,6 +75,7 @@
 
 .ask_content {
     margin-top: 8px;
+    margin-bottom: 20px;
 }
 
 .reply_part {
@@ -136,4 +137,9 @@
 }
 
 .reply_info .reply_author {
+}
+
+span, pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
