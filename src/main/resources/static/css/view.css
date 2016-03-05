@@ -5,6 +5,11 @@
     display: block;
 }
 
+.newsletter .content {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 .content > p {
     font-size: 16px;
     line-height: 1.5em;

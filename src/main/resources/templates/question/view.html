@@ -1,60 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:include="layouts/layout :: headerFragment">
     <title id="pageTitle">问题详情 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
-<link th:href="@{/css/view.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/question_view.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 
 <div class="wrapper" id="container">
     <div class="inner main-con">
-        <div th:if="${deletion eq 'unsuccess'}" class="alert alert-danger">
-            <div>
-                <strong>错误!</strong> 问题未被删除
+        <div class="reply_form">
+            <div class="ask_part">
+                <h1 class="ask_title" >
+                    <a class="glyphicon glyphicon-question-sign ask_title_logo"></a>
+                    <span th:text="${question.title}"></span>
+                </h1>
+                <div class="ask_info">
+                    <span class="ask_author" th:text="${question.user.username}"></span>
+                    <span id="v-times" class="f-pipe" style="">|</span>
+                <span class="ask_time">
+                    <time class="time" th:text="${#temporals.format(question.createdDate, 'yyyy.MM.dd')}"></time>
+                </span>
+                </div>
+                <pre class="ask_content" th:text="${question.content}"></pre>
             </div>
-        </div>
-        <div th:if="${deletion eq 'success'}" class="alert alert-success">
-            <div>
-                <strong>成功!</strong> 问题成功删除
-            </div>
-        </div>
 
-        <div class="newsletter">
-            <h2 th:text="${question.title}" class="title"></h2>
-            <div class="content" th:utext="${question.content}">
-            </div>
-            <div th:text="${question.user.username}"></div>
+            <div class="reply_part">
+                <div class="reply_num">
+                    <a class="glyphicon glyphicon-bookmark reply_num_logo"></a>
+                    <span class="reply_num_letter" th:text="${#lists.size(question.replies)}"></span><span>&nbsp;条回答</span>
+                </div>
 
-
-            <ul th:each="reply:${replies}">
-                <li>
-                    <span id="reply_content" th:text="${reply.content}"></span>
-                    <span id="reply_author" th:text="${reply.user.username}"></span>
-                    <span class="list_button">
-                        <a class="btn btn-sm btn-danger" th:href="@{/reply/delete/{id}(id=${reply.id})}">删除</a>
-                    </span>
-                    <!--<time class="time" th:text="${#temporals.format(reply.createdDate, 'yyyy/MM/dd')}"></time>-->
-                </li>
-            </ul>
-        </div>
-
-        <form th:object="${reply}" th:action="@{/reply/save/{questionId}(questionId=${question.id})}" action="#" method="post">
-
-            <div class="form_group">
-                <label for="content" class="form_label">回复</label>
-                <textarea class="form_control" style="min-height:200px;" id="content" th:field="${reply.content}" >
-                </textarea>
-            </div>
-            <div class="form_group">
-                <div class="center">
-                    <button class="btn btn-primary" type="submit">提交</button>
-                    <button class="btn btn-default" type="reset">重置</button>
+                <div class="reply_content" th:each="reply:${replies}">
+                    <div class="reply_item">
+                        <div>
+                            <a th:href="@{/reply/delete/{id}(id=${reply.id})}" th:alt="删除回复" sec:authorize="hasAuthority('manageQuestion')">
+                                <span class="glyphicon glyphicon-remove delete_symbol"></span>
+                            </a>
+                            <span id="reply_content" th:text="${reply.content}"></span>
+                        </div>
+                        <div class="reply_info">
+                            <span class="reply_author" th:text="${reply.user.username}"></span>
+                            <span class="f-pipe" style="">|</span>
+                            <time class="time" th:text="${#temporals.format(reply.createdDate, 'yyyy.MM.dd')}"></time>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+
+            <div class="self_reply">
+                <form th:object="${reply}" th:action="@{/reply/save/{questionId}(questionId=${question.id})}" action="#" method="post">
+
+                    <div class="form_group">
+                        <label for="content" class="form_label mvleft">我要回答</label>
+                        <textarea class="form_control reply_form_height" id="content" th:field="${reply.content}" >
+                        </textarea>
+                    </div>
+                    <div class="form_group">
+                        <div class="submit_btn">
+                            <button class="btn btn-sm btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 </div>
 

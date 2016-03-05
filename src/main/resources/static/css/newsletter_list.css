@@ -84,3 +84,11 @@
     float:right;
     padding-right:20px;
 }
+
+.xwtitle {
+    width: 700px;
+}
+
+.hover_underline a:hover {
+    text-decoration:underline;
+}

@@ -8,6 +8,7 @@ import cn.edu.dhu.library.littlebee.service.ReplyService;
 import cn.edu.dhu.library.littlebee.service.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ public class ReplyController {
     @Autowired
     private ReplyService replyService;
 
+    @PreAuthorize("hasAuthority('askQuestion')")
     @RequestMapping(value = "/reply/save/{questionId}", method = RequestMethod.POST)
     public ModelAndView reply(@PathVariable("questionId") Integer questionId,
                               @ModelAttribute("reply") Reply reply) {
@@ -57,6 +59,7 @@ public class ReplyController {
         return mav;
     }
 
+    @PreAuthorize("hasAuthority('manageQuestion')")
     @RequestMapping(value = "/reply/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Integer id, final RedirectAttributes redirectAttributes) {
         Question question;

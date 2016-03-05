@@ -5,7 +5,7 @@
     <title id="pageTitle">通知列表 - 东华大学爱书小蜜蜂服务队</title>
 </head>
 <body>
-<link th:href="@{/css/list.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/notice_list.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 
@@ -39,7 +39,6 @@
                     <a th:href="@{/notice/view/{id}(id=${notice.id})}">
                     <span id="_title" th:text="${notice.title}">
                     </span></a>
-                    <!--<span id="notice_content" th:text="${notice.content}"></span>-->
                     <span class="list_button" sec:authorize="hasAuthority('manageNotice')">
                         <a class="btn btn-sm btn-danger" th:href="@{/notice/delete/{id}(id=${notice.id})}">删除</a>
                     </span>
@@ -49,13 +48,34 @@
                     <time class="time" th:text="${#temporals.format(notice.createdDate, 'yyyy/MM/dd')}"></time>
                 </li>
             </ul>
-            <a class="add_item" th:href="@{/notice/post}" sec:authorize="hasAuthority('manageNotice')">
-                <img src="/images/ico_add.png" width="20" height="20" />添加</a>
-            <div class="page_tr">
-                <a th:href="@{/notice/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>
-                <a th:href="@{/notice/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>
+            <div class="add_item">
+                <a th:href="@{/notice/post}" sec:authorize="hasAuthority('manageNotice')"><img src="/images/ico_add.png" width="20" height="20" />添加</a>
+            </div>
+            <div class="page fl">
                 <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
             </div>
+            <div class="page tr marginr">
+                <a th:if="${pageCur <= 0}" class="btn btn-default" disabled='disabled'>首页</a>
+                <a th:if="${pageCur > 0}" class="btn btn-default" th:href="@{/notice/list(page=0)}">首页</a>
+
+                <a th:if="${pageCur < 1}" class="btn btn-default" disabled='disabled'>上一页</a></th:if>
+                <a th:if="${pageCur >= 1}" class="btn btn-default" th:href="@{/notice/list(page=${pageCur-1})}">上一页</a>
+
+                <a th:if="${pageCur >= pageCount-1}" class="btn btn-default" disabled='disabled'>下一页</a>
+                <a th:if="${pageCur < pageCount-1}" class="btn btn-default" th:href="@{/notice/list(page=${pageCur+1})}">下一页</a>
+
+                <a th:if="${pageCur >= pageCount-1}" class="btn btn-default" disabled='disabled'>尾页</a></th:if>
+                <a th:if="${pageCur < pageCount-1}" class="btn btn-default" th:href="@{/notice/list/(page=${pageCount-1})}">尾页</a>
+            </div>
+
+
+            <!--<div class="page_tr">-->
+                <!--<a th:href="@{/notice/list(page=${pageCur-1})}" th:if="(${pageCur} &gt; 0)">上一页</a>-->
+                <!--<a th:href="@{/notice/list(page=${pageCur+1})}" th:if="(${pageCur} &lt; ${pageCount-1})">下一页</a>-->
+                <!--<span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>-->
+            <!--</div>-->
+
+
 
         </div>
     </div>

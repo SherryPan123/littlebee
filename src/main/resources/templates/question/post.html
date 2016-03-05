@@ -6,29 +6,25 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/question_post.css}" rel="stylesheet" type="text/css"/>
 
 <div th:include="layouts/layout :: navbarFragment"></div>
 <div class="wrapper" id="container">
     <div class="inner main-con">
-        <div class="login_form">
+        <div class="login_form1">
             <h3>问&nbsp;题&nbsp;发&nbsp;布</h3>
             <form th:object="${question}" th:action="@{/question/save}" action="#" method="post">
-                <div>
-                    <input type="hidden" th:field="*{id}"/>
-                    <div class="form_group">
-                        <label for="title"  class="form_label">一句话描述问题</label>
-                        <input type="text" class="form_control" name="title" id="title" th:field="*{title}" required autofocus />
-                    </div>
-                    <div class="form_group">
-                        <label for="content" class="form_label">问题补充</label>
-                    <textarea class="form_control" style="min-height:200px;" name="content" id="content" th:field="*{content}" >
-                    </textarea>
-                    </div>
-
-
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form_group1">
+                    <label for="title"  class="form_label1">用一句话描述你的疑问</label>
+                    <textarea class="form_control1 wtmiaoshu" name="title" id="title" th:field="*{title}" required autofocus ></textarea>
                 </div>
-                <div class="form_group">
+                <div class="form_group1">
+                    <label for="content" class="form_label1">问题补充</label>
+                    <textarea class="form_control1 wtbuchong" name="content" id="content" th:field="*{content}" >
+                    </textarea>
+                </div>
+                <div class="form_group1">
                     <div class="center">
                         <button class="btn btn-primary" type="submit">提交</button>
                         <button class="btn btn-default" type="reset">重置</button>

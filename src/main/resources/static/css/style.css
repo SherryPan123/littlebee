@@ -2387,3 +2387,22 @@ button, input, optgroup, select, textarea {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.list_content .page {
+    color: #7f7f7f;
+    padding-top: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.tr {
+    text-align: right;
+}
+
+.marginr {
+	margin-right: 10px;
+}
+
+p {
+    word-wrap:break-word;
+}

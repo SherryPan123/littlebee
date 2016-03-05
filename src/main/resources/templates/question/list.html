@@ -45,7 +45,7 @@
                 <span>当前为第<label th:text="${pageCur+1}"></label>页，总共为<lable th:text="${pageCount}"></lable>页</span>
             </div>
             <div class="page tr marginr">
-                <a th:if="${pageCur == 0}" class="btn btn-default" disabled='disabled'>首页</a>
+                <a th:if="${pageCur <= 0}" class="btn btn-default" disabled='disabled'>首页</a>
                 <a th:if="${pageCur > 0}" class="btn btn-default" th:href="@{/question/list(page=0)}">首页</a>
 
                 <a th:if="${pageCur < 1}" class="btn btn-default" disabled='disabled'>上一页</a></th:if>
@@ -54,7 +54,7 @@
                 <a th:if="${pageCur >= pageCount-1}" class="btn btn-default" disabled='disabled'>下一页</a>
                 <a th:if="${pageCur < pageCount-1}" class="btn btn-default" th:href="@{/question/list(page=${pageCur+1})}">下一页</a>
 
-                <a th:if="${pageCur == pageCount-1}" class="btn btn-default" disabled='disabled'>尾页</a></th:if>
+                <a th:if="${pageCur >= pageCount-1}" class="btn btn-default" disabled='disabled'>尾页</a></th:if>
                 <a th:if="${pageCur < pageCount-1}" class="btn btn-default" th:href="@{/question/list/(page=${pageCount-1})}">尾页</a>
             </div>
             <div class="askQuestion">
